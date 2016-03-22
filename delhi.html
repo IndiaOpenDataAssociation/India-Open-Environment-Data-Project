@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <title>Open data</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+     <script src="js/jquery.min.js"></script>
+  	<script src="js/bootstrap.min.js"></script>
+
+	<link href="css/style.css" rel="stylesheet">
+    
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+	.bg-green{background-color: green; color: #fff; text-align: center;}
+	.bg-orange{background-color: orange; color: #fff;text-align: center;}
+	.bg-yellow{background-color: #e6e600; color: #fff;text-align: center;}
+	.bg-grey{background-color: #c3c3c3; color: #fff;text-align: center;}
+	.bg-red{background-color: red; color: #fff;text-align: center;}
+	.bg-light-green{background-color: #bbcf4c; color: #fff;text-align: center;}
+	.bg-dark-yellow{background-color: #FF9A00; color: #fff;text-align: center;}
+	.bg-dark-red{background-color: darkred; color: #fff;text-align: center;}
+	.bg-white{background-color: white;text-align: center;}
+    </style>
+  </head>
+  <body>
+
+  <!--div id="myModal" class="modal fade">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	                <h4 class="modal-title">Download CSV or API</h4>
+	            </div>
+	            <div class="modal-body">
+					<div class=""></div>
+					<div class="col-md-3"><button id="download_csv" title="Download CSV"><span class="glyphicon glyphicon-download-alt"></span></button></div>
+					Download API:<div class="col-md-3"><button id="download_api" title="Download API"><span class="glyphicon glyphicon-download-alt"></span></button></div>
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+	            </div>
+	        </div>
+	    </div>
+	</div-->
+ 	<div id="map"></div>
+
+    <script>
+
+// This example displays a marker at the center of Australia.
+// When the user clicks the marker, an info window opens.
+	var default_json_data="";
+	//VIEW 2
+	$.ajax({ 
+		
+		type:'get',
+		url:'http://indiaopendata.com/indiaopendata_api/php_calls/get_range_color.php',
+                processData: true,
+		dataType:'json',
+		async:false,
+		data:{
+			flag:"view2"
+		},
+		success: function(data)
+		{  
+			var d={};
+			var temp=[];
+			$.each(data, function(i,item){ 
+			 	
+			 	if(d[item.name]== undefined)
+			 	{
+			 		temp=[];
+			 		//console.log("undefined");
+			 		temp.push(item); 
+			 		d[item.name]=temp
+			 	}
+			 	else
+			 	{
+			 		temp.push(item);
+			 		d[item.name]=temp; 
+			 	}  
+			});
+			default_json_data=d;
+			//console.log(JSON.stringify(d));
+			 
+		},
+		error: function(err)
+		{
+			console.log(err);
+		}
+
+	});
+	
+  
+    </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?signed_in=true&callback=initMap"></script>
+        
+    <script type="text/javascript">
+        //GET RANGE AND COLOR ACCORDING ITS POLLUTANT name and values
+        function color_range(name,value,json)
+        { 
+        	var color="";
+        	$.each(json, function(i,data){
+        		$.each(data,function(j,item){ 
+	        		//console.log(item.name,",",name);
+	        		//console.log(value,",",parseInt(item.upper));
+	        		//console.log(value,",",parseInt(item.lower));
+	        		
+	        		if(item.name == name)
+	        		{
+	        			//console.log("line 124");
+	        			if(item.lower!=0)
+	        			{
+	        				//console.log(item.lower);
+		        			if(value>item.upper && value<=item.lower)
+		        			{
+		        				//console.log(item.color,"line no 130");
+		        				color=item.color;
+		        				return false;
+
+		        				
+		        			}
+	        			}
+	        			else
+	        			{
+	        				//console.log("line 135");
+	        				if(value>=item.upper)
+		        			{
+		        				color=item.color;
+		        				return false;
+		        			}
+
+	        			}
+	        		}
+	        		//console.log(item);
+	        	});
+        		if(color!="")
+        		{
+        			return false;
+        		}
+        	});
+        	return color;
+        }
+
+        var loader_img='<div id="page_load" class=" col-md-offset-1 col-md-12 text-center" style="display:none;"><img src="images/loader.gif" alt="Please wait.."></div>';
+        var gasesarray = [];
+		var datalist = "";
+        var contentString = '<div id="content">'+
+        ''+
+        ''+
+        '<div id="bodyContent">'+
+
+        '<div class="col-md-12 MB10"><strong><div class="col-md-4 "><span id="location_name"></span></div>'+
+
+		 '<div class="col-md-3 P0">As on: <span id="location-time">'+'</span></div></strong>'+
+
+		'<div class="col-md-5 "><div id="siteNotice"></div></div></div>'+
+		'<div id="loader_img" class="col-md-12 text-center" style="display:none;"><img src="images/loader.gif" alt="Please wait.."><br/><br/><strong> Please wait...</strong></div>'+
+       
+
+        '<div class="" id="main-content-table">';
+
+         
+        var endcontentString='</div></div></div><div class="col-md-12" id="info_txt" style="margin-top:11px;"><div class="col-md-9 MB10" style="font-size: 11px;font-style:italic;"><strong>*Uncalibrated Data</strong> </div><div class="col-md-3"><a target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="images/creative_commons_licence.png" height="20" weight="20" style="margin-left: 40px;"></a></div></div>'; 
+          
+        var locname = "";
+        var location_address="";
+	var pollutant = "";
+
+	//INITIALIZED MAP 
+	function initMap() {
+  
+	    var uluru = {lat: 28.6100, lng: 77.2300};
+	    var map = new google.maps.Map(document.getElementById('map'), {
+	      zoom: 11,
+	      center: uluru
+	    });
+     	
+     	/*divdetailscontent = '<div class="col-md-12">'+
+
+		'<strong><div class="col-md-3">Particulate Name:</div><div class="col-md-1"></div><div class="col-md-2">Current</div><div class="col-md-1"></div><div class="col-md-2">Last 1 Hr </div><div class="col-md-1"></div><div class="col-md-2">Day Peak</div>'+
+
+		'</strong>'+
+
+		'</div>';*/
+		
+
+		divdetailscontent = '<div class="col-md-12">'+
+
+		'<strong><div class="col-md-3">Particulate Name:</div><div class="col-md-1"></div><div class="col-md-3">Last 1 Hr</div><div class="col-md-1"></div><div class="col-md-3">Last 24 Hrs </div>'+
+
+		'</strong>'+
+
+		'</div>';
+			
+			
+		var fullcontent = contentString+divdetailscontent+endcontentString;
+		var marker, i;
+        var infowindow = new google.maps.InfoWindow({
+        	content: fullcontent
+        });
+		var iconBase = 'images/icons/';
+		var locations = $.getJSON("make_get_request.php", function(data){
+		pollutant_name="";  
+		//console.log(data);
+		for (i = 0; i < data.length; i++) {
+
+			var devicename = data[i].device_id;
+			locname = devicename;
+			marker = new google.maps.Marker({
+				position: new google.maps.LatLng(data[i].latitude, data[i].longitude),
+				map: map,
+				icon: "http://indiaopendata.com/indiaopendata_api/php_calls/marker-icon.php?lat="+data[i].latitude+"&log="+data[i].longitude+"&device_id="+devicename
+				//title: data[i].location_address
+			});
+			marker.set('location_name', devicename);
+			marker.addListener('click', function(event) {
+				$("#main-content-table").html("");
+				$('#loader_img').show();
+				$('#info_txt').hide();
+				
+				//$('#bodyContent').append(loader_img);
+				
+				locname=this.get('location_name');
+				var last_reading_time="";
+				/*$.getJSON("http://indiaopendata.com/indiaopendata_api/php_calls/get_last_reading_time.php?device_id="+this.get('location_name'), function(data){
+					var result=data.time.split(" ")[1];
+					last_reading_time=result;
+				});*/
+				
+				//GET LATEST READING TIME OF MACHINE ACCORDING  TO ITS LOCATION
+				$.ajax({ 
+	
+					type:'get',
+					url:'http://indiaopendata.com/indiaopendata_api/php_calls/get_last_reading_time.php',
+                                        processData: true,
+					dataType:'json',
+					async:false,
+					data:{
+						device_id:locname
+					},
+					success: function(data)
+					{  
+						var result=data.time.split(" ")[1];
+						last_reading_time=result;
+					},
+					error: function(err)
+					{
+						console.log(err);
+					}
+
+				});
+
+				$.getJSON("getDeviceDetails.php?deviceId="+this.get('location_name'), function(data){
+
+					location_address=data.location_name;
+					$("#location_name").text(data.location_name);
+					//console.log(last_reading_time);
+					//$("#location-time").text(formatAMPM(new Date()));
+					//$("#location-time").html("");
+					$("#location-time").text(last_reading_time+" "+"Hr");
+					 
+						
+
+						/*divdetailscontent = '<div class="col-md-12 ">'+
+					'<strong><div class="col-md-5"></div><div class="col-md-0"></div><div class="col-md-2">Current</div><div class="col-md-0"></div><div class="col-md-2">Last 1 Hr </div><div class="col-md-0"></div><div class="col-md-2">Day Peak</div>'+
+					'</strong>'+
+					'</div>';*/
+						divdetailscontent = '<div class="col-md-12 ">'+
+					'<strong><div class="col-md-5"></div><div class="col-md-0"></div><div class="col-md-3">Last 1 Hr</div><div class="col-md-0"></div><div class="col-md-3">Last 24 Hrs </div>'+
+					'</strong>'+
+					'</div>';
+					datalist = data.catlist;
+					$.getJSON("getTrendData.php?deviceId="+locname, function(dataresp){
+				
+						//$.each(dataresp, function(datarespkey, datarespval){ 
+						$.each(data.catlist, function(catkey, catval){
+							divdetailscontent+='<strong><div class="col-md-12 MT5">'+catval.category+'</div></strong>';
+						
+							$.each(catval.categorydata, function(key, val){
+								var flag= false;
+								for (var i = 0; i < dataresp.length; i++){
+								
+								 	// look for the entry with a matching `code` value
+									if (dataresp[i].name == val.key){ 
+										//console.log(default_json_data);
+										 val.currentPeakcolor=color_range(dataresp[i].name,dataresp[i].currentPeak,default_json_data);
+										 //console.log(val.currentPeakcolor,"line 289");
+										 val.last1hrcolor=color_range(dataresp[i].name,dataresp[i].last1hr,default_json_data);
+										 val.daycolor=color_range(dataresp[i].name,dataresp[i].day,default_json_data);
+										 //console.log(val.currentPeakcolor,",",val.last1hrcolor,",",val.daycolor,"line 289"); 
+
+
+										val.currentPeak = dataresp[i].currentPeak;
+										val.last1hr = dataresp[i].last1hr;
+										val.day = dataresp[i].day;
+										//|| dataresp[i].last1hr=="" || dataresp[i].last1hr=="-"||dataresp[i].day=="" || dataresp[i].day=="-"
+										if(dataresp[i].currentPeak=="" || dataresp[i].currentPeak=="-")
+										{ 	
+											val.currentPeak = "-";
+											val.currentPeakcolor="bg-grey";								
+										flag=false
+										}
+										else
+										{
+										flag=true;
+										}
+										if(dataresp[i].last1hr=="" || dataresp[i].last1hr=="-")
+										{ 		
+
+											val.last1hr = "-";
+											val.last1hrcolor="bg-grey";
+
+											flag=false
+											}
+											else
+											{
+											flag=true;
+										}
+										if(dataresp[i].day=="" || dataresp[i].day=="-")
+										{ 		
+											val.day = "-";
+											val.daycolor="bg-grey";							
+											flag=false
+											}
+											else
+											{
+											flag=true;
+										}
+									}
+									else{
+										if(!flag){
+											val.currentPeak = "-";
+											val.currentPeakcolor="bg-grey";
+											val.last1hr = "-";
+											val.last1hrcolor="bg-grey";
+											val.day = "-";
+											val.daycolor="bg-grey";
+											}
+										}
+									}
+
+									var text_1hr="-";
+									var text_24hrs="-";
+									if(val.key=="temperature")
+									{
+										 
+										val.currentPeakcolor="bg-white";
+										 
+										val.last1hrcolor="bg-white";
+										 
+										val.daycolor="bg-white";
+										
+										text_1hr=val.last1hr
+										text_24hrs=val.day;
+									} 
+									if(val.key=="humidity")
+									{
+										 
+										val.currentPeakcolor="bg-white";
+										 
+										val.last1hrcolor="bg-white";
+										 
+										val.daycolor="bg-white";
+										
+										text_1hr=val.last1hr
+										text_24hrs=val.day;
+									} 
+									
+									//SET TEXT(GOOD,BAD....) ACCORDING ITS COLOR ( Lasr 1HOUR)
+									 if(val.last1hrcolor=="bg-green"){
+									     
+									    text_1hr="Good";
+									  }
+									  if(val.last1hrcolor=="bg-light-green"){
+									    
+									     
+									    text_1hr="Fair";
+									  }
+									   if(val.last1hrcolor=="bg-yellow"){
+									     
+									     
+									    text_1hr="Mild";
+									  }
+									   if(val.last1hrcolor=="bg-dark-yellow"){
+									    
+									    text_1hr="Poor";
+
+									  }
+									   if(val.last1hrcolor=="bg-red"){
+									   
+									    text_1hr="Bad";
+									  }
+									   if(val.last1hrcolor=="bg-dark-red"){
+									    
+									    text_1hr="Severe";
+									  }
+									  
+
+									  // last 24 Hrs
+									  if(val.daycolor=="bg-green"){
+									     
+									    text_24hrs="Good";
+									  }
+									  if(val.daycolor=="bg-light-green"){
+									    
+									     
+									    text_24hrs="Fair";
+									  }
+									   if(val.daycolor=="bg-yellow"){
+									     
+									     
+									    text_24hrs="Mild";
+									  }
+									   if(val.daycolor=="bg-dark-yellow"){
+									    
+									    text_24hrs="Poor";
+
+									  }
+									   if(val.daycolor=="bg-red"){
+									   
+									    text_24hrs="Bad";
+									  }
+									   if(val.daycolor=="bg-dark-red"){
+									    
+									    text_24hrs="Severe";
+									  }
+									   
+
+
+									
+									//REMOVED SOME PARAM FROM VIEW2 
+									if(val.key=="butane" || val.key=="methane" || val.key=="propane" || val.key=="sound" || val.key=="ethanol" ||val.key=="uv")
+									{
+
+									}
+									
+									else{
+										//console.log(val.key);
+										var obj = {};
+										obj.name = val.name;
+										obj.title = val.title;
+										gasesarray.push(obj);
+
+										var tooltip="";
+										if(val.key=="temperature" || val.key=="humidity")
+										{
+											tooltip="";
+										}
+										else
+										{
+											 tooltip= '<a class="tooltip_info" title="'+val.title+'" data-toggle="tooltip" data-placement="right" data-original-title="'+val.title+'"><span class="glyphicon glyphicon-info-sign" style="margin-left: 3px;"></span></a>';
+
+										} 
+
+										//divdetailscontent+='<div class="col-md-12 fw500"><div class="col-md-5" title="'+val.title+'">'+val.name+'</div><div class="col-md-0"></div><div class="col-md-2"><div class="col-md-12 '+val.currentPeakcolor+'">'+val.currentPeak+'</div></div><div class="col-md-0"></div><div class="col-md-2 "><div class="col-md-12 '+val.last1hrcolor+'">'+val.last1hr+'</div></div><div class="col-md-0"></div><div class="col-md-2"><div class="col-md-12 '+val.daycolor+'">'+val.day+'</div></div></div>'; 
+										divdetailscontent+='<div class="col-md-12 fw500"><div class="col-md-5">'+val.name+ tooltip +'</div><div class="col-md-0"></div><div class="col-md-3 "><div class="col-md-12 '+val.last1hrcolor+'">'+text_1hr+'</div></div><div class="col-md-0"></div><div class="col-md-3"><div class="col-md-12 '+val.daycolor+'">'+text_24hrs+'</div></div></div>'; 
+									}
+									 
+								});
+							}); 
+
+							
+					
+							infowindow.setContent(contentString+divdetailscontent+endcontentString) 
+							//console.log("got it");
+							$("#location_name").text(data.location_name);
+							$("#location-time").text(last_reading_time+" "+"Hr");
+							$("#siteNotice").html('<div class="col-md-12"><div class="col-md-7 text-center"><button class="btn btn-primary btn-xs" id="checktrendbutton">Check Trend</button></div><div class="col-md-3"><button id="download_csv_api" title="Download csv"><span class="glyphicon glyphicon-download-alt"></span></button></div><div class="col-md-2"><button id="download_api" title="Download API"><span class="glyphicon glyphicon-download-alt"></span></button></div></div>'); 
+
+							$('#info_txt').show();
+			        		$('#loader_img').hide();
+						});
+						
+						 
+					});
+					infowindow.open(map, this);
+            	});
+			}}); 
+  		} 
+  		 
+        var content =  '<div class="col-md-12 gases-buttons">'+
+
+			'<div class="col-md-12 MT10"><div class=" col-md-half box bg-grey"></div><div class="index-text">N/A</div>'+
+
+			'<div class=" col-md-half box bg-green"></div><div class="index-text">Good </div>'+
+
+			'<div class=" col-md-half box bg-light-green"></div><div class="index-text">Fair</div>'+
+
+			'<div class=" col-md-half box bg-yellow"></div><div class=" index-text">Mild </div>'+
+
+			'<div class=" col-md-half box bg-dark-yellow"></div><div class="index-text">Poor </div>'+
+
+			'<div class=" col-md-half box bg-red"></div><div class=" index-text">Bad</div>'+
+
+			'<div class=" col-md-half box bg-dark-red"></div><div class="index-text">Severe</div>'+
+		 
+		'</div><div class="col-md-12 calendar-box"><div class="col-md-12 text-center font16 bold"><strong>Time</strong></div>';
+		content+='<div class="col-md-half box font16 vertical-text"><strong>Date</strong></div>';
+		content+='<div class="col-md-half box "></div>';
+		content+='<div class="col-md-half box "></div>';
+		content+='<div class="col-md-half box "></div>';
+		content+='<div class="col-md-half box ">4</div>';
+		content+='<div class="col-md-half box "></div>';
+		content+='<div class="col-md-half box "></div>';
+		content+='<div class="col-md-half box "></div>';
+		content+='<div class="col-md-half box ">8</div>';
+		content+='<div class="col-md-half box "></div>';
+		content+='<div class="col-md-half box "></div>';
+		content+='<div class="col-md-half box "></div>';
+		content+='<div class="col-md-half box ">12</div>';
+		content+='<div class="col-md-half box "></div>';
+		content+='<div class="col-md-half box "></div>';
+		content+='<div class="col-md-half box "></div>';
+		content+='<div class="col-md-half box ">16</div>';
+		content+='<div class="col-md-half box "></div>';
+		content+='<div class="col-md-half box "></div>';
+		content+='<div class="col-md-half box "></div>';
+		content+='<div class="col-md-half box ">20</div>';
+		content+='<div class="col-md-half box "></div>';
+		content+='<div class="col-md-half box "></div>';
+		content+='<div class="col-md-half box"></div>';
+		content+='<div class="col-md-half box">24</div>';
+		 
+		
+        $(function(){
+			$("body").on("click",".gases-buttons .btn-primary", function(){
+				$(".gases-buttons .btn-primary").removeClass("active");
+				$(this).addClass("active");
+			});
+        	$("body").on("click","#checktrendbutton", function(){
+        		 
+				var buttondropdown = '<div class="collapse navbar-collapse MT10" id="bs-example-navbar-collapse-1"><ul class="nav navbar-nav">';
+				$.each(datalist, function(key, datacat){
+					buttondropdown += '<li class="dropdown">';
+					buttondropdown += '<a href="#" class="dropdown-toggle" data-toggle="dropdown">'+datacat.category+' <b class="caret"></b></a>';
+					buttondropdown += '<ul class="dropdown-menu">';
+					$.each(datacat.categorydata, function(key, obj){
+						//buttondropdown+='<li><a href="#" onclick="$(\'#selected-gas-name\').text(\''+obj.name+'\');$(\'a.dropdown-toggle\').removeClass(\'active\');$(this).parent().parent().parent().find(\'a.dropdown-toggle\').addClass(\'active\');getDayData(\''+obj.key+'\');" title="'+obj.title+'">'+obj.name+'</a></li>';
+						
+						//REMOVED SOME PARAM from dropdown (VIEW 3) 
+						if(obj.key=="butane" || obj.key=="methane" || obj.key=="propane" || obj.key=="sound" || obj.key=="ethanol" || obj.key=="temperature" ||obj.key=="uv")
+						{
+
+						}
+						else
+						{
+							buttondropdown+='<li><a href="#" class="view3dropdown" data-text="'+obj.name+'" data-key="'+obj.key+'"  title="'+obj.title+'">'+obj.name+'</a></li>';	
+						}
+						
+						//buttondropdown+='<li><a href="#" title="'+obj.title+'">'+obj.name+'</a></li>';
+					});
+					buttondropdown += '</ul></li>';
+				}); 
+				buttondropdown += '</ul><span id="selected-gas-name" class="selected-gas-name"></span></div>';
+				var jsonDetails = '';
+				
+    			$("#main-content-table").html(buttondropdown+content+"<div id='calendar-data-box'>"+jsonDetails+'</div></div>');
+				$("#siteNotice").html('<div class="col-md-12"><div class="col-md-7 text-center"><button class="btn btn-primary btn-xs " id="detailsbutton">Check Details</button></div><div class="col-md-3"><button id="download_csv_api" title="Download csv"><span class="glyphicon glyphicon-download-alt"></span></button></div><div class="col-md-2"><button id="download_api" title="Download API"><span class="glyphicon glyphicon-download-alt"></span></button></div></div>');
+    			$($($(".dropdown-menu")[0]).find("a")[0]).click();
+        			
+        	});
+    		$("body").on("click","#detailsbutton", function(){
+    			$("#main-content-table").html(divdetailscontent);
+				$("#siteNotice").html('<div class="col-md-12"><div class="col-md-7 text-center"><button class="btn btn-primary btn-xs" id="checktrendbutton">Check Trend</button></div><div class="col-md-3"><button id="download_csv_api" title="Download csv"><span class="glyphicon glyphicon-download-alt"></span></button></div><div class="col-md-2"><button id="download_api" title="Download API"><span class="glyphicon glyphicon-download-alt"></span></button></div></div>');
+    		});
+        		
+        });
+		function getDayData(pollutant) {
+			//GET RANGE  AND COLOR OF SELECTED POLLUTANT PARAM JSON
+			var json_data="";
+			$.ajax({
+				type:'get',
+				url : 'getDetailsData.php?flag=view3' + '&pollutant=' + pollutant,
+				async:false,
+				dataType : 'json',
+				success : function(data) {
+					var d={};
+					var temp=[];
+					$.each(data, function(i,item){ 
+					 	
+					 	if(d[item.name]== undefined)
+					 	{
+					 		temp=[];
+					 		//console.log("undefined");
+					 		temp.push(item); 
+					 		d[item.name]=temp
+					 	}
+					 	else
+					 	{
+					 		temp.push(item);
+					 		d[item.name]=temp; 
+					 	}  
+					});
+					json_data=d;
+
+				},
+				error: function(err)
+				{
+
+				}
+			});
+
+			//GET JSON DATA ACCORDING TIME AND DATE 
+			var jsonDetails = "";
+			$.ajax({
+				type : 'GET',
+				url : 'getDetailsData.php?deviceId=' + locname + '&pollutant=' + pollutant,
+				dataType : 'json',
+				success : function(data) {
+					//console.log(data.length,"length");
+					if(data.length<=6)
+					{
+						$('.vertical-text').css("transform-origin","21px 49px 0");
+						 
+					}
+
+					var result_json=data;
+					data.sort(function(a, b) { 
+						var aa = new Date(a.date); 
+						var bb = new Date(b.date); 
+						//console.log(aa,",",bb);
+						return bb - aa; 
+					});
+					//console.log(JSON.stringify(data));
+					$.each(data, function(key, val) {
+						//console.log(val.day_details.length,"length");
+						
+						var date = new Date(val.date);
+						jsonDetails += '<div class="col-md-half box">' + date.getDate() + '</div>';
+						val.day_details.sort(function(a, b) {
+							var aa = parseInt(a.time.split(":")[0]);
+							var bb = parseInt(b.time.split(":")[0]);
+							return aa - bb;
+						});
+
+						
+						$.each(val.day_details, function(detailkey, detailval) {
+							 
+							//console.log(detailval.value,"value##");
+							if(parseInt(detailval.value) == "NaN" || detailval.value=="-" ||detailval.value=="")
+							{
+								jsonDetails += '<div class="col-md-half small-box bg-grey"></div>';
+							} 
+							else
+							{
+								var color=color_range(pollutant,detailval.value,default_json_data);
+								if(color=="")
+								{
+
+									jsonDetails += '<div class="col-md-half small-box bg-grey"></div>';
+							 	
+								}
+								else
+								{
+									jsonDetails += '<div class="col-md-half small-box '+color+'"></div>';	
+								}
+								//console.log(color,"line 511");
+								 
+							} 
+
+
+							
+
+						});
+
+						//MAKE EXTRA BOXES IF LENGTH IS LESS THEN 24
+						if(val.day_details.length!=24)
+							{
+								var remaining=24-val.day_details.length;
+								for(i=0;i<remaining;i++)
+								{
+									 jsonDetails += '<div class="col-md-half small-box bg-grey"></div>';
+								}
+							}
+						
+						//var result_json=[];
+						$('#loader_img').hide();
+						 
+						$('#info_txt').show();
+						$('#main-content-table').show();
+
+						if($.isEmptyObject(result_json))
+						{
+							$('#info_txt').hide();
+							$(".gases-buttons").html("<div class='col-md-12 text-center' style='height: 160px; margin-top: 29px;'><strong>Data Not Available Currently!!!</strong></div>");
+						}
+						else
+						{
+							$("#calendar-data-box").html(jsonDetails);
+						}
+						 
+							
+						
+
+
+					});
+				}
+			});
+		}
+
+		$(function(){
+			$("body").on("click", ".view3dropdown", function(){
+				var text = $(this).attr("data-text"); 
+				var key = $(this).attr("data-key");
+				$("#selected-gas-name").text(text);
+
+				//Loading image for View3
+				$('#loader_img').show(); 
+				$('#info_txt').hide();
+				$('#main-content-table').hide();
+
+				pollutant_name=key;
+				getDayData(key);
+
+			});
+			$("body").on("mouseenter",".dropdown", function(){
+			 $('.dropdown-menu', this).stop( true, true ).fadeIn("fast");
+			    $(this).toggleClass('open');
+			    //$('b', this).toggleClass("caret caret-up"); 
+			});
+			$("body").on("mouseleave",".dropdown", function(){
+			 $('.dropdown-menu', this).stop( true, true ).fadeOut("fast");
+			    $(this).toggleClass('open');
+			    //$('b', this).toggleClass("caret caret-up"); 
+			});	 
+		});
+		function formatAMPM(date) {
+
+		  var hours = date.getHours();
+
+		  var minutes = date.getMinutes();
+
+		  var seconds = date.getSeconds();
+
+		  var ampm = hours >= 12 ? 'pm' : 'am';
+
+		  hours = hours % 12;
+
+		  hours = hours ? hours : 12; // the hour '0' should be '12'
+
+		  minutes = minutes < 10 ? '0'+minutes : minutes;
+
+		  var strTime = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
+
+		  return strTime; 
+		} 
+
+		$("body").on("click", "#download_csv_api", function(){
+ 			
+ 			//$("#myModal").modal('show');
+			//console.log(locname);
+			//console.log(location_address);
+			//console.log(pollutant_name);
+
+			//DOWNLOAD CSV 
+			//document.location.href= 'download_csv.php?device_id='+locname+"&location_address="+location_address+"&pollutant="+pollutant; 
+
+			document.location.href= 'download_csv.php?device_id='+locname+"&location_address="+location_address; 
+
+		});
+
+		$("body").on("click", "#download_api", function(){
+ 			console.log("download api");
+			document.location.href= 'download_api.php'; 
+		});
+    </script>
+  </body>
+</html>

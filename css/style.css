@@ -1,0 +1,60 @@
+.bg-green{background-color: green; color: #fff; text-align: center;}
+.bg-orange{background-color: orange; color: #fff;text-align: center;}
+.bg-yellow{background-color: #ffcc00; color: #fff;text-align: center;}
+.bg-grey{background-color: #c3c3c3; color: #fff;text-align: center;}
+.bg-red{background-color: red; color: #fff;text-align: center;}
+.bg-light-green{background-color: #bbcf4c; color: #fff;text-align: center;}
+.bg-dark-yellow{background-color: #FF9A00; color: #fff;text-align: center;}
+.bg-dark-red{background-color: darkred; color: #fff;text-align: center;}
+.bg-white{background-color: white;text-align: center;}
+
+.small-box{ height: 18px; border: 1px solid white;  margin-top: 5px;}
+.box{ height: 18px; text-align: center;}
+.col-md-half{width: 4%; padding: 3px 0; float: left; font-weight: 500;}
+.red1{background-color: #FF0023;}
+.red2{background-color: #F94D65;}
+.red3{background-color: #F57A8B;}
+.red4{background-color: #F9B1BB;}
+#main-content-table .col-md-4,#main-content-table .col-md-2,#main-content-table .col-md-3,#main-content-table .col-md-10{padding: 2px 10px;}
+/* #main-content-table .col-md-12{padding-bottom: 0px;} */
+#main-content-table{font-size: 12px; padding: 15px;}
+.MT10{margin-top: 10px;}
+.MB10{margin-bottom: 10px;}
+.MT5{margin-top: 5px;}
+.P0{padding: 0;}
+.gases-buttons {  padding: 10px 20px !important;}
+.PT15{padding-top: 15px;}
+.PT5{padding-top: 5px;}
+.vertical-text{
+	transform: rotate(270deg);
+	transform-origin: 78px 105px;
+	left: 0;
+	top: 85px;
+}
+.font16{font-size: 16px;}
+.calendar-box{padding: 0 20px 0px 20px;}
+.index-text{padding-left: 2px; padding-right: 10px; float: left;}
+.dropdown-header{font-size: 14px; font-weight: bold;}
+/*#main-content-table .dropdown li a{font-size: 12px;}
+#main-content-table ul.nav li.dropdown{border-radius: 10px;  border: 1px solid #428bca; }
+ #main-content-table ul.nav li.dropdown:hover, #main-content-table ul.nav li.dropdown.active  {background: rgb(112, 173, 71);}
+#main-content-table ul.nav li.dropdown a, #main-content-table ul.nav li.dropdown a:hover{background: none;}*/
+ .navbar-nav>li>a{padding-top: 5px; padding-bottom: 5px;border-radius: 3px;   margin-right: 15px;     border: 1px solid #0a6fb4;}
+ .navbar-nav>li>a:hover, .navbar-nav>li>a.active{background-color: #0a6fb4 !important; color: #fff;}
+ .navbar-nav .dropdown-menu > li > a {
+	   padding: 8px 15px;
+	     color: #0a6fb4;
+	       border-bottom: 1px solid #F3E8E8;
+		   font-size: 12px;
+ }
+ .fw500{font-weight: 500;}
+ .navbar-nav>li>.dropdown-menu{padding: 0;}
+ span#selected-gas-name {
+    font-size: 16px;
+    line-height: 30px;
+    font-weight: 900;
+    margin-left: 25px;
+}
+ .navbar-nav .dropdown-menu > li:hover > a{  background-color: #0a6fb4;
+   color: #fff;}
+   .collapse.navbar-collapse{padding-left: 0;}

@@ -1,0 +1,21 @@
+body{
+	direction: rtl;
+}
+.logo{
+	background: url("../images/logo.png") center no-repeat;
+	background-size: contain;
+	height: 60px;
+}
+.navbar-brand{
+	background: url("../images/logo.png") center no-repeat;
+	background-size: contain;
+	height: 70px;
+	width: 100px;
+}
+
+.navbar-nav>li>a {
+  line-height: 30px;
+}
+.navbar > .container .navbar-brand{
+	margin-left: 20px;
+}
