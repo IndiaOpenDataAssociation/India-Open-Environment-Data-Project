@@ -2,7 +2,7 @@
 The India Open Environment Data Project is focused on assessing the air-quality index of different parts of Delhi and showcasing the information in an open, standardized and visualized format to promote community action within the society. For which India Open Data needed help in showcasing the readings in a very simple and understandable format on their website
 http://indiaopendata.com/india-open-environment-data-project/delhi , so that anybody accessing the site should be able to understand the Air Quality for a specific area.
 
-# India Open Data had developed a small and cost effective device to measure the Air Quality and send the captured data to their server.
+India Open Data had developed a small and cost effective device to measure the Air Quality and send the captured data to their server.
 
 
 #Procedure:
