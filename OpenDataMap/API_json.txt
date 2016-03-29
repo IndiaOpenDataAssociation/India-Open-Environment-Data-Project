@@ -1,0 +1,17 @@
+1. To Get Location Details: 
+http://indiaopendata.com/indiaopendata_api/get_locations_json.php
+
+
+NOTE- 
+
+*You can get device_id and pollutant from above link.
+
+
+2. To Get Details About View 2 Data (Parameter Wise Details):
+http://indiaopendata.com/indiaopendata_api/get_view2_json.php?device_id=EMK_DL_001
+
+
+
+
+3. To Get View3 Data (Check Trend):
+http://indiaopendata.com/indiaopendata_api/get_view3_json.php?device_id=EMK_DL_001&pollutant=dust_spm_2.5

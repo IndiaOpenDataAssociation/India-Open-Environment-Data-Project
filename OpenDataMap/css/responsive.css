@@ -1,0 +1,91 @@
+
+@media (min-width: 767px) {
+	#reverse-search-bar{display: none;}
+	#search-bar{display: block;}
+	.circle {
+  background-color: #000;
+  height: 151px;
+  width: 223px;
+  margin: 10px auto;
+  position: relative;
+}
+}
+@media (min-width: 992px) {
+.dropdown:hover .dropdown-menu {display: block;margin-top:0;}
+.clear{clear:both;}
+#reverse-search-bar{display: none;}
+#search-bar{display: block;}
+
+}
+
+@media (max-width: 800px){
+.home-bg{height:400px;}
+.drone-services{top:7em;}
+#reverse-search-bar{display: none;}
+#search-bar{display: block;}
+
+.box .badge{left:40%;}
+.categories img{margin-bottom:10px;}
+.drone-image-box img{width:100%;}
+.box .label label{left: 0;margin: auto;right: 0;bottom: 0px;}
+.categories a.btn{margin-bottom:10px;}
+}
+@media (max-width:767px){
+.navbar-nav li{border:none;}
+header .navbar-default .btn-default, .categories hr,.box{width:100%; margin:10px 0;}
+h4{font-size:16px;}
+.box{margin-bottom:3em;}
+h2{font-size:21px;}
+#search-bar{display: none;}
+#reverse-search-bar{display: block;}
+.categories p{margin:0;}
+.social-links{ margin: 10px 10px 15px 0;}
+.drone-image-box img{height:175px; margin:5px 0;}
+#base, #base-1{margin:0 auto;}
+#base:before{  border-right:70px solid transparent; border-top: 38px solid #fccf2e;border-left: 70px solid transparent;top:100px; bottom:0;right:0;}
+.service-option{width:100%;  padding: 5px 0px 0px 0; float: left;}
+.box .badge {display:none;}
+.drone-image-box label{ font-size: 12px; left: 20px;}
+.drone-step .panel{margin:1em 0;}
+.drone-step .panel img{max-width:32%;}
+.learn-more{width:100%; margin:1em 0;}
+.home-bg{height:565px;  background-position: 50%; background-size:cover;}
+.contact-bg{height:565px;  background-size: auto 300px;}
+.arrow-image {
+  margin-top: 10px;
+  margin-right: 40%;
+}
+.fixed-bottom-sticker {
+	position: relative;
+  margin: -30px 15px 0px 0;
+  margin: 15px 15px -21px 175px;
+  padding: 10px 0;
+}
+#map-box, .map-container {
+  height: 300px;
+}
+.product-box {
+  height: 200px;
+  width: 300px;
+}
+.login-bg{height:365px; background-size: auto 365px;}
+.forgot-password-bg{height: 300px;  background-size: auto 300px;}
+.sign-up-bg{height:565px;  background-position: 50%; background-size:cover;}
+.setting-bg{height:730px;  background-position: 50%; background-size:cover;}
+.blank-bg{height: auto;}
+.upload-image-small-box{float: right; width: 70%;}
+.width30-right{width: 30%; float: right}
+.width30-right-top{width: 30%; float: right; margin-top: 22px;}
+.width30-left{width: 30%; float: left;}
+.service-option .search{margin-bottom:0px;}
+.home-bg header .navbar-default{background: #8d8c8c!important;}
+.image-large-box{padding: 0;}
+.drone-services{top:11em;}
+.ui-tabs ul.ui-tabs-nav li.ui-state-default{width:100%;}
+.ui-tabs ul.ui-tabs-nav li.ui-state-default a.ui-tabs-anchor{width:100%;}
+.pr50{padding-right: 0px;}
+footer ul,footer p{margin:10px 0 20px;}
+.navbar-default .navbar-nav .open .dropdown-menu>li>a{color:#fff;}
+.service-option .multi-column-dropdown {right: 0; height: 230px !important; min-width: 0px; overflow-y: scroll !important; overflow-x:hidden;}
+.navbar-default .navbar-nav li a{color: #fff;}
+}
