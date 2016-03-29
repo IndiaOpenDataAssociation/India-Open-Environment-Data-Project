@@ -1,0 +1,1286 @@
+/* Layout helpers
+----------------------------------*/
+/* line 15, ../sass/edit/_jquery-no-theme.scss */
+.ui-helper-zfix {
+  right: 0;
+}
+
+/* Misc visuals
+----------------------------------*/
+/* Overlays */
+/* line 22, ../sass/edit/_jquery-no-theme.scss */
+.ui-widget-overlay {
+  right: 0;
+}
+
+/* line 23, ../sass/edit/_jquery-no-theme.scss */
+.ui-resizable-n {
+  right: 0;
+}
+
+/* line 24, ../sass/edit/_jquery-no-theme.scss */
+.ui-resizable-s {
+  right: 0;
+}
+
+/* line 25, ../sass/edit/_jquery-no-theme.scss */
+.ui-resizable-e {
+  left: -5px;
+}
+
+/* line 26, ../sass/edit/_jquery-no-theme.scss */
+.ui-resizable-w {
+  right: -5px;
+}
+
+/* line 27, ../sass/edit/_jquery-no-theme.scss */
+.ui-resizable-se {
+  left: 1px;
+}
+
+/* line 28, ../sass/edit/_jquery-no-theme.scss */
+.ui-resizable-sw {
+  right: -5px;
+}
+
+/* line 29, ../sass/edit/_jquery-no-theme.scss */
+.ui-resizable-nw {
+  right: -5px;
+}
+
+/* line 30, ../sass/edit/_jquery-no-theme.scss */
+.ui-resizable-ne {
+  left: -5px;
+}
+
+/* line 31, ../sass/edit/_jquery-no-theme.scss */
+.ui-accordion .ui-accordion-header {
+  text-align: right;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  padding-left: 0.5em;
+  padding-right: 0.7em;
+}
+
+/* line 32, ../sass/edit/_jquery-no-theme.scss */
+.ui-accordion .ui-accordion-icons {
+  padding-right: 2.2em;
+}
+
+/* line 33, ../sass/edit/_jquery-no-theme.scss */
+.ui-accordion .ui-accordion-noicons {
+  padding-right: 0.7em;
+}
+
+/* line 34, ../sass/edit/_jquery-no-theme.scss */
+.ui-accordion .ui-accordion-icons .ui-accordion-icons {
+  padding-right: 2.2em;
+}
+
+/* line 35, ../sass/edit/_jquery-no-theme.scss */
+.ui-accordion .ui-accordion-header .ui-accordion-header-icon {
+  right: 0.5em;
+  left: auto;
+}
+
+/* workarounds */
+/* line 38, ../sass/edit/_jquery-no-theme.scss */
+.ui-button {
+  margin-right: 0.1em;
+}
+
+/* the overflow property removes extra width in IE */
+/* line 39, ../sass/edit/_jquery-no-theme.scss */
+.ui-button-icon-only {
+  width: 2.2em;
+}
+
+/* to make room for the icon, a width needs to be set here */
+/* line 40, ../sass/edit/_jquery-no-theme.scss */
+button.ui-button-icon-only {
+  width: 2.4em;
+}
+
+/* button elements seem to need a little more width */
+/* line 41, ../sass/edit/_jquery-no-theme.scss */
+.ui-button-icons-only {
+  width: 3.4em;
+}
+
+/* line 42, ../sass/edit/_jquery-no-theme.scss */
+button.ui-button-icons-only {
+  width: 3.7em;
+}
+
+/*button text element */
+/* line 45, ../sass/edit/_jquery-no-theme.scss */
+.ui-button-text-icon-primary .ui-button-text, .ui-button-text-icons .ui-button-text {
+  padding-top: 0.4em;
+  padding-bottom: 0.4em;
+  padding-left: 1em;
+  padding-right: 2.1em;
+}
+
+/* line 46, ../sass/edit/_jquery-no-theme.scss */
+.ui-button-text-icon-secondary .ui-button-text, .ui-button-text-icons .ui-button-text {
+  padding-top: 0.4em;
+  padding-bottom: 0.4em;
+  padding-left: 2.1em;
+  padding-right: 1em;
+}
+
+/* line 47, ../sass/edit/_jquery-no-theme.scss */
+.ui-button-text-icons .ui-button-text {
+  padding-right: 2.1em;
+  padding-left: 2.1em;
+}
+
+/* no icon support for input elements, provide padding by default */
+/*button icon element(s) */
+/* line 51, ../sass/edit/_jquery-no-theme.scss */
+.ui-button-icon-only .ui-icon {
+  right: 50%;
+  margin-left: -8px;
+}
+
+/* line 52, ../sass/edit/_jquery-no-theme.scss */
+.ui-button-text-icon-primary .ui-button-icon-primary, .ui-button-text-icons .ui-button-icon-primary, .ui-button-icons-only .ui-button-icon-primary {
+  right: 0.5em;
+}
+
+/* line 53, ../sass/edit/_jquery-no-theme.scss */
+.ui-button-text-icon-secondary .ui-button-icon-secondary, .ui-button-text-icons .ui-button-icon-secondary, .ui-button-icons-only .ui-button-icon-secondary {
+  left: 0.5em;
+}
+
+/* line 54, ../sass/edit/_jquery-no-theme.scss */
+.ui-button-text-icons .ui-button-icon-secondary, .ui-button-icons-only .ui-button-icon-secondary {
+  left: 0.5em;
+}
+
+/*button sets*/
+/* line 57, ../sass/edit/_jquery-no-theme.scss */
+.ui-buttonset {
+  margin-right: 7px;
+}
+
+/* line 58, ../sass/edit/_jquery-no-theme.scss */
+.ui-buttonset .ui-button {
+  margin-left: 0;
+  margin-right: -0.3em;
+}
+
+/* workarounds */
+/* line 61, ../sass/edit/_jquery-no-theme.scss */
+.ui-datepicker .ui-datepicker-prev {
+  left: 2px;
+}
+
+/* line 62, ../sass/edit/_jquery-no-theme.scss */
+.ui-datepicker .ui-datepicker-next {
+  right: 2px;
+}
+
+/* line 63, ../sass/edit/_jquery-no-theme.scss */
+.ui-datepicker .ui-datepicker-prev-hover {
+  left: 1px;
+}
+
+/* line 64, ../sass/edit/_jquery-no-theme.scss */
+.ui-datepicker .ui-datepicker-next-hover {
+  right: 1px;
+}
+
+/* line 65, ../sass/edit/_jquery-no-theme.scss */
+.ui-datepicker .ui-datepicker-prev span, .ui-datepicker .ui-datepicker-next span {
+  left: 50%;
+  margin-left: -8px;
+}
+
+/* line 66, ../sass/edit/_jquery-no-theme.scss */
+.ui-datepicker td span, .ui-datepicker td a {
+  text-align: right;
+}
+
+/* line 67, ../sass/edit/_jquery-no-theme.scss */
+.ui-datepicker .ui-datepicker-buttonpane {
+  border-left: 0;
+  border-right: 0;
+}
+
+/* line 68, ../sass/edit/_jquery-no-theme.scss */
+.ui-datepicker .ui-datepicker-buttonpane button {
+  float: right;
+  padding: .2em .6em .3em .6em;
+}
+
+/* line 69, ../sass/edit/_jquery-no-theme.scss */
+.ui-datepicker .ui-datepicker-buttonpane button.ui-datepicker-current {
+  float: left;
+}
+
+/* with multiple calendars */
+/* line 72, ../sass/edit/_jquery-no-theme.scss */
+.ui-datepicker-multi .ui-datepicker-group {
+  float: left;
+}
+
+/* line 73, ../sass/edit/_jquery-no-theme.scss */
+.ui-datepicker-multi .ui-datepicker-group-last .ui-datepicker-header {
+  border-left-width: 0;
+}
+
+/* line 74, ../sass/edit/_jquery-no-theme.scss */
+.ui-datepicker-multi .ui-datepicker-group-middle .ui-datepicker-header {
+  border-left-width: 0;
+}
+
+/* line 75, ../sass/edit/_jquery-no-theme.scss */
+.ui-datepicker-multi .ui-datepicker-buttonpane {
+  clear: left;
+}
+
+/* IE6 IFRAME FIX (taken from datepicker 1.5.3 */
+/* line 78, ../sass/edit/_jquery-no-theme.scss */
+.ui-datepicker-cover {
+  right: -4px;
+  /*must have*/
+}
+
+/* line 81, ../sass/edit/_jquery-no-theme.scss */
+.ui-dialog .ui-dialog-title {
+  float: right;
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+  margin-left: 16px;
+  margin-right: 0;
+}
+
+/* line 82, ../sass/edit/_jquery-no-theme.scss */
+.ui-dialog .ui-dialog-titlebar-close {
+  left: 0.3em;
+  right: inherit;
+}
+
+/* line 83, ../sass/edit/_jquery-no-theme.scss */
+.ui-dialog .ui-dialog-buttonpane {
+  text-align: right;
+  padding-top: 0.3em;
+  padding-bottom: 0.5em;
+  padding-left: 1em;
+  padding-right: 0.4em;
+}
+
+/* line 84, ../sass/edit/_jquery-no-theme.scss */
+.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
+  float: left;
+}
+
+/* line 85, ../sass/edit/_jquery-no-theme.scss */
+.ui-dialog .ui-dialog-buttonpane button {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-left: 0.4em;
+  margin-right: 0;
+}
+
+/* line 86, ../sass/edit/_jquery-no-theme.scss */
+.ui-dialog .ui-resizable-se {
+  left: 3px;
+}
+
+/* icon support */
+/* line 90, ../sass/edit/_jquery-no-theme.scss */
+.ui-menu-icons .ui-menu-item a {
+  padding-right: 2em;
+}
+
+/* left-aligned */
+/* line 93, ../sass/edit/_jquery-no-theme.scss */
+.ui-menu .ui-icon {
+  right: 0.2em;
+}
+
+/* right-aligned */
+/* line 96, ../sass/edit/_jquery-no-theme.scss */
+.ui-menu .ui-menu-icon {
+  float: left;
+}
+
+/* line 97, ../sass/edit/_jquery-no-theme.scss */
+.ui-progressbar {
+  text-align: right;
+}
+
+/* line 98, ../sass/edit/_jquery-no-theme.scss */
+.ui-slider {
+  text-align: right;
+}
+
+/* line 100, ../sass/edit/_jquery-no-theme.scss */
+.ui-slider-horizontal .ui-slider-handle {
+  margin-left: -0.6em;
+}
+
+/* line 101, ../sass/edit/_jquery-no-theme.scss */
+.ui-slider-horizontal .ui-slider-range-min {
+  right: 0;
+}
+
+/* line 102, ../sass/edit/_jquery-no-theme.scss */
+.ui-slider-horizontal .ui-slider-range-max {
+  left: 0;
+}
+
+/* line 104, ../sass/edit/_jquery-no-theme.scss */
+.ui-slider-vertical .ui-slider-handle {
+  right: -0.3em;
+  margin-left: 0;
+}
+
+/* line 105, ../sass/edit/_jquery-no-theme.scss */
+.ui-slider-vertical .ui-slider-range {
+  right: 0;
+}
+
+/* line 106, ../sass/edit/_jquery-no-theme.scss */
+.ui-spinner-input {
+  margin-left: 0.4em;
+  margin-right: 22px;
+}
+
+/* line 107, ../sass/edit/_jquery-no-theme.scss */
+.ui-spinner-button {
+  left: 0;
+}
+
+/* line 108, ../sass/edit/_jquery-no-theme.scss */
+.ui-spinner a.ui-spinner-button {
+  border-left: none;
+}
+
+/* more specificity required here to overide default borders */
+/* line 109, ../sass/edit/_jquery-no-theme.scss */
+.ui-spinner .ui-icon {
+  right: 0;
+}
+
+/* vertical centre icon */
+/* line 112, ../sass/edit/_jquery-no-theme.scss */
+.ui-tabs .ui-tabs-nav li {
+  float: right;
+  margin-top: 1px;
+  margin-bottom: 0;
+  margin-left: 0.2em;
+  margin-right: 0;
+}
+
+/* line 113, ../sass/edit/_jquery-no-theme.scss */
+.ui-tabs .ui-tabs-nav li a {
+  float: right;
+}
+
+/* Corner radius */
+/* line 118, ../sass/edit/_jquery-no-theme.scss */
+.ui-corner-all, .ui-corner-top, .ui-corner-left, .ui-corner-tl {
+  border-top-left-radius: 4px;
+  -moz-border-radius-topleft: 4px;
+  -webkit-border-top-left-radius: 4px;
+  -khtml-border-top-left-radius: 4px;
+}
+
+/* line 119, ../sass/edit/_jquery-no-theme.scss */
+.ui-corner-all, .ui-corner-top, .ui-corner-right, .ui-corner-tr {
+  border-top-right-radius: 4px;
+  -moz-border-radius-topright: 4px;
+  -webkit-border-top-right-radius: 4px;
+  -khtml-border-top-right-radius: 4px;
+}
+
+/* line 120, ../sass/edit/_jquery-no-theme.scss */
+.ui-corner-all, .ui-corner-bottom, .ui-corner-left, .ui-corner-bl {
+  border-bottom-left-radius: 4px;
+  -moz-border-radius-bottomleft: 4px;
+  -webkit-border-bottom-left-radius: 4px;
+  -khtml-border-bottom-left-radius: 4px;
+}
+
+/* line 121, ../sass/edit/_jquery-no-theme.scss */
+.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br {
+  border-bottom-right-radius: 4px;
+  -moz-border-radius-bottomright: 4px;
+  -webkit-border-bottom-right-radius: 4px;
+  -khtml-border-bottom-right-radius: 4px;
+}
+
+/* positioning */
+/* line 126, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-carat-1-n {
+  background-position: 0 0;
+}
+
+/* line 127, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-carat-1-nw {
+  background-position: -16px 0;
+}
+
+/* line 128, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-carat-1-w {
+  background-position: -32px 0;
+}
+
+/* line 129, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-carat-1-sw {
+  background-position: -48px 0;
+}
+
+/* line 130, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-carat-1-s {
+  background-position: -64px 0;
+}
+
+/* line 131, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-carat-1-se {
+  background-position: -80px 0;
+}
+
+/* line 132, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-carat-1-e {
+  background-position: -96px 0;
+}
+
+/* line 133, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-carat-1-ne {
+  background-position: -112px 0;
+}
+
+/* line 134, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-carat-2-n-s {
+  background-position: -128px 0;
+}
+
+/* line 135, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-carat-2-e-w {
+  background-position: -144px 0;
+}
+
+/* line 136, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-triangle-1-n {
+  background-position: 0 -16px;
+}
+
+/* line 137, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-triangle-1-nw {
+  background-position: -16px -16px;
+}
+
+/* line 138, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-triangle-1-w {
+  background-position: -32px -16px;
+}
+
+/* line 139, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-triangle-1-sw {
+  background-position: -48px -16px;
+}
+
+/* line 140, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-triangle-1-s {
+  background-position: -64px -16px;
+}
+
+/* line 141, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-triangle-1-se {
+  background-position: -80px -16px;
+}
+
+/* line 142, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-triangle-1-e {
+  background-position: -96px -16px;
+}
+
+/* line 143, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-triangle-1-ne {
+  background-position: -112px -16px;
+}
+
+/* line 144, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-triangle-2-n-s {
+  background-position: -128px -16px;
+}
+
+/* line 145, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-triangle-2-e-w {
+  background-position: -144px -16px;
+}
+
+/* line 146, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrow-1-n {
+  background-position: 0 -32px;
+}
+
+/* line 147, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrow-1-nw {
+  background-position: -16px -32px;
+}
+
+/* line 148, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrow-1-w {
+  background-position: -32px -32px;
+}
+
+/* line 149, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrow-1-sw {
+  background-position: -48px -32px;
+}
+
+/* line 150, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrow-1-s {
+  background-position: -64px -32px;
+}
+
+/* line 151, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrow-1-se {
+  background-position: -80px -32px;
+}
+
+/* line 152, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrow-1-e {
+  background-position: -96px -32px;
+}
+
+/* line 153, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrow-1-ne {
+  background-position: -112px -32px;
+}
+
+/* line 154, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrow-2-n-s {
+  background-position: -128px -32px;
+}
+
+/* line 155, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrow-2-nw-se {
+  background-position: -144px -32px;
+}
+
+/* line 156, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrow-2-e-w {
+  background-position: -160px -32px;
+}
+
+/* line 157, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrow-2-sw-ne {
+  background-position: -176px -32px;
+}
+
+/* line 158, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrowstop-1-n {
+  background-position: -192px -32px;
+}
+
+/* line 159, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrowstop-1-w {
+  background-position: -208px -32px;
+}
+
+/* line 160, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrowstop-1-s {
+  background-position: -224px -32px;
+}
+
+/* line 161, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrowstop-1-e {
+  background-position: -240px -32px;
+}
+
+/* line 162, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrowthick-1-n {
+  background-position: 0 -48px;
+}
+
+/* line 163, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrowthick-1-nw {
+  background-position: -16px -48px;
+}
+
+/* line 164, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrowthick-1-w {
+  background-position: -32px -48px;
+}
+
+/* line 165, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrowthick-1-sw {
+  background-position: -48px -48px;
+}
+
+/* line 166, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrowthick-1-s {
+  background-position: -64px -48px;
+}
+
+/* line 167, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrowthick-1-se {
+  background-position: -80px -48px;
+}
+
+/* line 168, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrowthick-1-e {
+  background-position: -96px -48px;
+}
+
+/* line 169, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrowthick-1-ne {
+  background-position: -112px -48px;
+}
+
+/* line 170, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrowthick-2-n-s {
+  background-position: -128px -48px;
+}
+
+/* line 171, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrowthick-2-nw-se {
+  background-position: -144px -48px;
+}
+
+/* line 172, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrowthick-2-e-w {
+  background-position: -160px -48px;
+}
+
+/* line 173, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrowthick-2-sw-ne {
+  background-position: -176px -48px;
+}
+
+/* line 174, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrowthickstop-1-n {
+  background-position: -192px -48px;
+}
+
+/* line 175, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrowthickstop-1-w {
+  background-position: -208px -48px;
+}
+
+/* line 176, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrowthickstop-1-s {
+  background-position: -224px -48px;
+}
+
+/* line 177, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrowthickstop-1-e {
+  background-position: -240px -48px;
+}
+
+/* line 178, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrowreturnthick-1-e {
+  background-position: 0 -64px;
+}
+
+/* line 179, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrowreturnthick-1-n {
+  background-position: -16px -64px;
+}
+
+/* line 180, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrowreturnthick-1-w {
+  background-position: -32px -64px;
+}
+
+/* line 181, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrowreturnthick-1-s {
+  background-position: -48px -64px;
+}
+
+/* line 182, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrowreturn-1-e {
+  background-position: -64px -64px;
+}
+
+/* line 183, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrowreturn-1-n {
+  background-position: -80px -64px;
+}
+
+/* line 184, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrowreturn-1-w {
+  background-position: -96px -64px;
+}
+
+/* line 185, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrowreturn-1-s {
+  background-position: -112px -64px;
+}
+
+/* line 186, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrowrefresh-1-e {
+  background-position: -128px -64px;
+}
+
+/* line 187, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrowrefresh-1-n {
+  background-position: -144px -64px;
+}
+
+/* line 188, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrowrefresh-1-w {
+  background-position: -160px -64px;
+}
+
+/* line 189, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrowrefresh-1-s {
+  background-position: -176px -64px;
+}
+
+/* line 190, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrow-4 {
+  background-position: 0 -80px;
+}
+
+/* line 191, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-arrow-4-diag {
+  background-position: -16px -80px;
+}
+
+/* line 192, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-extlink {
+  background-position: -32px -80px;
+}
+
+/* line 193, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-newwin {
+  background-position: -48px -80px;
+}
+
+/* line 194, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-refresh {
+  background-position: -64px -80px;
+}
+
+/* line 195, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-shuffle {
+  background-position: -80px -80px;
+}
+
+/* line 196, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-transfer-e-w {
+  background-position: -96px -80px;
+}
+
+/* line 197, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-transferthick-e-w {
+  background-position: -112px -80px;
+}
+
+/* line 198, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-folder-collapsed {
+  background-position: 0 -96px;
+}
+
+/* line 199, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-folder-open {
+  background-position: -16px -96px;
+}
+
+/* line 200, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-document {
+  background-position: -32px -96px;
+}
+
+/* line 201, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-document-b {
+  background-position: -48px -96px;
+}
+
+/* line 202, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-note {
+  background-position: -64px -96px;
+}
+
+/* line 203, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-mail-closed {
+  background-position: -80px -96px;
+}
+
+/* line 204, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-mail-open {
+  background-position: -96px -96px;
+}
+
+/* line 205, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-suitcase {
+  background-position: -112px -96px;
+}
+
+/* line 206, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-comment {
+  background-position: -128px -96px;
+}
+
+/* line 207, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-person {
+  background-position: -144px -96px;
+}
+
+/* line 208, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-print {
+  background-position: -160px -96px;
+}
+
+/* line 209, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-trash {
+  background-position: -176px -96px;
+}
+
+/* line 210, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-locked {
+  background-position: -192px -96px;
+}
+
+/* line 211, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-unlocked {
+  background-position: -208px -96px;
+}
+
+/* line 212, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-bookmark {
+  background-position: -224px -96px;
+}
+
+/* line 213, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-tag {
+  background-position: -240px -96px;
+}
+
+/* line 214, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-home {
+  background-position: 0 -112px;
+}
+
+/* line 215, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-flag {
+  background-position: -16px -112px;
+}
+
+/* line 216, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-calendar {
+  background-position: -32px -112px;
+}
+
+/* line 217, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-cart {
+  background-position: -48px -112px;
+}
+
+/* line 218, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-pencil {
+  background-position: -64px -112px;
+}
+
+/* line 219, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-clock {
+  background-position: -80px -112px;
+}
+
+/* line 220, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-disk {
+  background-position: -96px -112px;
+}
+
+/* line 221, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-calculator {
+  background-position: -112px -112px;
+}
+
+/* line 222, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-zoomin {
+  background-position: -128px -112px;
+}
+
+/* line 223, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-zoomout {
+  background-position: -144px -112px;
+}
+
+/* line 224, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-search {
+  background-position: -160px -112px;
+}
+
+/* line 225, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-wrench {
+  background-position: -176px -112px;
+}
+
+/* line 226, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-gear {
+  background-position: -192px -112px;
+}
+
+/* line 227, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-heart {
+  background-position: -208px -112px;
+}
+
+/* line 228, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-star {
+  background-position: -224px -112px;
+}
+
+/* line 229, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-link {
+  background-position: -240px -112px;
+}
+
+/* line 230, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-cancel {
+  background-position: 0 -128px;
+}
+
+/* line 231, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-plus {
+  background-position: -16px -128px;
+}
+
+/* line 232, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-plusthick {
+  background-position: -32px -128px;
+}
+
+/* line 233, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-minus {
+  background-position: -48px -128px;
+}
+
+/* line 234, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-minusthick {
+  background-position: -64px -128px;
+}
+
+/* line 235, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-close {
+  background-position: -80px -128px;
+}
+
+/* line 236, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-closethick {
+  background-position: -96px -128px;
+}
+
+/* line 237, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-key {
+  background-position: -112px -128px;
+}
+
+/* line 238, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-lightbulb {
+  background-position: -128px -128px;
+}
+
+/* line 239, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-scissors {
+  background-position: -144px -128px;
+}
+
+/* line 240, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-clipboard {
+  background-position: -160px -128px;
+}
+
+/* line 241, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-copy {
+  background-position: -176px -128px;
+}
+
+/* line 242, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-contact {
+  background-position: -192px -128px;
+}
+
+/* line 243, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-image {
+  background-position: -208px -128px;
+}
+
+/* line 244, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-video {
+  background-position: -224px -128px;
+}
+
+/* line 245, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-script {
+  background-position: -240px -128px;
+}
+
+/* line 246, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-alert {
+  background-position: 0 -144px;
+}
+
+/* line 247, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-info {
+  background-position: -16px -144px;
+}
+
+/* line 248, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-notice {
+  background-position: -32px -144px;
+}
+
+/* line 249, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-help {
+  background-position: -48px -144px;
+}
+
+/* line 250, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-check {
+  background-position: -64px -144px;
+}
+
+/* line 251, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-bullet {
+  background-position: -80px -144px;
+}
+
+/* line 252, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-radio-on {
+  background-position: -96px -144px;
+}
+
+/* line 253, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-radio-off {
+  background-position: -112px -144px;
+}
+
+/* line 254, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-pin-w {
+  background-position: -128px -144px;
+}
+
+/* line 255, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-pin-s {
+  background-position: -144px -144px;
+}
+
+/* line 256, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-play {
+  background-position: 0 -160px;
+}
+
+/* line 257, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-pause {
+  background-position: -16px -160px;
+}
+
+/* line 258, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-seek-next {
+  background-position: -32px -160px;
+}
+
+/* line 259, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-seek-prev {
+  background-position: -48px -160px;
+}
+
+/* line 260, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-seek-end {
+  background-position: -64px -160px;
+}
+
+/* line 261, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-seek-start {
+  background-position: -80px -160px;
+}
+
+/* ui-icon-seek-first is deprecated, use ui-icon-seek-start instead */
+/* line 263, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-seek-first {
+  background-position: -80px -160px;
+}
+
+/* line 264, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-stop {
+  background-position: -96px -160px;
+}
+
+/* line 265, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-eject {
+  background-position: -112px -160px;
+}
+
+/* line 266, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-volume-off {
+  background-position: -128px -160px;
+}
+
+/* line 267, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-volume-on {
+  background-position: -144px -160px;
+}
+
+/* line 268, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-power {
+  background-position: 0 -176px;
+}
+
+/* line 269, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-signal-diag {
+  background-position: -16px -176px;
+}
+
+/* line 270, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-signal {
+  background-position: -32px -176px;
+}
+
+/* line 271, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-battery-0 {
+  background-position: -48px -176px;
+}
+
+/* line 272, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-battery-1 {
+  background-position: -64px -176px;
+}
+
+/* line 273, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-battery-2 {
+  background-position: -80px -176px;
+}
+
+/* line 274, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-battery-3 {
+  background-position: -96px -176px;
+}
+
+/* line 275, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-circle-plus {
+  background-position: 0 -192px;
+}
+
+/* line 276, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-circle-minus {
+  background-position: -16px -192px;
+}
+
+/* line 277, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-circle-close {
+  background-position: -32px -192px;
+}
+
+/* line 278, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-circle-triangle-e {
+  background-position: -48px -192px;
+}
+
+/* line 279, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-circle-triangle-s {
+  background-position: -64px -192px;
+}
+
+/* line 280, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-circle-triangle-w {
+  background-position: -80px -192px;
+}
+
+/* line 281, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-circle-triangle-n {
+  background-position: -96px -192px;
+}
+
+/* line 282, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-circle-arrow-e {
+  background-position: -112px -192px;
+}
+
+/* line 283, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-circle-arrow-s {
+  background-position: -128px -192px;
+}
+
+/* line 284, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-circle-arrow-w {
+  background-position: -144px -192px;
+}
+
+/* line 285, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-circle-arrow-n {
+  background-position: -160px -192px;
+}
+
+/* line 286, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-circle-zoomin {
+  background-position: -176px -192px;
+}
+
+/* line 287, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-circle-zoomout {
+  background-position: -192px -192px;
+}
+
+/* line 288, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-circle-check {
+  background-position: -208px -192px;
+}
+
+/* line 289, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-circlesmall-plus {
+  background-position: 0 -208px;
+}
+
+/* line 290, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-circlesmall-minus {
+  background-position: -16px -208px;
+}
+
+/* line 291, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-circlesmall-close {
+  background-position: -32px -208px;
+}
+
+/* line 292, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-squaresmall-plus {
+  background-position: -48px -208px;
+}
+
+/* line 293, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-squaresmall-minus {
+  background-position: -64px -208px;
+}
+
+/* line 294, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-squaresmall-close {
+  background-position: -80px -208px;
+}
+
+/* line 295, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-grip-dotted-vertical {
+  background-position: 0 -224px;
+}
+
+/* line 296, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-grip-dotted-horizontal {
+  background-position: -16px -224px;
+}
+
+/* line 297, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-grip-solid-vertical {
+  background-position: -32px -224px;
+}
+
+/* line 298, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-grip-solid-horizontal {
+  background-position: -48px -224px;
+}
+
+/* line 299, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-gripsmall-diagonal-se {
+  background-position: -1164px -224px;
+}
+
+/* line 300, ../sass/edit/_jquery-no-theme.scss */
+.ui-icon-grip-diagonal-se {
+  background-position: -80px -11224px;
+}
