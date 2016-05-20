@@ -1,0 +1,19 @@
+<nav ng-controller="headerCtrl as vm" class="navbar navbar-default custom-menu no-bottom-margin">
+    <div class="">
+        <div class="navbar-header">
+          <a  ui-sref="dashboard.index">OPEN ENVIRONMENT DATA</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right navbar-collapse collapse custom-navbar">
+                
+                <li ng-class="{active: $state.includes('about')}"><a ></a></li>
+                <li ng-class="{active: $state.includes('about')}"><a ></a></li>
+                <li ng-class="{active: $state.includes('about')}"><a ui-sref="about.index">ABOUT</a></li>
+                <li ng-class="{active: $state.includes('community')}"><a ui-sref="community.index">COMMUNITY</a></li>
+                <li ng-class="{active: $state.includes('api')}"><a ui-sref="api.index">OPEN APIs</a></li>
+                <li ng-class="{active: $state.includes('partners')}"><a ui-sref="partners.index">PARTNERS</a></li>
+                <li ><a href="http://knowledge.indiaopendata.com/index.php/India_Open_Environment_Data_Project" target="_blank">WIKI</a></li>
+              </ul>
+        </div>
+    </div>
+</nav>

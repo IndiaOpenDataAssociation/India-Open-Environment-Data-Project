@@ -1,0 +1,29 @@
+<div class="col-sm-3 col-md-3 col-lg-2 menu no-padding" data-ng-hide="$state.includes('login') || $state.includes('signup')" ng-controller="MenuCtrl as vm" style="">
+
+    <div class="col-sm-12 no-padding menu-list">
+        <ul class="nav nav-pills nav-stacked main-menu" >
+            <li role="presentation" ng-class="{active: $state.includes('realtime')}"><a ui-sref="realtime.index"> <span>Dashboard</span></a></li>
+            <li role="presentation" ng-class="{active: $state.includes('devices')}"><a ui-sref="devices.index"> <span>Devices</span></a></li>
+            <li role="presentation" ng-class="{active: $state.includes('users')}"><a ui-sref="users.index"> <span>Profile</span></a></li>
+            <!--li role="presentation" ng-class="{active: $state.includes('alert')}"><a ui-sref="alert.index"> <span>Alerts</span></a></li>
+            <li role="presentation" ng-class="{active: $state.includes('settings')}"><a > <span>Manage</span></a>
+                <ul id="analyticsSubMenu" class="nav nav-pills nav-stacked collapse sub-menu">
+                    <li ng-class="{active:$state.current.name == 'settings.devices'}"><a ui-sref="settings.devices">Devices</a></li>
+                    <li ng-class="{active:$state.current.name == 'settings.users'}"><a ui-sref="settings.users">Users</a></li>
+                </ul>
+            </li-->
+            
+        </ul>
+    </div>
+    <!-- <div class="col-sm-12 menu-bottom">
+        <div class="col-sm-4 text-center">
+            <a href="#">Help</a>
+        </div>
+        <div class="col-sm-4 text-center">
+            <a href="#">Support</a>
+        </div>
+        <div class="col-sm-4 text-center">
+            <a href="#">About</a>
+        </div>
+    </div> -->
+</div>

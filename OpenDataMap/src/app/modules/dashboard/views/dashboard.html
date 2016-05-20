@@ -1,0 +1,123 @@
+<div class="no-overflow-y">
+<section class="no-padding">
+    <div class="row">
+        <div class="col-sm-12 mobile-right-no-padding">
+            <div class="col-sm-9 no-padding"> 
+                <ui-gmap-google-map center="map.center" zoom='11' options="options">
+                    <ui-gmap-marker icon="'marker.icon'" ng-repeat="marker in vm.markersToshow" click="vm.markerClicked(marker, marker.id,marker.title,marker.address,marker.contributor)" coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id"> 
+                    </ui-gmap-marker> 
+                    <!--ui-gmap-markers models="vm.markersToshow" coords="'self'" click="'onClicked'" fit='true'
+                         doCluster="true" >
+                    </ui-gmap-markers-->
+                </ui-gmap-google-map>
+            </div>
+            <div class="col-sm-3 screen-height no-padding blue-bg" >
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="col-sm-12 dark-blue-bg name-container">
+                            <div class="col-sm-2 no-padding toggle" ng-hide="vm.selectedModalType == 'home'">
+                                <img src="assets/images/avatar.png" style="margin-right:20px;width:40px;" class="margin-h-auto img-responsive">
+                            </div>
+                            <div class=" no-padding toggle" ng-class="(vm.selectedModalType == 'home') ? 'col-sm-12 text-center' : 'col-sm-10 text-left'">
+                                <div class="">
+                                    <p class="device-label white-font bold"> {{vm.selectedDeviceLabel}}</p>
+                                    <p class="device-address white-font">{{vm.selectedDeviceAddr}} </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 gray-bg device-type-container">
+                            <div class="col-sm-5 no-padding text-left">
+                                <h5 class="bold" ng-show="vm.selectedModalType == 'home'">{{vm.dataResourcesCount}} Data Sources</h5>
+                                <h5 class="bold" ng-hide="vm.selectedModalType == 'home'">Outdoor</h5>
+                            </div>
+                            <div class="col-sm-7 no-padding text-right">
+                                <h6 class="bold" ng-show="vm.selectedModalType == 'home'">Please Select one</h6>
+                                <h6 class="" ng-hide="vm.selectedModalType == 'home'">updated at: {{vm.lastUpdatedTime}}</h6>
+                            </div>
+                        </div>
+                        <div slimscroll="{height: viewPortHeight}">
+                            <div class="toggle" ng-show="vm.selectedModalType == 'home'" >
+                                <div ng-include src="config.moduleDir + 'dashboard/views/home.html'" include-replace></div>
+                            </div>
+                            <div class="toggle" ng-show="vm.selectedModalType == 'daily'" >
+                                <div ng-include src="config.moduleDir + 'dashboard/views/daily.html'" include-replace></div>
+                            </div>
+                            <div class="toggle" ng-show="vm.selectedModalType == 'analytics'" >
+                                <div ng-include src="config.moduleDir + 'dashboard/views/analytics.html'" include-replace></div>
+                            </div>
+                            <div class="toggle" ng-show="vm.selectedModalType == 'profile'">
+                                <div ng-include src="config.moduleDir + 'dashboard/views/profile.html'" include-replace></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="col-sm-12">
+                <div class="row bottom-row" ng-show="true">
+                    <div class="col-sm-12 no-padding">
+                        <div class="col-sm-4 no-padding bottom-nav-icons">
+                            <div ng-class="{active: vm.selectedModalType == 'home'}" ng-click="vm.changeModalType('home')">
+                                <img class="img-responsive img-bottom-nav" src="assets/images/icons/home_g.png" ng-hide="vm.selectedModalType == 'home'">
+                                <img class="img-responsive img-bottom-nav" src="assets/images/icons/home_b.png" ng-show="vm.selectedModalType == 'home'">
+                            </div>
+                        </div>
+                        <div  class="col-sm-4 no-padding bottom-nav-icons">
+                            <div ng-class="{active: vm.selectedModalType == 'daily'}" ng-click="vm.changeModalType('daily')">
+                                <img class="img-responsive img-bottom-nav" src="assets/images/icons/realtime_g.png" ng-hide="vm.selectedModalType == 'daily'">
+                                <img class="img-responsive img-bottom-nav" src="assets/images/icons/realtime_b.png" ng-show="vm.selectedModalType == 'daily'">
+                            </div>
+                        </div>
+                        <div class="col-sm-4 no-padding bottom-nav-icons">
+                            <div ng-class="{active: vm.selectedModalType == 'analytics'}" ng-click="vm.changeModalType('analytics')">
+                                <img class="img-responsive img-bottom-nav" src="assets/images/icons/analytics_g.png" ng-hide="vm.selectedModalType == 'analytics'">
+                                <img class="img-responsive img-bottom-nav" src="assets/images/icons/analytics_b.png" ng-show="vm.selectedModalType == 'analytics'">
+                            </div>
+                        </div>
+                        <!--div class="col-sm-3 no-padding bottom-nav-icons">
+                            <div ng-class="{active: vm.selectedModalType == 'profile'}" ng-click="vm.changeModalType('profile')">
+                                <img class="img-responsive img-bottom-nav" src="assets/images/icons/profile_g.png" ng-hide="vm.selectedModalType == 'profile'">
+                                <img class="img-responsive img-bottom-nav" src="assets/images/icons/profile_b.png" ng-show="vm.selectedModalType == 'profile'">
+                            </div>
+                        </div-->
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+<section class="bottom-panel" ng-show="true">
+    <div class="">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="col-sm-6 text-left">
+                    <a class="white" href="http://indiaopendata.com/" target="_blank"><span>An India Open Data Association Initiative</span></a>
+                </div>
+                <div class="col-sm-6 text-right">
+                    <a class="white" href="http://oizom.com/" target="_blank"><span>Made with <i class="white fa fa-heart"></i> by Oizom</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</div>
+
+<div class="filter-container" style="display:none">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="col-sm-12 " ng-click="vm.disableIodaDevices()">
+                <div class="filter-icon-container" >
+                    <img class="img-responsive filter-icon" ng-hide="vm.showIODADevices == true" src="assets/images/IODA_G.png">
+                    <img class="img-responsive filter-icon" ng-show="vm.showIODADevices == true" src="assets/images/IODA_B.png">
+                </div>
+            </div>
+            <div class="col-sm-12" ng-click="vm.disableOizomDevices()">
+                <div class="filter-icon-container" >
+                    <img class="img-responsive filter-icon" ng-hide="vm.showOizomDevices == true" src="assets/images/filter_g3.png">
+                    <img class="img-responsive filter-icon" ng-show="vm.showOizomDevices == true" src="assets/images/filter_b3.png">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
