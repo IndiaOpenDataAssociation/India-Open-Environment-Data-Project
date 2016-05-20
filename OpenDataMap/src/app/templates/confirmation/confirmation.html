@@ -1,0 +1,28 @@
+<div class="modal-header ">
+	<div class="edit-title-div">
+		<span class="modal-title h3">Are You Sure?</span>
+	</div>
+</div>
+<fieldset>
+<div class="modal-body" confirmation-modal>
+	<form>
+		<div class="row">
+	    	<div class="col-sm-12">
+				<div class="form-group">
+					{{title}}
+				</div>
+	    	</div>
+	    </div>
+	</form>
+</div>
+</fieldset>
+<div class="modal-footer">
+    <div class="col-sm-12 no-padding">
+        <div class="col-sm-6 no-padding text-left">
+        </div>
+        <div class="col-sm-6 no-padding" ng-show="!region.id || editable">
+            <button class="btn btn-round btn-white" ng-click="cancel()"> No</button>
+            <button class="btn btn-round btn-accent" ng-click="ok()"> Yes </button>
+        </div>
+    </div>
+</div>

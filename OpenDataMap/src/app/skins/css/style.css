@@ -1,0 +1,7 @@
+@font-face {
+	font-family: 'bebasneue';
+	src:url('../fonts/BebasNeue.otf');
+	src:url('../fonts/BebasNeue.ttf')  format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
