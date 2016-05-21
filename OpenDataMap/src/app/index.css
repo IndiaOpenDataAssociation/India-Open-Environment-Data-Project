@@ -1118,3 +1118,41 @@ div {
         bottom: 45px;
     }
 }
+.airowl-tab .nav-tabs > li{
+    width: 20%;
+    border-top: 0px;
+    cursor: pointer;
+}
+.airowl-tab .nav-tabs > li:hover > a{
+    color: #1a1a1a;
+    border: 0px;
+}
+.airowl-tab .nav-tabs > li.active{
+    border-bottom: 2px solid #fff;
+}
+.airowl-tab .nav-tabs > li > a{
+    border: 0px;
+    color: #fff;
+
+}
+.airowl-tab .nav-tabs{
+    border: 0px;
+}
+.img-tab{    margin: 15px auto;
+    max-height: 250px;
+}
+.tab-div{
+    min-height: 280px;
+}
+.tab-v-container{
+    height: 280px;
+    display: table-cell;
+}
+.tab-container{
+    display: inline-block;
+    vertical-align: middle;
+    align: center;
+}
+.tab-div {
+    background-color: #fff;
+}
