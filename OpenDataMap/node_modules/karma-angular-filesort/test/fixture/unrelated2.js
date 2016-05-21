@@ -1,1 +1,0 @@
-var hasNothingToDoWithAngular = true;
