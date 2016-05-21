@@ -1156,3 +1156,25 @@ div {
 .tab-div {
     background-color: #fff;
 }
+.airowl-menu a{
+    background-color: #fff;
+    color : #00b3bf;
+    border-color: 10px;
+}
+.airowl-menu.active a{
+    color: #fff;
+    background-color : #00b3bf;
+    border-color: 10px;
+}
+.custom-menu.navbar-default .navbar-nav > li.airowl-menu > a{
+    color: #00b3bf !important;
+    background-color: #fff;
+    border-radius: 6px;
+}
+.custom-menu.navbar-default .navbar-nav > li.airowl-menu.active > a,
+.custom-menu.navbar-default .navbar-nav > li.airowl-menu > a:hover,
+.custom-menu.navbar-default .navbar-nav > li.airowl-menu > a:focus{
+    background-color: #00b3bf !important;
+    color: #fff !important;
+    border-radius: 6px;
+}
