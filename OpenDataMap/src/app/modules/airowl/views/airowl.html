@@ -28,7 +28,7 @@
     </div>
     <!-- Below Home section
     ==========================================-->
-    <section class="below-home-section home-repeat-bg">
+    <section class="below-home-section home-repeat-bg bg-white">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 text-center"> 
@@ -161,78 +161,90 @@
                             </p>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-12 setting-box primary-black margin-top-default ">
-                            <div class="tabbable-panel white-font">
-                                <div class="tabbable-line">
-                                    <ul class="nav nav-tabs ">
-                                        <li class="active">
-                                            <a href="#tab_default_1" data-toggle="tab">
-                                            ARDUINO MINI </a>
-                                        </li>
-                                        <li>
-                                            <a href="#tab_default_2" data-toggle="tab">
-                                            DUST SENSOR </a>
-                                        </li>
-                                        <li>
-                                            <a href="#tab_default_3" data-toggle="tab">
-                                            GSM BOARD </a>
-                                        </li>
-                                        <li>
-                                            <a href="#tab_default_4" data-toggle="tab">
-                                            ADAPTOR </a>
-                                        </li>
-                                        <li>
-                                            <a href="#tab_default_5" data-toggle="tab">
-                                            CASING </a>
-                                        </li>
-                                    </ul>
-                                    <div class="tab-content">
-                                        <div class="tab-pane active" id="tab_default_1">
-                                            <div class="">
-                                                <div class="col-sm-12 bg-gray">
-                                                    <div class="col-sm-6">
-                                                    </div>
-                                                    <div class="col-sm-6 padding-25 text-left">
-                                                        <p class="primary-black">
-                                                            The Arduino nano is a versatile, embedded micro-controller board based upon the popular Arduino format. It can, quite conveniently, be used on breadboards and can be powered via a Mini-B USB connection, a 6-20V unregulated external power supply, or 5V regulated external power supply. The Arduino nano can be programmed using a software package, written in Java, called Arduino. It has 16KB of programmable memory and 14 GPIO pins.
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div> 
-                                        </div>
-                                        <div class="tab-pane" id="tab_default_2">
-                                           <div class="">
-                                                <div class="col-sm-12 bg-gray">
-                                                    <div class="col-sm-6">
-                                                    </div>
-                                                    <div class="col-sm-6 padding-25 text-left">
-                                                        <p class="primary-black">
-                                                            This is an ultra compact and reliable wireless module. The SIM900A is a complete Dual-band GSM/GPRS solution in a SMT module which can be embedded in the customer applications allowing you to benefit from small dimensions. It accept commands from Arduino Nano through UART. It has external antenna.
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div> 
-                                        </div>
-                                        <div class="tab-pane" id="tab_default_3">
-                                            <div class="">
-                                                <div class="col-sm-12 bg-gray">
-                                                    <div class="col-sm-6">
-                                                    </div>
-                                                    <div class="col-sm-6 padding-25 text-left">
-                                                        <p class="primary-black">
-                                                            This Dust Sensor gives a good indication of the air quality in an environment by measuring the dust concentration. This dust sensor is versatile, accurate and compact in size. Using laser scattering theory, the presence of air, dust particles were detected, with good selectivity and stability.
-
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div> 
+                    <tabset class="airowl-tab">
+                        <tab heading="ARDUINO NANO">
+                            <div class="">
+                                <div class="col-sm-12 bg-gray tab-div">
+                                    <div class="col-sm-6">
+                                        <img class="img-middle img-tab img-responsive" src="assets/img/arduino_nano.png">
+                                    </div>
+                                    <div class="col-sm-6 vertical-center-parent padding-25 tab-v-container text-left">
+                                        <div class="vertical-center">
+                                        <p class="primary-black">
+                                            The Arduino nano is a versatile, embedded micro-controller board based upon the popular Arduino format. It can, quite conveniently, be used on breadboards and can be powered via a Mini-B USB connection, a 6-20V unregulated external power supply, or 5V regulated external power supply. The Arduino nano can be programmed using a software package, written in Java, called Arduino. It has 16KB of programmable memory and 14 GPIO pins.
+                                        </p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        </tab>
+                        <tab heading="DUST SENSOR">
+                            <div class="">
+                                <div class="col-sm-12 bg-gray tab-div">
+                                    <div class="col-sm-6">
+                                        <img class="img-middle img-tab img-responsive" src="assets/img/dust_sensor.jpg">
+                                    </div>
+                                    <div class="col-sm-6 vertical-center-parent padding-25 tab-v-container text-left">
+                                        <div class="vertical-center">
+                                        <p class="primary-black">
+                                            This Dust Sensor gives a good indication of the air quality in an environment by measuring the dust concentration. This dust sensor is versatile, accurate and compact in size. Using laser scattering theory, the presence of air, dust particles were detected, with good selectivity and stability.
+                                        </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </tab>
+                        <tab heading="GSM BOARD">
+                            <div class="row">
+                                <div class="col-sm-12 bg-gray tab-div">
+                                    <div class="col-sm-6">
+                                        <img class="img-middle img-tab img-responsive" src="assets/img/gsm.jpg">
+                                    </div>
+                                    <div class="col-sm-6 vertical-center-parent padding-25 tab-v-container text-left">
+                                        <div class="vertical-center">
+                                        <p class="primary-black">
+                                            This is an ultra compact and reliable wireless module. The SIM900A is a complete Dual-band GSM/GPRS solution in a SMT module which can be embedded in the customer applications allowing you to benefit from small dimensions. It accept commands from Arduino Nano through UART. It has external antenna.
+                                        </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </tab>
+                        <tab heading="ADAPTER">
+                            <div class="">
+                                <div class="col-sm-12 bg-gray tab-div">
+                                    <div class="col-sm-6">
+                                        <img class="img-middle img-tab img-responsive" src="assets/img/adapter.jpg">
+                                    </div>
+                                    <div class="col-sm-6 vertical-center-parent padding-25 tab-v-container text-left">
+                                        <div class="vertical-center">
+                                        <p class="primary-black">
+                                            The simple 5V adapter is the power source for the device.
+                                            The design of the adapter is same to that of your mobile adapters.
+                                            It comes with one meter lenth chord.
+                                        </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </tab>
+                        <tab heading="CASING">
+                            <div class="">
+                                <div class="col-sm-12 bg-gray tab-div">
+                                    <div class="col-sm-6">
+                                        <img class="img-middle img-tab img-responsive" src="assets/img/oizom_pcb.jpg">
+                                    </div>
+                                    <div class="col-sm-6 vertical-center-parent padding-25 tab-v-container text-left">
+                                        <div class="vertical-center">
+                                        <p class="primary-black">
+                                            The design of the casing is simple yet beautiful. AirOwl can become a part of the family of antiques or gadgets you have in your house and it is really attractive.
+                                        </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </tab>
+                    </tabset>
                 </div>
             </div>
         </div>
@@ -377,7 +389,7 @@
             </div>
         </div>
     </section>
-    <section class="secondary-white-bg">
+    <section class="secondary-white-bg bg-white">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 text-center">
