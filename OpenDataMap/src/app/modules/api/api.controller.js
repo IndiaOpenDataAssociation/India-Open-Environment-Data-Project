@@ -7,7 +7,7 @@
     function ApiController($scope, $rootScope, swaggerTranslator) {
     	// init form
         $scope.isLoading = false;
-        $scope.url = $scope.swaggerUrl = 'http://jimishparekh.github.io/swagger.json';
+        $scope.url = $scope.swaggerUrl = 'http://jimishio.github.io/swagger.json';
         // error management
         $scope.myErrorHandler = function(data, status){
             alert(swaggerTranslator.translate('error', {
