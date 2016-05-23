@@ -1,3 +1,4 @@
+
 <div class="no-overflow-y">
 <section class="no-padding">
     <div class="row">
@@ -15,8 +16,10 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="col-sm-12 dark-blue-bg name-container">
-                            <div class="col-sm-2 no-padding toggle" ng-hide="vm.selectedModalType == 'home'">
-                                <img src="assets/images/avatar.png" style="margin-right:20px;width:40px;" class="margin-h-auto img-responsive">
+                            <div class="col-sm-2 no-padding toggle"  ng-hide="vm.selectedModalType == 'home'">
+                                <img src="assets/images/avatar.png" 
+                                id = "avatarimg"
+                                class="margin-h-auto img-responsive">
                             </div>
                             <div class=" no-padding toggle" ng-class="(vm.selectedModalType == 'home') ? 'col-sm-12 text-center' : 'col-sm-10 text-left'">
                                 <div class="">
@@ -30,9 +33,9 @@
                                 <h5 class="bold" ng-show="vm.selectedModalType == 'home'">{{vm.dataResourcesCount}} Data Sources</h5>
                                 <h5 class="bold" ng-hide="vm.selectedModalType == 'home'">Outdoor</h5>
                             </div>
-                            <div class="col-sm-7 no-padding text-right">
-                                <h6 class="bold" ng-show="vm.selectedModalType == 'home'">Please Select one</h6>
-                                <h6 class="" ng-hide="vm.selectedModalType == 'home'">updated at: {{vm.lastUpdatedTime}}</h6>
+                            <div class="col-sm-7 no-padding text-right leftfloat">
+                                <h6 class="bold leftfloat" ng-show="vm.selectedModalType == 'home'">Please Select one</h6>
+                                <h6 class="leftfloat" ng-hide="vm.selectedModalType == 'home'">updated at: {{vm.lastUpdatedTime}}</h6>
                             </div>
                         </div>
                         <div slimscroll="{height: viewPortHeight}">

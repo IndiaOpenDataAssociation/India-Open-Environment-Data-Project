@@ -9,6 +9,143 @@
     margin: 0;
     padding: 0;
 }
+@media (min-width: 320px) and (max-width: 548px){
+     #avatarimg{
+    margin: 0 auto;
+    margin-right:20px;
+    width:40px;
+    float: left;
+    }
+    .leftfloat{
+        float: left;
+    }
+    .svg-center{
+    align-self: center;
+   
+    position: relative;
+    width: 100%;
+    }
+    .home-label-container{
+    position: relative;
+    width: 100%;
+    top: 50%;
+
+    text-align: center;
+    align-self: center;
+    }
+    .img-bottom-nav{
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    top: 200px;
+    margin: 0 auto;
+/*    position: absolute;*/
+
+    }
+    .bottom-nav-icons > div{
+    padding:8px 0px;
+    cursor: pointer;
+    position: relative;
+    float: left;
+    background-color: rgba(255, 255, 255, 0.1);
+    }
+    .aqi-container{
+    position: absolute;
+    top:77px;
+    font-family: "bebasneue";
+    font-size: 56px;
+    width: 50%;
+    text-align: center;
+    }
+    .aqi-label-container{
+    position: absolute;
+    top:140px;
+    font-size: 16px;
+    width: 100%;
+    text-align: center;
+    }
+    body.dashboard{
+        overflow-y: auto !important;
+    }
+    .div-68{
+    padding:8px;
+    }
+    .div-68 img{
+    max-height: 26px;
+    margin:auto;
+    float: left;
+    padding-right: 10px;
+    }
+    .trans-bg.img-container{
+    padding: 8px;
+    border-radius: 3px;
+    margin-top: auto;
+    margin-bottom: auto;
+    vertical-align: middle;
+    float: left;
+
+    }
+    .trans-bg.img-container img{
+        max-height: 27px;
+       float: left;
+    }
+    .trans-bg.label-container{
+        padding: 7px 8px 6px 8px;
+        border-radius: 3px;
+        float: left;
+    }
+
+}
+@media (min-width: 548px) and (max-width: 728px){
+     #avatarimg{
+    margin: 0 auto;
+    margin-right:20px;
+    width:40px;
+    float: left;
+    }
+     .svg-center{
+    align-self: center;
+   
+    position: relative;
+    width: 100%;
+    }
+    .home-label-container{
+    position: relative;
+    width: 100%;
+    top: 50%;   
+    text-align: center;
+    align-self: center;
+    }
+
+
+}
+@media (min-width: 728px){
+    .svg-center{
+        left: 50%;
+        position: relative;
+        margin-left: -135px;
+    }
+    .img-bottom-nav{
+    height: 30px;
+    width: 30px;
+    margin: 0 auto;
+    }
+    .trans-bg.img-container{
+    padding: 8px;
+    border-radius: 3px;
+    margin-top: auto;
+    margin-bottom: auto;
+    vertical-align: middle;
+    }
+    .trans-bg.img-container img{
+        max-height: 27px;
+    }
+    .trans-bg.label-container{
+        padding: 7px 8px 6px 8px;
+        border-radius: 3px;
+    }
+}
+
 html{
 }
 body{
@@ -465,6 +602,7 @@ section.no-padding{
 .margin-h-auto{
     margin: 0 auto;
 }
+
 h6, .h6{
     font-size: 11px;
 }
@@ -477,20 +615,7 @@ h6, .h6{
 .activity-container{
     margin-bottom: 4px;
 }
-.trans-bg.img-container{
-    padding: 8px;
-    border-radius: 3px;
-    margin-top: auto;
-    margin-bottom: auto;
-    vertical-align: middle;
-}
-.trans-bg.img-container img{
-    max-height: 27px;
-}
-.trans-bg.label-container{
-    padding: 7px 8px 6px 8px;
-    border-radius: 3px;
-}
+
 .label-container > p{
     margin : 5px 8px 5px 8px;
 }
@@ -505,7 +630,7 @@ h6, .h6{
     Navbar header styling
 */
 
-.navbar-header{
+.navbar-header {
     padding:8px 30px;
     color: #fff;
 }
@@ -515,7 +640,11 @@ h6, .h6{
     color: #fff;
     text-decoration: none;
 }
-.custom-menu.navbar-default .navbar-nav > li > a{
+
+
+
+}
+.custom-menu.navbar-default .navbar-nav  > li > a{
     color: #fff;
 }
 .custom-menu.navbar-default .navbar-nav > li.active > a{
@@ -950,11 +1079,8 @@ div {
     height: 36px;
     width: 36px;
 }
-.svg-center{
-    left: 50%;
-    position: relative;
-    margin-left: -135px;
-}
+
+
 .filter-container{
     position: absolute;
     bottom: 95px;
@@ -983,17 +1109,13 @@ div {
     height: 40px;
     width: 40px;
 }
-.bottom-row{
-    position: absolute;
+/*.bottom-row{
+    position: relative;
     background-color: #464f56;
-    bottom: 5px;
+    bottom: 5%;
     width: 100%;
-}
-.img-bottom-nav{
-    height: 30px;
-    width: 30px;
-    margin: 0 auto;
-}
+}*/
+
 .color-container{
     padding:8px 15px;
     color: #3d3d3d;
@@ -1044,6 +1166,7 @@ div {
     top: -4px !important;
 }
 .row{
+    margin-left: -15px;
 }
 .swagger-ui .api-version{
     

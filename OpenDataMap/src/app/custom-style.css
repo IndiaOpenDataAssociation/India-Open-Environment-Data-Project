@@ -268,8 +268,8 @@ font-weight: 900;
 	}
 .navbar-default .navbar-toggle:hover, 
 .navbar-default .navbar-toggle:focus {
-	background-color: #FCAC45;
-	border-color: #FCAC45;
+	background-color: transparent;
+	border-color: #FFF;
 	}
 .navbar-default .navbar-toggle:hover>.icon-bar {
 	background-color: #FFF;
@@ -2037,9 +2037,12 @@ codrops menu
 		margin-left:0px;
 		border-collapse: collapse;
 	}
+	.navbar-inverse{
+		background-color: transparent;
+	}
 
 	.collapse{
-	    display: none;
+	 
 	  }
 	  .custom-collapse{
 	    display: block;
@@ -2228,7 +2231,7 @@ codrops menu
 }
 @media (max-width:620px){
 	.collapse{
-	    display: none;
+	    
 	  }
 	  .custom-collapse{
 	    display: block;
