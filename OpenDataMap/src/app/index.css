@@ -9,7 +9,7 @@
     margin: 0;
     padding: 0;
 }
-@media (min-width: 320px) and (max-width: 548px){
+@media (min-width: 300px) and (max-width: 728px){
      #avatarimg{
     margin: 0 auto;
     margin-right:20px;
@@ -21,7 +21,6 @@
     }
     .svg-center{
     align-self: center;
-   
     position: relative;
     width: 100%;
     }
@@ -35,20 +34,37 @@
     }
     .img-bottom-nav{
     height: 30px;
-    width: 30px;
-    position: absolute;
-    top: 200px;
+    width: 33%;
+   /* float: right;*/
+/*    position: absolute;*/
+  /*  top: 200px;*/
+  align-self: center;
+
     margin: 0 auto;
+ 
+
 /*    position: absolute;*/
 
     }
     .bottom-nav-icons > div{
     padding:8px 0px;
     cursor: pointer;
+    width: 33.33%;
+    align-self: center;
+    height: 50px;
     position: relative;
     float: left;
     background-color: rgba(255, 255, 255, 0.1);
     }
+    .bottom-row{
+    position: static;
+    background-color: #464f56;
+ /*   bottom: 25px;*/
+    bottom: 0px;
+    width: 100%;
+    }   
+
+
     .aqi-container{
     position: absolute;
     top:77px;
@@ -94,10 +110,47 @@
         border-radius: 3px;
         float: left;
     }
-
+    .chart-container{
+    max-height: 200px;
+    width: 100%
+    padding-right:20px;
+    background-color: #464f56;
 }
-@media (min-width: 548px) and (max-width: 728px){
-     #avatarimg{
+.chart {
+  background: conic-gradient(#f15854 4%, #4d4d4d 0 8%, #5da5da 0 17%, #decf3f 0 48%, #b276b2 0 54%, #faa43a 0);
+  border-radius: 50%;
+  width:100%;
+  height: 0;
+  padding-top: 50%;
+  float: left;
+  padding-right: 20px;
+}
+     .g-label{
+    font-size: 12px;
+    color: #fff;
+    position: relative;
+    margin-top: 12px;
+   /* top: 10%;*/
+    font-weight: bold;
+}
+
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form{
+    border-top-color: white;
+        background-color: #00b3bf;
+    }
+    }
+}
+
+
+/*@media (min-width: 548px) and (max-width: 728px){
+    .g-label{
+    font-size: 12px;
+    color: #fff;
+    position: relative;
+    margin-top: 10%;
+    font-weight: bold;
+    }
+    #avatarimg{
     margin: 0 auto;
     margin-right:20px;
     width:40px;
@@ -116,20 +169,48 @@
     text-align: center;
     align-self: center;
     }
-
-
-}
-@media (min-width: 728px){
-    .svg-center{
-        left: 50%;
-        position: relative;
-        margin-left: -135px;
+     .bottom-row{
+    position: absolute;
+    background-color: #464f56;
+    bottom: 5px;
+    width: 100%;
     }
     .img-bottom-nav{
     height: 30px;
     width: 30px;
     margin: 0 auto;
     }
+    .bottom-nav-icons > div{
+    padding:8px 0px;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.1);
+    }
+      .div-68{
+    padding:8px;
+    }
+    .div-68 img{
+    max-height: 26px;
+    margin:auto;
+    float: left;
+    padding-right: 10px;
+    }
+    .bottom-nav-icons > div.active{
+    padding:5px 0px;
+    background-color: transparent;
+    }
+    .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form{
+    border-top-color: white;
+    }
+
+}*/
+@media (min-width: 728px){
+    .svg-center{
+        left: 50%;
+        position: relative;
+        margin-left: -135px;
+    }
+
+   
     .trans-bg.img-container{
     padding: 8px;
     border-radius: 3px;
@@ -144,7 +225,50 @@
         padding: 7px 8px 6px 8px;
         border-radius: 3px;
     }
+    .g-label{
+    font-size: 12px;
+    color: #fff;
+    margin-top: 70px;
+    font-weight: bold;
+    }
+    .bottom-row{
+    position: absolute;
+    background-color: #464f56;
+    bottom: 5px;
+    width: 100%;
+    }
+
+    .img-bottom-nav{
+    height: 30px;
+    width: 30px;
+    display: block;
+    margin: 0 auto;
+    }
+    .bottom-nav-icons > div{
+    padding:8px 0px;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.1);
+    }
+    .bottom-nav-icons > div.active{
+    padding:5px 0px;
+    background-color: transparent;
+    }
+
 }
+/*.img-bottom-nav{
+    height: 30px;
+    width: 30px;
+    margin: 0 auto;
+}
+.bottom-nav-icons > div{
+    padding:8px 0px;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.bottom-nav-icons > div.active{
+    padding:5px 0px;
+    background-color: transparent;
+}*/
 
 html{
 }
@@ -633,6 +757,7 @@ h6, .h6{
 .navbar-header {
     padding:8px 30px;
     color: #fff;
+    background-color: #00b3bf;
 }
 .navbar-header a{
     font-size: 16px;
@@ -756,12 +881,7 @@ h6, .h6{
     padding-top: 16px;
     font-size: 15px; 
 }
-.g-label{
-    font-size: 12px;
-    color: #fff;
-    margin-top: 70px;
-    font-weight: bold;
-}
+
 .gas-container .col-sm-3{
     min-height: 80px;
     margin-bottom: 20px;
@@ -795,12 +915,14 @@ h6, .h6{
 .bottom-panel{
     position: absolute;
     padding-top: 8px;
-    padding-bottom: 8px;
+  /*  padding-bottom: 8px;*/
     background-color: #303841;
     color: #fff;
     font-size: 12px;
     width: 100%;
-    bottom: 60px;
+    bottom: 0px;
+    height: 50px;
+  /*  bottom: 60px;*/
 }
 
 /* modal icons */
@@ -1236,7 +1358,7 @@ div {
         padding-right: 0px;
     }
 }
-@media (max-width: 1281px){
+@media (min-width: 728px) and (max-width: 1281px){
     .bottom-panel{
         bottom: 45px;
     }

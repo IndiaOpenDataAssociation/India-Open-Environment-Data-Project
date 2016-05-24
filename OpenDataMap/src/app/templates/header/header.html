@@ -1,15 +1,16 @@
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 <nav ng-controller="headerCtrl as vm" class="navbar navbar-default custom-menu no-bottom-margin">
     <div class="navbar-inverse">
-   
+        <div class="container-fluid">
         <div class="navbar-header">
-          <!--   <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-            </button> -->
-            <a  ui-sref="dashboard.index">OPEN ENVIRONMENT DATA</a>
+            </button>
+            <a ui-sref="dashboard.index">OPEN ENVIRONMENT DATA</a>
         </div>
-        <div class="collapse navbar-collapse custom-collapse" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse custom-collapse" id="bs-example-navbar-collapse-1" style="background-color:#00b3bf;">
             <ul class="nav navbar-nav navbar-right navbar-collapse  custom-navbar ">
                 
                 <li ng-class="{active: $state.includes('about')}"><a></a></li>
@@ -24,3 +25,5 @@
     </div>
     </div>
 </nav>
+
+
