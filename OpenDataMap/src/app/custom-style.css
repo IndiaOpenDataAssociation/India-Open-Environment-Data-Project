@@ -2236,7 +2236,7 @@ codrops menu
 }
 @media (max-width:620px){
 	.collapse{
-	    
+	    display: none;
 	  }
 	  .custom-collapse{
 	    display: block;
