@@ -277,6 +277,9 @@ font-weight: 900;
 .navbar{
 	min-height: 57px;
 }
+.navbar-inverse{
+	background-color: #00b3bf;
+}
 
 /* sign up page
 ===========================================================*/
@@ -2038,11 +2041,13 @@ codrops menu
 		border-collapse: collapse;
 	}
 	.navbar-inverse{
-		background-color: transparent;
+		/*background-color: transparent;*/
+		background-color: #00b3bf;
+		border-color: rgb(250,250,250);
 	}
 
 	.collapse{
-	 
+	  	display: none;
 	  }
 	  .custom-collapse{
 	    display: block;
