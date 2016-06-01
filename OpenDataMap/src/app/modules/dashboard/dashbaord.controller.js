@@ -521,6 +521,7 @@
 
         this.initializeGraphData = function(){
             self.aqiGraphData = [];
+            self.aqiAverage = [];
             self.aqiGraph = new RealtimeGraphFactory.getAreaGraph();
         };
 
@@ -559,6 +560,7 @@
             value = parseInt(value);
             length = self.aqiGraphData.length;
             self.aqiGraphData.push([time, value]);
+            self.aqiAverage.push(parseInt(value));
             
         };
 
@@ -579,11 +581,13 @@
         this.associateGraphData = function(){
             self.aqiGraphData.sort(self.sortGraphData);
             self.aqiGraph.series[0].data = self.aqiGraphData;
+            console.log("printing data : "+self.aqiAverage);
+            self.aqiFinal = Math.max.apply(Math, self.aqiAverage);
             if(self.graphWidth > 0){
                 self.aqiGraph.options.chart.width = self.graphWidth;
             }
             self.currentAverageAQI = Math.floor(self.currentAverageAQI);
-            self.aqiGraph.options.title.text = "Average AQI : "+self.currentAverageAQI;
+            self.aqiGraph.options.title.text = "Max AQI : "+self.aqiFinal;
         };
     }
 })();
