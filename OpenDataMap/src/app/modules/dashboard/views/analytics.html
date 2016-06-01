@@ -1,9 +1,15 @@
 <div class="col-sm-12 blue-bg chart-container no-padding ">
+    <div class="text-center">
+        <h6 class="white-font"> last 24 hours data </h6>
+    </div>
     <div style="margin: 25px auto; padding: 0px 10px;" ng-show="vm.selectedModalType == 'analytics'">
         <highchart id="chart1" config="vm.aqiGraph"></highchart>
     </div>
 </div>
 <div class="col-sm-12 blue-bg padding-15" style="margin-bottom:45px">
+    <div class="text-center">
+        <h6 class="white-font"> Latest Hourly Data </h6>
+    </div>
     <div class="row">
         <div class="margin-top-default col-sm-12 gas-container padding-15 no-bottom-padding">
             <div class="col-sm-12 no-padding">
