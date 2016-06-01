@@ -332,7 +332,7 @@
         // });
 
         var w = angular.element($window);
-        $scope.viewPortHeight = w.height() - 164;
+        $scope.viewPortHeight = w.height() - 90;
 
         this.windowWidth = w.width();
         this.graphWidth = (this.windowWidth/4) - 40;

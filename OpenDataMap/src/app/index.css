@@ -986,7 +986,7 @@ div {
 .bottom-row{
     position: absolute;
     background-color: #464f56;
-    bottom: 5px;
+    bottom: 0px;
     width: 100%;
 }
 .img-bottom-nav{
