@@ -6,6 +6,6 @@
         .config(config);
 
     function config($urlRouterProvider) {
-        $urlRouterProvider.otherwise('/dashboard/delhi/');
+        $urlRouterProvider.otherwise('/dashboard/');
     }
 })();

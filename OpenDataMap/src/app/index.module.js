@@ -13,14 +13,7 @@
             'google.places',
             'config',
             'dashboard',
-            'ngMaterial',
-            'about',
-            'partners',
-            'devices',
-            'community',
-            'api',
-            'swaggerUi',
-            'airowl'
+            'ngMaterial'
         ]);
 
 })();

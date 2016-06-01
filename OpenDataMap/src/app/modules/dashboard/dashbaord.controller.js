@@ -150,7 +150,6 @@
                     url: "/assets/images/polludron-icon.png"
                 }
             };
-            console.log("came here i times : ");
             self.markers.push(newMarker);
         };
 
@@ -212,7 +211,6 @@
                 self.selectedContributor = contributor;
             } else if(contributor === null){
                 angular.forEach(self.markers, function(item){
-                    console.log("pushed to markersToshow");
                     self.markersToshow.push(item);
                 });
             } else {}
@@ -309,7 +307,6 @@
             });
 
             self.changeContributor(null);
-            console.log("came here");
         });
 
         // AllAQIDataItems.query().$promise.then(function(data){
@@ -346,7 +343,6 @@
 
         this.markersToshow = [];
         $scope.onClicked = function(marker){
-            console.log('clicked here');
         };
         //click called 
         this.markerClicked = function(marker, deviceId, deviceLabel, deviceAddr, contributor){
@@ -362,8 +358,8 @@
         };
 
         this.lastUpdatedTime = null;
-        this.selectedDeviceLabel = "AirPollution.online";
-        this.selectedDeviceAddr = "A Global Air-Pollution Initiave";
+        this.selectedDeviceLabel = "A Global Air-Pollution Initiave";
+        this.selectedDeviceAddr = null;
         this.deviceDataFetched = false;
         this.selectedDeviceData = {};
         this.selectedModalType = 'home';
@@ -388,8 +384,8 @@
                     }
                     
                 } else if (type == 'home') {
-                    self.selectedDeviceLabel = "AirPollution.online";
-                    self.selectedDeviceAddr = "A Global Air-Pollution Initiave";
+                    self.selectedDeviceLabel = "A Global Air-Pollution Initiave";
+                    self.selectedDeviceAddr = null;
                 } else {}
                 self.selectedModalType = type;
             }
