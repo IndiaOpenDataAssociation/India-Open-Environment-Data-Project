@@ -358,7 +358,7 @@
             self.selectedModalType = 'daily';
             self.analyticsClicked = false;
             self.selectedMarker = marker;
-            self.updateSelectedData(deviceLabel, deviceAddr);
+            self.updateSelectedData(deviceLabel, deviceAddr, contributor);
         };
 
         this.lastUpdatedTime = null;
@@ -373,7 +373,7 @@
             if(self.selectedDeviceId !== 0){
                 if(type == 'analytics'){
                     self.selectedDeviceLabel = self.selectedMarker.title;
-                    self.selectedDeviceAddr = self.selectedMarker.address;
+                    self.selectedDeviceAddr = self.selectedMarker.contributor;
                     if(self.selectedDeviceId !== 0){
                         if(self.analyticsClicked){
                         } else {
@@ -382,7 +382,7 @@
                     }
                 } else if (type == 'daily'){
                     self.selectedDeviceLabel = self.selectedMarker.title;
-                    self.selectedDeviceAddr = self.selectedMarker.address;
+                    self.selectedDeviceAddr = self.selectedMarker.contributor;
                     if(self.selectedDeviceId === 0){
                         self.initializeGraphData();
                     }
@@ -399,9 +399,10 @@
             self.deviceDataFetched = null;
         };
 
-        this.updateSelectedData = function(deviceLabel, address){
+        this.updateSelectedData = function(deviceLabel, address, type){
             self.selectedDeviceLabel = deviceLabel;
-            self.selectedDeviceAddr = address;
+            self.selectedDeviceAddr = type;
+
         };
 
         this.activityArray = null;
