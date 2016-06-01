@@ -268,14 +268,17 @@ font-weight: 900;
 	}
 .navbar-default .navbar-toggle:hover, 
 .navbar-default .navbar-toggle:focus {
-	background-color: #FCAC45;
-	border-color: #FCAC45;
+	background-color: transparent;
+	border-color: #FFF;
 	}
 .navbar-default .navbar-toggle:hover>.icon-bar {
 	background-color: #FFF;
 	}
 .navbar{
 	min-height: 57px;
+}
+.navbar-inverse{
+	background-color: #00b3bf;
 }
 
 /* sign up page
@@ -2037,9 +2040,14 @@ codrops menu
 		margin-left:0px;
 		border-collapse: collapse;
 	}
+	.navbar-inverse{
+		/*background-color: transparent;*/
+		background-color: #00b3bf;
+		border-color: rgb(250,250,250);
+	}
 
 	.collapse{
-	    display: none;
+	  	display: none;
 	  }
 	  .custom-collapse{
 	    display: block;
