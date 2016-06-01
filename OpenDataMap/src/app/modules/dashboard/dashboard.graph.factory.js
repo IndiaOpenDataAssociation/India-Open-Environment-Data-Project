@@ -22,13 +22,19 @@
                             enabled: true,
                             text: '',
                             style: {
-                                'color' : '#fff'
+                                'color' : '#fff',
+                                'font-size' : '14px'
                             }
                         },
                         xAxis: {
                             type: 'datetime',
                             style: {
                                 'color' : '#fff'
+                            },
+                            title : {
+                                style : {
+                                    'color' : "#fff"
+                                }
                             }
                         },
                         global: {
