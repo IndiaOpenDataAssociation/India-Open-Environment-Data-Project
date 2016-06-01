@@ -5,11 +5,13 @@
     <meta charset="utf-8">
     <title>OPEN ENVIRONMENT DATA PROJECT - India Open Data Association</title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta http-equiv="X-Frame-Options" content="allow">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
     <link rel="icon" type="image/png" href="favicon.png" sizes="36x36">
+    
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
     <!-- bower:css -->
@@ -21,6 +23,13 @@
     <!-- css files will be automatically insert here -->
     <!-- endinject -->
     <!-- endbuild -->
+    <script type="text/javascript">
+    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+ // some code..
+$(".slimScrollBar,.slimScrollRail").remove();
+$(".slimScrollDiv").contents().unwrap();
+}
+</script>
     <div ng-include src="'app/templates/accent/accent.html'" include-replace></div>
     <style>
         .display-none{
@@ -30,6 +39,9 @@
             display: block;
         }
     </style>
+    <script type="text/javascript" src="classie.js"></script>
+<script type="text/javascript" src="modernizr.custom.js"></script>
+<script type="text/javascript" src="main.js"></script>
 </head>
 
 <body >
@@ -86,5 +98,6 @@
             $(".display-none").addClass("display-block").removeClass("display-none");
         }); 
     </script>
+
 
 </html>
