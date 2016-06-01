@@ -9,6 +9,10 @@
     margin: 0;
     padding: 0;
 }
+.img-avatar{
+    height: 35px;
+    margin-top: 3px;
+}
 @media (min-width: 300px) and (max-width: 728px){
       .margin-10px{
         margin: 20px;
