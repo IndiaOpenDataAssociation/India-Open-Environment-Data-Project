@@ -17,7 +17,7 @@ p > q {
   overflow: visible; 
 }
 .landing-content{
-	padding-top: 10%;
+	padding-top: 5%;
 }
 sup, span.sup{
 	color: #808080;
@@ -46,7 +46,7 @@ a.small{
 	font-size: 14px;
 }
 .home-airowl{
-	height: 160px;
+	height: 180px;
 	margin: 0 auto;
 }
 .btn{
@@ -170,8 +170,8 @@ hr{
 	background-color: #f8f8f8;
 }
 .img-120{
-	height: 120px;
-	width: 120px;
+	height: 90px;
+	width: 90px;
 }
 .line-height-20{
 	line-height: 20px;
@@ -268,14 +268,17 @@ font-weight: 900;
 	}
 .navbar-default .navbar-toggle:hover, 
 .navbar-default .navbar-toggle:focus {
-	background-color: #FCAC45;
-	border-color: #FCAC45;
+	background-color: transparent;
+	border-color: #FFF;
 	}
 .navbar-default .navbar-toggle:hover>.icon-bar {
 	background-color: #FFF;
 	}
 .navbar{
 	min-height: 57px;
+}
+.navbar-inverse{
+	background-color: #00b3bf;
 }
 
 /* sign up page
@@ -478,6 +481,9 @@ video#videoToPlay2{
 }
 .padding-100{
 	padding:100px 0px;
+}
+.padding-50{
+	padding:50px 0px;
 }
 .margin-bottom{
 	margin-bottom: 15px;
@@ -950,8 +956,8 @@ a.blog-link{
 }
 .title{
 	line-height: 50px;
-	border-bottom: 2px solid #ff0000;
-	font-weight: bold;
+	/*border-bottom: 2px solid #ff0000;*/
+	font-weight: 500;
 }
 .title.white{
 	color: #fff;
@@ -1731,18 +1737,20 @@ codrops menu
 	font-size: 18px;
 }
 .white-card-bg{
-	background-color: #fff;
-	border: 1px solid #1a1a1a;
+	background-color: rgba(255,255,255,0.9);
+	box-shadow: 4px 4px 4px rgba(94,94,94,0.5);
 	padding:25px 30px;
 	color: #1a1a1a;
 }
 .white-vertical-card{
 	padding: 50px 25px;
+	margin-bottom: 25px;
 	min-height: 502px;
-	background-color: #fff;
+	box-shadow: 4px 4px 4px rgba(94,94,94,0.5);
+	background-color: rgba(255,255,255,0.9);
 }
 .margin-v-25{
-	margin: 25px 0px;
+	margin: 0px 0px 10px 0px;
 }
 .white-vertical-card-title{
 	color: #ec1c24;
@@ -1765,7 +1773,7 @@ codrops menu
 .title-card-bg{
 	text-transform: uppercase;
 	margin-bottom: 15px;
-	font-size: 20px;
+	font-size: 24px;
 }
 .desc-card-bg{
 	font-size: 18px;
@@ -2037,9 +2045,14 @@ codrops menu
 		margin-left:0px;
 		border-collapse: collapse;
 	}
+	.navbar-inverse{
+		/*background-color: transparent;*/
+		background-color: #00b3bf;
+		border-color: rgb(250,250,250);
+	}
 
 	.collapse{
-	    display: none;
+	  	display: none;
 	  }
 	  .custom-collapse{
 	    display: block;
