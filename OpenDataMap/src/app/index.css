@@ -772,6 +772,7 @@ section.no-padding{
 .no-top-margin{
     margin-top: 0px;
 }
+
 .display-inline{
     display: inline-block;
 }
@@ -792,6 +793,9 @@ section.no-padding{
 }
 .padding-15{
     padding: 15px;
+}
+.no-top-padding{
+    padding-top: 0px;
 }
 .no-bottom-padding{
     padding-bottom: 0px;
