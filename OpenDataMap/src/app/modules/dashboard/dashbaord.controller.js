@@ -362,8 +362,8 @@
         };
 
         this.lastUpdatedTime = null;
-        this.selectedDeviceLabel = "AirPollution.online";
-        this.selectedDeviceAddr = "A Global Air-Pollution Initiave";
+        this.selectedDeviceLabel = "A Global Air-Pollution Initiave";
+        this.selectedDeviceAddr = null;
         this.deviceDataFetched = false;
         this.selectedDeviceData = {};
         this.selectedModalType = 'home';
@@ -388,8 +388,8 @@
                     }
                     
                 } else if (type == 'home') {
-                    self.selectedDeviceLabel = "AirPollution.online";
-                    self.selectedDeviceAddr = "A Global Air-Pollution Initiave";
+                    self.selectedDeviceLabel = "A Global Air-Pollution Initiave";
+                    self.selectedDeviceAddr = null;
                 } else {}
                 self.selectedModalType = type;
             }

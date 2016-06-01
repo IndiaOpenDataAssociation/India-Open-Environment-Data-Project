@@ -27,8 +27,11 @@
                                 id = "avatarimg"
                                 class="margin-h-auto img-avatar img-responsive">
                             </div>
-                            <div class=" no-padding toggle" ng-class="(vm.selectedModalType == 'home') ? 'col-sm-12 text-center' : 'col-sm-10 text-left'">
-                                <div class="">
+                            <div  class=" no-padding toggle" ng-class="(vm.selectedModalType == 'home') ? 'col-sm-12 text-center' : 'col-sm-10 text-left'">
+                                <div style="min-height:39px;" class="" ng-show="vm.selectedDeviceAddr == null">
+                                    <p class="device-label white-font bold" style="padding-top: 9px;"> {{vm.selectedDeviceLabel}}</p>
+                                </div>
+                                <div class="" ng-hide="vm.selectedDeviceAddr == null">
                                     <p class="device-label white-font bold"> {{vm.selectedDeviceLabel}}</p>
                                     <p class="device-address white-font">{{vm.selectedDeviceAddr}} </p>
                                 </div>
