@@ -358,6 +358,7 @@
             self.selectedModalType = 'daily';
             self.analyticsClicked = false;
             self.selectedMarker = marker;
+            self.selectedDeviceData = {}; 
             self.updateSelectedData(deviceLabel, deviceAddr, contributor);
         };
 
