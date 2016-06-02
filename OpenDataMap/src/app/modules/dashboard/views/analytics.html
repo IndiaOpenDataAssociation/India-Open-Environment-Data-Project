@@ -7,6 +7,102 @@
     <div class="row">
         <div class="margin-top-default col-sm-12 gas-container padding-15 no-bottom-padding">
             <div class="col-sm-12 no-padding">
+                <div class="col-sm-3 text-center" ng-show="vm.selectedDeviceData.p2">
+                    <!--div class="g-container">
+                        {{vm.selectedDeviceData.p2}}
+                    </div-->
+                    <div class="c100 {{vm.p2percen}} yellow small position-middle">
+                        <span>{{vm.selectedDeviceData.p2}}</span>
+                        <div class="units unitsp">
+                            <spam class="unit3">ug/m3</spam>
+                        </div>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+                    <p class="g-label"> PM 10</p>
+                </div>
+                <div class="col-sm-3 text-center" ng-show="vm.selectedDeviceData.p1">
+                    <!--div class="g-container">
+                        {{vm.selectedDeviceData.p1}}
+                    </div-->
+                    <div class="c100 {{vm.p1percen}} yellow small position-middle">
+                        <span>{{vm.selectedDeviceData.p1}}</span>
+                        <div class="units unitsp">
+                            <spam class="unit3">ug/m3</spam>
+                        </div>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+                    <p class="g-label"> PM 2.5</p>
+                </div>
+                <div class="col-sm-3 text-center" ng-show="vm.selectedDeviceData.pm10">
+                    <!--div class="g-container">
+                        {{vm.selectedDeviceData.p2}}
+                    </div-->
+                    <div class="c100 {{vm.p2percen}} yellow small position-middle">
+                        <span>{{vm.selectedDeviceData.pm10}}</span>
+                        <div class="units unitsp">
+                            <spam class="unit3">ug/m3</spam>
+                        </div>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+                    <p class="g-label"> PM 10</p>
+                </div>
+                <div class="col-sm-3 text-center" ng-show="vm.selectedDeviceData.pm25">
+                    <!--div class="g-container">
+                        {{vm.selectedDeviceData.p1}}
+                    </div-->
+                    <div class="c100 {{vm.p1percen}} yellow small position-middle">
+                        <span>{{vm.selectedDeviceData.pm25}}</span>
+                        <div class="units unitsp">
+                            <spam class="unit3">ug/m3</spam>
+                        </div>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+                    <p class="g-label"> PM 2.5</p>
+                </div>
+                <div class="col-sm-3 text-center" ng-show="vm.selectedDeviceData.temp">
+                    <!--div class="g-container">
+                        {{vm.selectedDeviceData.temp}}
+                    </div-->
+                    <div class="c100 {{vm.temppercen}} yellow small position-middle">
+                        <span>{{vm.selectedDeviceData.temp}}</span>
+                        <div class="units units1">
+                            <spam class="unit3">C</spam>
+                        </div>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+                    <p class="g-label"> Temp</p>
+                </div>
+                <div class="col-sm-3 text-center" ng-show="vm.selectedDeviceData.hum">
+                    <!--div class="g-container">
+                        {{vm.selectedDeviceData.hum}}
+                    </div-->
+                    <div class="c100 {{vm.humpercen}} yellow small position-middle">
+                        <span>{{vm.selectedDeviceData.hum}}</span>
+                        <div class="units units1">
+                            <spam class="unit3">%</spam>
+                        </div>
+                        <div class="slice">
+                            <div class="bar"></div>
+                            <div class="fill"></div>
+                        </div>
+                    </div>
+                    <p class="g-label"> Humidity</p>
+                </div>
                 <div class="col-sm-3 text-center" ng-show="vm.selectedDeviceData.g1">
                     <!--div class="g-container">
                         {{vm.selectedDeviceData.g1}}
@@ -91,7 +187,10 @@
                         {{vm.selectedDeviceData.o3}}
                     </div-->
                     <div class="c100 {{vm.g1percen}} yellow small position-middle">
-                        <span>{{vm.selectedDeviceData.g1}}</span>
+                        <span>{{vm.selectedDeviceData.o3}}</span>
+                        <div class="units unitsp">
+                            <spam class="unit3">ug/m3</spam>
+                        </div>
                         <div class="slice">
                             <div class="bar"></div>
                             <div class="fill"></div>
@@ -99,12 +198,12 @@
                     </div>
                     <p class="g-label"> O3</p>
                 </div>
-                <div class="col-sm-3 text-center" ng-show="vm.selectedDeviceData.p2">
+                <div class="col-sm-3 text-center"  ng-show="vm.selectedDeviceData.so2">
                     <!--div class="g-container">
-                        {{vm.selectedDeviceData.p2}}
+                        {{vm.selectedDeviceData.o3}}
                     </div-->
-                    <div class="c100 {{vm.p2percen}} yellow small position-middle">
-                        <span>{{vm.selectedDeviceData.p2}}</span>
+                    <div class="c100 {{vm.g1percen}} yellow small position-middle">
+                        <span>{{vm.selectedDeviceData.so2}}</span>
                         <div class="units unitsp">
                             <spam class="unit3">ug/m3</spam>
                         </div>
@@ -113,14 +212,14 @@
                             <div class="fill"></div>
                         </div>
                     </div>
-                    <p class="g-label"> PM 10</p>
+                    <p class="g-label"> SO2</p>
                 </div>
-                <div class="col-sm-3 text-center" ng-show="vm.selectedDeviceData.p1">
+                <div class="col-sm-3 text-center"  ng-show="vm.selectedDeviceData.no2">
                     <!--div class="g-container">
-                        {{vm.selectedDeviceData.p1}}
+                        {{vm.selectedDeviceData.o3}}
                     </div-->
-                    <div class="c100 {{vm.p1percen}} yellow small position-middle">
-                        <span>{{vm.selectedDeviceData.p1}}</span>
+                    <div class="c100 {{vm.g1percen}} yellow small position-middle">
+                        <span>{{vm.selectedDeviceData.no2}}</span>
                         <div class="units unitsp">
                             <spam class="unit3">ug/m3</spam>
                         </div>
@@ -129,39 +228,23 @@
                             <div class="fill"></div>
                         </div>
                     </div>
-                    <p class="g-label"> PM 2.5</p>
+                    <p class="g-label"> NO2</p>
                 </div>
-                <div class="col-sm-3 text-center" ng-show="vm.selectedDeviceData.temp">
+                <div class="col-sm-3 text-center"  ng-show="vm.selectedDeviceData.co">
                     <!--div class="g-container">
-                        {{vm.selectedDeviceData.temp}}
+                        {{vm.selectedDeviceData.o3}}
                     </div-->
-                    <div class="c100 {{vm.temppercen}} yellow small position-middle">
-                        <span>{{vm.selectedDeviceData.temp}}</span>
-                        <div class="units units1">
-                            <spam class="unit3">C</spam>
+                    <div class="c100 {{vm.g1percen}} yellow small position-middle">
+                        <span>{{vm.selectedDeviceData.co}}</span>
+                        <div class="units unitsp">
+                            <spam class="unit3">mg/m3</spam>
                         </div>
                         <div class="slice">
                             <div class="bar"></div>
                             <div class="fill"></div>
                         </div>
                     </div>
-                    <p class="g-label"> Temp</p>
-                </div>
-                <div class="col-sm-3 text-center" ng-show="vm.selectedDeviceData.hum">
-                    <!--div class="g-container">
-                        {{vm.selectedDeviceData.hum}}
-                    </div-->
-                    <div class="c100 {{vm.humpercen}} yellow small position-middle">
-                        <span>{{vm.selectedDeviceData.hum}}</span>
-                        <div class="units units1">
-                            <spam class="unit3">%</spam>
-                        </div>
-                        <div class="slice">
-                            <div class="bar"></div>
-                            <div class="fill"></div>
-                        </div>
-                    </div>
-                    <p class="g-label"> Humidity</p>
+                    <p class="g-label"> CO</p>
                 </div>
             </div>
         </div>

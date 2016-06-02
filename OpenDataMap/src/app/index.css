@@ -1551,4 +1551,7 @@ div {
         font-size: 9px;
     }
     p{overflow:hidden; white-space: nowrap;}
+    p.g-label{
+        font-size: 8px;
+    }
 }
