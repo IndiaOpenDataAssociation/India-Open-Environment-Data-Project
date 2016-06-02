@@ -305,10 +305,10 @@
     font-weight: bold;
     }
     .bottom-row{
-    position: absolute;
-    background-color: #464f56;
-    bottom: 5px;
-    width: 100%;
+        position: absolute;
+        background-color: #464f56;
+        bottom: 5px;
+        width: 100%;
     }
 
     .img-bottom-nav{
@@ -1537,4 +1537,18 @@ div {
     background-color: #00b3bf !important;
     color: #fff !important;
     border-radius: 6px;
+}
+
+@media (max-height: 501px) {
+    .bottom-row{
+        bottom: -5px;
+        z-index: 10000000000;
+    }
+    h5{
+        font-size: 9px;
+    }
+    h6{
+        font-size: 9px;
+    }
+    p{overflow:hidden; white-space: nowrap;}
 }
