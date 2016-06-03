@@ -10,7 +10,7 @@
         $stateProvider
             .state('dashboard', {
                 abstract: true,
-                url: "/dashboard/delhi",
+                url: "/dashboard",
                 template: '<ui-view></ui-view>'
             })
             .state('dashboard.index', {

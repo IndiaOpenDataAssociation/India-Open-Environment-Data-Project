@@ -249,8 +249,14 @@ font-weight: 900;
 	padding: 0 !important;
 }
 .fixed{
-	background-color: rgba(0,0,0,.7) !important;
-	padding: 3px 0px 0px 0px !important
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	z-index: 10000;
+}
+.nfixed{
+	position: relative !important;
 }
 .fixed .img-logo{
 	width: 165px;

@@ -1,7 +1,7 @@
 (function() {
     'use strict';
     angular
-        .module('app', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.router', 'ui.bootstrap',
+        .module('app', ['djds4rce.angular-socialshare','ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.router', 'ui.bootstrap',
             'validation',
             'angular-momentjs',
             'ui.select',
