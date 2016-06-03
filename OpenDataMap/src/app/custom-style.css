@@ -169,6 +169,9 @@ hr{
 .bg-gray{
 	background-color: #f8f8f8;
 }
+.bg-darker-gray{
+	background-color: #e6e6e6;
+}
 .img-120{
 	height: 120px;
 	width: 120px;
@@ -2276,3 +2279,20 @@ label{
 		margin-top: 12%
 	}
 }
+#half-colored{
+	background: linear-gradient(0deg, #fff 50%, #FBA919 50%);
+
+}
+
+.abc{
+	height: 
+	background-color: #f8f8f8;
+}
+.top-space	{
+	margin-top: 100px;
+	border: 0px;
+}
+.xyz{
+	margin-top: 10px;
+}
+

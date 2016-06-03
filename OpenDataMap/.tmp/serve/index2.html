@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>OPEN ENVIRONMENT DATA PROJECT - India Open Data Association</title>
+    <title>OPEN ENVIRONMENT DATA - India Open Data Association</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta http-equiv="X-Frame-Options" content="allow">
@@ -82,7 +82,7 @@ $(".slimScrollDiv").contents().unwrap();
             </div>
         </div>
         <!-- Page Loader -->
-        <div loader style="position: fixed;top: 0;bottom: 0;right: 0;left: 0;background: #fff;opacity: 0.9;z-index:9999;display: none;">
+        <div loader style="position: fixed;top: 0;bottom: 0;right: 0;left: 0;background: #fff;opacity: 0.9;z-index:9999; display: none;">
             <div id="pageloader" class="animate">
                 <div class="dot1"></div>
                 <div class="dot2"></div>
@@ -168,6 +168,7 @@ $(".slimScrollDiv").contents().unwrap();
         <script src="app/modules/about/about.route.js"></script>
         <script src="app/modules/about/about.factory.js"></script>
         <script src="app/modules/about/about.controller.js"></script>
+        <script src="app/modules/markerclusterer.js"></script>
         <script src="app/services/validation.rules.js"></script>
         <script src="app/services/uploader.service.js"></script>
         <script src="app/services/keyvalue.service.js"></script>
@@ -176,7 +177,6 @@ $(".slimScrollDiv").contents().unwrap();
         <script src="app/services/authentication.service.js"></script>
         <script src="app/services/aqicolor.service.js"></script>
         <script src="app/services/angular-validation.js"></script>
-        <script src="app/modules/markerclusterer.js"></script>
         <script src="app/index.run.js"></script>
         <script src="app/index.route.js"></script>
         <script src="app/index.directive.js"></script>
@@ -194,8 +194,13 @@ $(".slimScrollDiv").contents().unwrap();
     <script>
         $(document).ready(function(){
             $(".display-none").addClass("display-block").removeClass("display-none");
-        }); 
+        });
+        console.log("came here with host name : "+window.location.hostname);
+        var hostName = window.location.hostname;
+        if(hostName == "www.airpollution.online"){
+            window.location.href = "http://openenvironment.indiaopendata.com";
+        } else if(hostName == "airpollution.online"){
+            window.location.href = "http://openenvironment.indiaopendata.com";
+        } else {}
     </script>
-
-
 </html>
