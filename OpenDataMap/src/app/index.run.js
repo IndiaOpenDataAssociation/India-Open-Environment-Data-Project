@@ -35,7 +35,7 @@
         AuthenticationService.setUser();
         $rootScope.config = config;
         $rootScope.$state = $state;
-        $FB.init('1143867325634076');
+        $FB.init('1143339922353483');
     }
 
 })();
