@@ -16,7 +16,8 @@
         uiGmapGoogleMapApiProvider.configure({
               key: 'AIzaSyBr3jBMT0Q4j0TnWxajkWt159n5lROYsh0'
         });
-        $locationProvider.html5Mode(true).hashPrefix('!');
+        //$locationProvider.html5Mode(true).hashPrefix('!');
+        $locationProvider.html5Mode(true);
         swaggerTranslatorProvider
             .setLanguage('en')
             .addTranslations('en', {
