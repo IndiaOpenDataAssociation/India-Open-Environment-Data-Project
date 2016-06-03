@@ -8,6 +8,13 @@
         var self = this;
         self.selectedDevice = null;
 
+
+        if (uiGmapIsReady) {
+            var x = $document.find('googleMap');
+            x.innerHTML = "<img src='assets/img/loader3.gif'>";
+
+        }
+
          // $timeout(function () {
          //            angular.element(document.querySelector('#ld')).innerHTML="<h1>hi!</h1>";
          //            // var x = $document.find('#load');
