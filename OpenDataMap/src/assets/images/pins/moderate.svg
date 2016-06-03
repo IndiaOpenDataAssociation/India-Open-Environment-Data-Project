@@ -1,27 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 16.0.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
-	<!ENTITY ns_extend "http://ns.adobe.com/Extensibility/1.0/">
-	<!ENTITY ns_ai "http://ns.adobe.com/AdobeIllustrator/10.0/">
-	<!ENTITY ns_graphs "http://ns.adobe.com/Graphs/1.0/">
-	<!ENTITY ns_vars "http://ns.adobe.com/Variables/1.0/">
-	<!ENTITY ns_imrep "http://ns.adobe.com/ImageReplacement/1.0/">
-	<!ENTITY ns_sfw "http://ns.adobe.com/SaveForWeb/1.0/">
-	<!ENTITY ns_custom "http://ns.adobe.com/GenericCustomNamespace/1.0/">
-	<!ENTITY ns_adobe_xpath "http://ns.adobe.com/XPath/1.0/">
-]>
-<svg version="1.1" id="Layer_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
-	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px"
-	 viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
-<switch>
-	<g i:extraneous="self">
-		<path fill="#303841" d="M20,0.499c-7.682,0-13.932,6.25-13.932,13.932c0,6.397,4.266,11.888,10.43,13.476l2.895,10.133
-			c0.075,0.27,0.325,0.46,0.607,0.46c0.282,0,0.53-0.19,0.612-0.46l2.896-10.133c6.158-1.588,10.425-7.078,10.425-13.476
-			C33.933,6.749,27.681,0.499,20,0.499z M20,26.908c-6.879,0-12.474-5.6-12.474-12.478C7.526,7.552,13.121,1.957,20,1.957
-			s12.473,5.595,12.473,12.474C32.474,21.309,26.88,26.908,20,26.908z"/>
-		<path fill="#eac736" d="M32.474,14.431c0,6.878-5.594,12.478-12.473,12.478s-12.474-5.6-12.474-12.478
-			C7.526,7.552,13.121,1.957,20,1.957S32.474,7.552,32.474,14.431z"/>
-	</g>
-</switch>
-
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="26.076px" height="25px" viewBox="-3.038 -2.5 26.076 25" enable-background="new -3.038 -2.5 26.076 25"
+	 xml:space="preserve">
+<g>
+	<path fill="#303841" d="M9.995-2C5.14-2,1.199,1.95,1.199,6.804c0,4.033,2.695,7.506,6.582,8.5l1.84,6.408
+		C9.667,21.889,9.82,22,9.995,22c0.176,0,0.333-0.111,0.379-0.287l1.844-6.408c3.891-0.994,6.579-4.468,6.579-8.5
+		C18.805,1.95,14.852-2,9.995-2z M9.995,12.805c-3.313,0-5.998-2.691-5.998-6c0-3.311,2.685-5.997,5.998-5.997s6,2.686,6,5.997
+		C15.995,10.113,13.309,12.805,9.995,12.805z"/>
+	<path fill="#eac736" d="M15.999,6.804c0,3.305-2.687,6-6,6c-3.313,0-5.998-2.695-5.998-6c0-3.311,2.685-6,5.998-6
+		C13.313,0.804,15.999,3.493,15.999,6.804z"/>
+</g>
 </svg>
+
+
+
