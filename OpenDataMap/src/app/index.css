@@ -1587,3 +1587,18 @@ div {
 .tab-accordion-header, .tab-accordion-header.active {
     display:none;
 }
+.im-powered-link, .im-checkout .im-powered-link{
+    display: none !important;
+}
+.im-checkout{
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.im-checkout btn-49{
+    margin: 10px auto;
+}
+.im-checkout-btn.btn--flat{
+    background: #C30F1F !important;
+    color: #fff !important;
+    border-color: #C30F1F !important;
+}
