@@ -205,6 +205,7 @@
 
         this.showOizomDevices = true;
         this.showIODADevices = true;
+        this.socialShareSentence = "Find the Air Quality of your area. Stay updated about the air you breathe. #KnowWhatYouBreathe";
 
         this.disableOizomDevices = function(){
             if(self.showOizomDevices){
@@ -471,6 +472,7 @@
                 self.visibleArea = AQIColorService.getVisibilityPercentage(self.selectedAQI);
                 self.selectedAQILabel = AQIColorService.getLabel(self.selectedAQI);
                 self.activityArray = AQIColorService.getActivityArray(self.selectedAQI);
+                self.socialShareSentence = "I just discovered the air quality of "+self.selectedDeviceLabel+" is "+self.selectedAQI+" ("+self.selectedAQILabel+"). #KnowWhatYouBreathe";
                 self.setGraphColors();
                 self.calculatePercentage(data[0].payload);
                 angular.forEach(data[0].payload.d,function(value, key){

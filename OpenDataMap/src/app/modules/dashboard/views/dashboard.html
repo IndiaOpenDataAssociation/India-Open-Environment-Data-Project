@@ -44,7 +44,7 @@
                             </div>
                             <div class="col-sm-7 no-padding text-right leftfloat">
                              <h6 class="bold leftfloat" ng-show="vm.selectedModalType == 'home'">Please Select one</h6>
-                                <h6 class="leftfloat" ng-hide="vm.selectedModalType == 'home'">updated at: {{vm.lastUpdatedTime}}</h6>
+                                <h6 class="leftfloat" ng-hide="vm.selectedModalType == 'home'">as of: {{vm.lastUpdatedTime}}</h6>
                             </div>
                         </div>
                         <div id="scrollable" slimscroll="{height: viewPortHeight}">
@@ -133,4 +133,18 @@
         </div>
     </div>
 </div>
+</div>
+
+<div class="social-share">
+    <div class="individual-social-container">
+        <div class="">
+             <a facebook-feed-share class="facebookShare" 
+                data-url='http://openenvironment.indiaopendata.com/' 
+                data-caption="openenvironment.indiaopendata.com | Open Environment Project"
+                data-description="{{vm.socialShareSentence}}"
+                data-picture="http://i.imgur.com/6jgckGK.jpg">
+
+             </a>
+        </div>
+    </div>
 </div>

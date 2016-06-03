@@ -1538,3 +1538,10 @@ div {
     color: #fff !important;
     border-radius: 6px;
 }
+.social-share{
+    position: absolute;
+    bottom: 95px;
+    left: 10px;
+    width: 50px;
+    text-align: center;
+}
