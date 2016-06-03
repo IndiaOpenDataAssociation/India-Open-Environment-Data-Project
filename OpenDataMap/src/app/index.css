@@ -1503,7 +1503,8 @@ div {
 
 
 }
-.airowl-tab .nav-tabs > li > a{
+.airowl-tab .nav-tabs > li > a,
+.airowl-tab .nav-tabs > li > a:focus{
     border: 0px;
     color: #fff;
 
