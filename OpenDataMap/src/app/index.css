@@ -1602,3 +1602,7 @@ div {
     color: #fff !important;
     border-color: #C30F1F !important;
 }
+.fa-btn-custom{
+    width: 210px;
+    margin-right: 15px;
+}
