@@ -4,7 +4,7 @@
     angular.module('dashboard')
         .controller('DashboardCtrl', DashboardCtrl);
 
-    function DashboardCtrl($scope, $rootScope, $window, $moment, AQIColorService, AllAQIDataItems,RealtimeGraphFactory, $cookies, $state, FieldsDataItems, AnalyticsDataItems, FieldsService, DeviceDataItems, AllPublicDataItems, $timeout) {
+    function DashboardCtrl(uiGmapIsReady,$document,$location,$scope, $rootScope, $window, $moment, AQIColorService, AllAQIDataItems,RealtimeGraphFactory, $cookies, $state, FieldsDataItems, AnalyticsDataItems, FieldsService, DeviceDataItems, AllPublicDataItems, $timeout) {
         var self = this;
         self.selectedDevice = null;
 
@@ -50,6 +50,11 @@
             return value;
           };
 
+        if (uiGmapIsReady) {
+            var x = $document.find('googleMap');
+            x.innerHTML = "<img src='assets/img/loader3.gif'>";
+
+        }
         var mapObject = {
             center: {
                 latitude: 23,
@@ -67,8 +72,17 @@
             options: {
                 draggable: true
             },
-            events: {}
+            events: {
+            },
+
         };
+
+      // var infowindow = new google.maps.InfoWindow({
+      //     content: contentString,
+      //     maxWidth: 200
+      //   });
+
+        // this.markerClusterer
         var styleArray = [
           {
             stylers: [
@@ -96,6 +110,7 @@
         };
 
         $scope.clusterOptions = {
+             minimumClusterSize: 3,
             maxZoom:11,
             styles: [{
               width: 50,
@@ -107,8 +122,8 @@
             keepSpiderfied:true
         };
 
-        $rootScope.latitude = 28.5877575;
-        $rootScope.longitude = 77.21531200000004;
+        $rootScope.latitude = 22.9734;
+        $rootScope.longitude = 78.6569;
 
         $rootScope.map = {
             center: {
@@ -117,7 +132,8 @@
             },
             zoom: 9,
             zoomControl: false,
-            disableDefaultUI: true,
+            disableDefaultUI: false,
+            control: {},
             styles: [
               {
                 stylers: [
@@ -147,6 +163,10 @@
           selectedClusterTypes: selectedClusterTypes,
           clusterOptions: selectedClusterTypes.standard
         };
+
+        // var map1 = $rootScope.map.control.getGMap();
+
+
         //$rootScope.map.setOptions(styles);
         $scope.marker = {
             id: 0,
@@ -194,15 +214,17 @@
                 contributor: contributor,
                 title: titleVal,
                 address: addressLabel,
-                events: {},
+                events: {
+                   
+                },
                 icon: {
                     url: "/assets/images/polludron-icon.png"
                 }
+                // show:true;
             };
             console.log("came here i times : ");
             self.markers.push(newMarker);
         };
-
         this.showOizomDevices = true;
         this.showIODADevices = true;
         this.socialShareSentence = "Find the Air Quality of your area. Stay updated about the air you breathe. #KnowWhatYouBreathe";
@@ -267,6 +289,26 @@
                 });
             } else {}
         };
+
+      
+        // info_window =[];
+        // $scope.mouseOverEvent={
+        //     mouseover: markerMouseOver
+        // };
+
+        // function markerMouseOver () {
+        //      // body...  
+        // }
+
+
+ 
+
+
+         // var abc = new MarkerClusterer($scope.ui-gmap-google-map,[]);
+        // var map = new google.maps.Map(document.getElementById('googleMap'));
+        // var mc = new MarkerClusterer();
+        // mc.setMap(mapObject);
+        // mc.addMarkers("markersToshow");
 
         // function generateIcon(number,  color) {
 
@@ -403,6 +445,7 @@
             deviceId = deviceId.replace(/ /g,'');
             self.selectedDeviceId = deviceId;
             self.initializeGraphColors();
+            // marker.show=true;
             //marker.options.icon = 
             self.getSelectedDeviceData(deviceId);
             self.selectedModalType = 'daily';
@@ -413,8 +456,8 @@
         };
 
         this.lastUpdatedTime = null;
-        this.selectedDeviceLabel = "A Global Air-Pollution Initiave";
-        this.selectedDeviceAddr = null;
+        this.selectedDeviceLabel = "AirPollution.online";
+        this.selectedDeviceAddr = "A Global Air-Pollution Initiave";
         this.deviceDataFetched = false;
         this.selectedDeviceData = {};
         this.selectedModalType = 'home';
@@ -424,7 +467,7 @@
             if(self.selectedDeviceId !== 0){
                 if(type == 'analytics'){
                     self.selectedDeviceLabel = self.selectedMarker.title;
-                    self.selectedDeviceAddr = self.selectedMarker.contributor;
+                    self.selectedDeviceAddr = self.selectedMarker.address;
                     if(self.selectedDeviceId !== 0){
                         if(self.analyticsClicked){
                         } else {
@@ -433,14 +476,14 @@
                     }
                 } else if (type == 'daily'){
                     self.selectedDeviceLabel = self.selectedMarker.title;
-                    self.selectedDeviceAddr = self.selectedMarker.contributor;
+                    self.selectedDeviceAddr = self.selectedMarker.address;
                     if(self.selectedDeviceId === 0){
                         self.initializeGraphData();
                     }
                     
                 } else if (type == 'home') {
-                    self.selectedDeviceLabel = "A Global Air-Pollution Initiave";
-                    self.selectedDeviceAddr = null;
+                    self.selectedDeviceLabel = "AirPollution.online";
+                    self.selectedDeviceAddr = "A Global Air-Pollution Initiave";
                 } else {}
                 self.selectedModalType = type;
             }
@@ -450,10 +493,9 @@
             self.deviceDataFetched = null;
         };
 
-        this.updateSelectedData = function(deviceLabel, address, type){
+        this.updateSelectedData = function(deviceLabel, address){
             self.selectedDeviceLabel = deviceLabel;
-            self.selectedDeviceAddr = type;
-
+            self.selectedDeviceAddr = address;
         };
 
         this.activityArray = null;
@@ -573,7 +615,6 @@
 
         this.initializeGraphData = function(){
             self.aqiGraphData = [];
-            self.aqiAverage = [];
             self.aqiGraph = new RealtimeGraphFactory.getAreaGraph();
         };
 
@@ -612,7 +653,6 @@
             value = parseInt(value);
             length = self.aqiGraphData.length;
             self.aqiGraphData.push([time, value]);
-            self.aqiAverage.push(parseInt(value));
             
         };
 
@@ -633,13 +673,11 @@
         this.associateGraphData = function(){
             self.aqiGraphData.sort(self.sortGraphData);
             self.aqiGraph.series[0].data = self.aqiGraphData;
-            console.log("printing data : "+self.aqiAverage);
-            self.aqiFinal = Math.max.apply(Math, self.aqiAverage);
             if(self.graphWidth > 0){
                 self.aqiGraph.options.chart.width = self.graphWidth;
             }
             self.currentAverageAQI = Math.floor(self.currentAverageAQI);
-            self.aqiGraph.options.title.text = "Max AQI : "+self.aqiFinal;
+            self.aqiGraph.options.title.text = "Average AQI : "+self.currentAverageAQI;
         };
 
         
