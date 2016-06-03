@@ -365,6 +365,7 @@ body,
 .container-fluid {
     height: 100%;
     min-height: 100%;
+    overflow-x: hidden;
     font-family: 'Open Sans', sans-serif;
     background-color: #f3f3f3;
 }

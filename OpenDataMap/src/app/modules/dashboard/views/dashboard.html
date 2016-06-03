@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-sm-12 mobile-right-no-padding">
             <div class="col-sm-9 no-padding"> 
-                <ui-gmap-google-map center="map.center" zoom='11' options="options">
+                <ui-gmap-google-map center="map.center" zoom='5' options="options">
                     <ui-gmap-marker icon="'marker.icon'" ng-repeat="marker in vm.markersToshow" click="vm.markerClicked(marker, marker.id,marker.title,marker.address,marker.contributor)" coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id"> 
                     </ui-gmap-marker> 
                     <!--ui-gmap-markers models="vm.markersToshow" coords="'self'" click="'onClicked'" fit='true'

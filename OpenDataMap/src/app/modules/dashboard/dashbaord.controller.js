@@ -65,15 +65,15 @@
             keepSpiderfied:true
         };
 
-        $rootScope.latitude = 28.5877575;
-        $rootScope.longitude = 77.21531200000004;
+        $rootScope.latitude = 22.9734;
+        $rootScope.longitude = 78.6569;
 
         $rootScope.map = {
             center: {
                 latitude: $rootScope.latitude,
                 longitude: $rootScope.longitude
             },
-            zoom: 9,
+            zoom: 5,
             zoomControl: false,
             disableDefaultUI: true,
             styles: [
