@@ -8,6 +8,48 @@
         var self = this;
         self.selectedDevice = null;
 
+        var clusterTypes = ['standard','ugly','beer'];
+          var selectedClusterTypes = {
+            ugly:{
+              title: 'Hi I am a Cluster!',
+              gridSize: 60, ignoreHidden: true,
+              minimumClusterSize: 2,
+              imageExtension: 'png',
+              imagePath: 'assets/images/cluster', imageSizes: [72]
+            },
+            beer:{
+              title: 'Beer!',
+              gridSize: 60,
+              ignoreHidden: true,
+              minimumClusterSize: 2,
+              enableRetinaIcons: true,
+              styles: [{
+                url: 'assets/images/beer.png',
+                textColor: '#ddddd',
+                textSize: 18,
+                width: 33,
+                height: 33,
+              }]
+            },
+            standard:{
+              title: 'Hi I am a Cluster!', gridSize: 60, ignoreHidden: true, minimumClusterSize: 2
+            }
+          };
+          var selectClusterType = function(value){
+            var cloned = _.clone($rootScope.map.randomMarkers, true);
+            $rootScope.map.randomMarkers = [];
+            $rootScope.map.clusterOptions = $scope.map.selectedClusterTypes[value] || $scope.map.selectedClusterTypes.standard;
+            $rootScope.map.clusterOptionsText =  angular.toJson($rootScope.map.clusterOptions);
+            if(!value){
+              value = 'standard';
+            }
+            $timeout(function(){
+              $rootScope.map.randomMarkers = cloned;
+            },200);
+
+            return value;
+          };
+
         var mapObject = {
             center: {
                 latitude: 23,
@@ -96,7 +138,14 @@
                   { visibility: "off" }
                 ]
               }
-            ]
+            ],
+            randomMarkers : [],
+            doClusterRandomMarkers: true,
+          currentClusterType: 'standard',
+          clusterTypes: clusterTypes,
+          selectClusterType: selectClusterType,
+          selectedClusterTypes: selectedClusterTypes,
+          clusterOptions: selectedClusterTypes.standard
         };
         //$rootScope.map.setOptions(styles);
         $scope.marker = {
@@ -590,5 +639,8 @@
             self.currentAverageAQI = Math.floor(self.currentAverageAQI);
             self.aqiGraph.options.title.text = "Max AQI : "+self.aqiFinal;
         };
+
+        
+
     }
 })();

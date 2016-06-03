@@ -1,5 +1,5 @@
 
-<nav ng-controller="headerCtrl as vm" class="navbar navbar-default custom-menu no-bottom-margin">
+<nav ng-controller="headerCtrl as vm" class="navbar navbar-default fixed custom-menu no-bottom-margin" ng-class="{nfixed: $state.includes('dashboard')}">
     <div class="navbar-inverse">
         <div class="container-fluid">
         <div class="navbar-header">
@@ -7,9 +7,6 @@
         </div>
         <div class="collapse navbar-collapse custom-collapse" id="bs-example-navbar-collapse-1" style="background-color:#00b3bf;">
             <ul class="nav navbar-nav navbar-right navbar-collapse  custom-navbar ">
-                
-                <li ng-class="{active: $state.includes('about')}"><a></a></li>
-                <li ng-class="{active: $state.includes('about')}"><a></a></li>
                 <li ng-class="{active: $state.includes('about')}"><a ui-sref="about.index">ABOUT</a></li>
                 <li ng-class="{active: $state.includes('community')}"><a ui-sref="community.index">COMMUNITY</a></li>
                 <li ng-class="{active: $state.includes('api')}"><a ui-sref="api.index">OPEN APIs</a></li>

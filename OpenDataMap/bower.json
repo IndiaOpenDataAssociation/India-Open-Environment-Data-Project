@@ -27,9 +27,11 @@
     "ng-bs-daterangepicker": "~0.0.3",
     "highcharts-ng": "~0.0.8",
     "highcharts": "~4.1.7",
+    "angular-leaflet-directive": "0.10.0",
     "angular-material": "1.0.4",
     "angular-messages": "1.4.5-build.4192+sha.ea8016c",
-    "angular-swagger-ui": "~0.3.1"
+    "angular-swagger-ui": "~0.3.1",
+    "angular-socialshare": "1.4.3"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.0"

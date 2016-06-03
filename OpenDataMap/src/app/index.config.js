@@ -6,7 +6,7 @@
         .config(config);
 
     /** @ngInject */
-    function config(uiGmapGoogleMapApiProvider, swaggerTranslatorProvider, $httpProvider, $validationProvider, $tooltipProvider) {
+    function config(uiGmapGoogleMapApiProvider, $locationProvider, swaggerTranslatorProvider, $httpProvider, $validationProvider, $tooltipProvider) {
         $httpProvider.interceptors.push('httpRequestInterceptor');
         $validationProvider.setErrorHTML(function(msg) {
             return '';
@@ -16,6 +16,7 @@
         uiGmapGoogleMapApiProvider.configure({
               key: 'AIzaSyBr3jBMT0Q4j0TnWxajkWt159n5lROYsh0'
         });
+        //$locationProvider.html5Mode(true).hashPrefix('!');
         swaggerTranslatorProvider
             .setLanguage('en')
             .addTranslations('en', {

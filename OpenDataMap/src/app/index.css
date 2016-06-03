@@ -1475,7 +1475,7 @@ div {
 }
 @media (min-width: 728px) and (max-width: 1281px){
     .bottom-panel{
-        bottom: 45px;
+        bottom: 27px; /* 27px */
     }
 }
 .airowl-tab .nav-tabs > li{
