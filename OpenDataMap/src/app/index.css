@@ -1606,3 +1606,20 @@ div {
     width: 210px;
     margin-right: 15px;
 }
+.select-city-box{
+    position: fixed;
+    top: 60px;
+    left:25px;
+    max-width: 300px;
+}
+select.city-search{
+    padding: 8px;
+    width: 250px;
+    color: #00b3bf;
+    font-size: 16px;
+    background-color: rgba(255,255,255,0.95);
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: none;
+    outline: none;
+}
