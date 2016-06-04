@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-sm-12 mobile-right-no-padding">
             <div class="col-sm-9 no-padding"> 
-                <ui-gmap-google-map center="map.center" zoom='5' options="options" id ="googleMap" control="map.control">
+                <ui-gmap-google-map center="$root.map.center" zoom='$root.map.zoom' options="options" id ="googleMap" control="$root.map.control">
                     <ui-gmap-marker icon="'marker.icon'"
                      ng-repeat="marker in vm.markersToshow" 
                      click="vm.markerClicked(marker, marker.id,marker.title,marker.address,marker.contributor)" 
@@ -162,4 +162,11 @@
                 data-text="{{vm.socialShareSentence}}" ></a>
         </div>
     </div>
+</div>
+
+<div class="select-city-box">
+    <select class="city-search" ng-change="vm.selectCity()" ng-model="vm.selectedCity">
+      <option value="0" ng-value="0" selected> India</option>
+      <option ng-repeat="item in vm.cities" value="{{item.city}}" ng-value="{{item.city}}" >{{item.city}}</option>
+    </select>
 </div>
