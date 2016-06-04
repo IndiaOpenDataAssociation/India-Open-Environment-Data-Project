@@ -17,15 +17,10 @@
     <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="../bower_components/animate.css/animate.css" />
     <link rel="stylesheet" href="../bower_components/font-awsome/css/font-awesome.css" />
-    <link rel="stylesheet" href="../bower_components/angular-toastr/dist/angular-toastr.css" />
     <link rel="stylesheet" href="../bower_components/angular-ui-select/dist/select.css" />
     <link rel="stylesheet" href="../bower_components/angular-google-places-autocomplete/src/autocomplete.css" />
     <link rel="stylesheet" href="../bower_components/angular-google-places-autocomplete/dist/autocomplete.min.css" />
-    <link rel="stylesheet" href="../bower_components/bootstrap-daterangepicker/daterangepicker-bs3.css" />
-    <link rel="stylesheet" href="../bower_components/leaflet/dist/leaflet.css" />
-    <link rel="stylesheet" href="../bower_components/angular-material/angular-material.css" />
     <link rel="stylesheet" href="../bower_components/angular-swagger-ui/dist/css/swagger-ui.min.css" />
     <link rel="stylesheet" href="../bower_components/angular-socialshare/angular-socialshare.css" />
     <!-- endbower -->
@@ -55,11 +50,8 @@ $(".slimScrollDiv").contents().unwrap();
             display: block;
         }
     </style>
-    <script type="text/javascript" src="classie.js"></script>
-<script type="text/javascript" src="modernizr.custom.js"></script>
-<script type="text/javascript" src="main.js"></script>
     <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-    
+
 </head>
 
 <body >
@@ -88,22 +80,10 @@ $(".slimScrollDiv").contents().unwrap();
             </div>
         </div>
         <!-- Page Loader -->
-        <div loader style="position: fixed;top: 0;bottom: 0;right: 0;left: 0;background: #fff;opacity: 0.9;z-index:9999;">
+        <div loader >
 <!--             <div id="pageloader" class="animate">
                 <div class="dot1"></div>
                 <div class="dot2"></div> -->
-            <div>
-                <img src="assets/img/header.png" class="img-responsive">
-                <img src="assets/img/rightpane.png" class="img-responsive" style="float:right;">
-                <div style=" padding-top: 250px; padding-left: 500px;">
-                        <figure>
-                        <img src="assets/img/loading_blue.gif" style="padding-bottom: 10px; width: auto;">
-                        <figcaption style="color: #00b3bf; padding-left: 55px;"> Loading</figcaption>
-                        </figure>
-                </div>
-                <img src="assets/img/footer.png">
-
-           </div>
         </div>
         <!-- build:js(src) scripts/vendor.js -->
         <!-- bower:js -->
@@ -118,29 +98,20 @@ $(".slimScrollDiv").contents().unwrap();
         <script src="../bower_components/malarkey/dist/malarkey.min.js"></script>
         <script src="../bower_components/moment/moment.js"></script>
         <script src="../bower_components/angular-resource/angular-resource.js"></script>
-        <script src="../bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
         <script src="../bower_components/angular-ui-select/dist/select.js"></script>
         <script src="../bower_components/lodash/lodash.js"></script>
-        <script src="../bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
+        <script src="../bower_components/angular-google-maps/dist/angular-google-maps.min.js"></script>
         <script src="../bower_components/angular-google-places-autocomplete/src/autocomplete.js"></script>
         <script src="../bower_components/angular-google-places-autocomplete/dist/autocomplete.min.js"></script>
         <script src="../bower_components/slimScroll/jquery.slimscroll.js"></script>
         <script src="../bower_components/angular-slimscroll/angular-slimscroll.js"></script>
         <script src="../bower_components/angular-elastic/elastic.js"></script>
         <script src="../bower_components/jquery-ui/jquery-ui.js"></script>
-        <script src="../bower_components/momentjs/moment.js"></script>
         <script src="../bower_components/angular-momentjs/angular-momentjs.js"></script>
-        <script src="../bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
-        <script src="../bower_components/ng-bs-daterangepicker/src/ng-bs-daterangepicker.js"></script>
         <script src="../bower_components/highcharts-ng/dist/highcharts-ng.js"></script>
         <script src="../bower_components/highcharts/highcharts.js"></script>
         <script src="../bower_components/highcharts/highcharts-more.js"></script>
         <script src="../bower_components/highcharts/modules/exporting.js"></script>
-        <script src="../bower_components/leaflet/dist/leaflet-src.js"></script>
-        <script src="../bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js"></script>
-        <script src="../bower_components/angular-aria/angular-aria.js"></script>
-        <script src="../bower_components/angular-messages/angular-messages.js"></script>
-        <script src="../bower_components/angular-material/angular-material.js"></script>
         <script src="../bower_components/angular-swagger-ui/dist/scripts/swagger-ui.min.js"></script>
         <script src="../bower_components/angular-socialshare/angular-socialshare.js"></script>
         <!-- endbower -->
@@ -190,7 +161,6 @@ $(".slimScrollDiv").contents().unwrap();
         <script src="app/services/authentication.service.js"></script>
         <script src="app/services/aqicolor.service.js"></script>
         <script src="app/services/angular-validation.js"></script>
-        <script src="app/modules/markerclusterer.js"></script>
         <script src="app/index.run.js"></script>
         <script src="app/index.route.js"></script>
         <script src="app/index.directive.js"></script>
