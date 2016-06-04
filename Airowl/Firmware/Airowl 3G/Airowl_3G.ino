@@ -14,9 +14,12 @@ const unsigned char cmd_get_sensor[] =
     0x00, 0x00, 0x00, 0x47
 };
 
+#define ARRAYSIZE 15
+String apn[ARRAYSIZE] = {"www","airtelgprs.com","aircelgprs.com","TATA.DOCOMO.INTERNET","bsnlnet","internet","uninor","mtnl.net"};
+
 int PM1=0, PM25=0, PM10=0;
 int i = 0;
-
+String APN;
 void setup()
 {
   GSM_Serial.begin(9600);               // the GPRS baud rate   
@@ -64,9 +67,33 @@ void SubmitHttpRequest()
   delay(1000);
  
   ShowSerialData();
+  int j;
+
+  String APN1 = "AT+SAPBR=3,1,\"APN\","+ String(apn[j]) + "\"";
+  String APN2 = "AT+SAPBR=3,1,\"APN\",\"mtnl\",\"mtnl123\","+ String(apn[j]) + "\"";
  
-  GSM_Serial.println("AT+SAPBR=3,1,\"APN\",\"www\"");//setting the APN, the second need you fill in your local apn server
-  delay(4000);
+
+  int size=sizeof(apn);
+  for (j = 0; j <size ; j++)
+  {
+    if (j == (size-1)) 
+    {
+      GSM_Serial.println(APN2);
+     
+    }
+    else
+    {
+    GSM_Serial.println(APN1);
+     Serial.println("apn done");
+    }
+    delay(2000);
+    
+   if (Serial.readString()=="OK")
+     APN = apn[j];
+     break;
+  // else 
+   // Serial.println("GSM done"); 
+  }
  
   ShowSerialData();
  
