@@ -50,11 +50,6 @@
             return value;
           };
 
-        if (uiGmapIsReady) {
-            var x = $document.find('googleMap');
-            x.innerHTML = "<img src='assets/img/loader3.gif'>";
-
-        }
         var mapObject = {
             center: {
                 latitude: 23,
@@ -132,7 +127,7 @@
             },
             zoom: 9,
             zoomControl: false,
-            disableDefaultUI: false,
+            disableDefaultUI: true,
             control: {},
             styles: [
               {
@@ -467,7 +462,7 @@
             if(self.selectedDeviceId !== 0){
                 if(type == 'analytics'){
                     self.selectedDeviceLabel = self.selectedMarker.title;
-                    self.selectedDeviceAddr = self.selectedMarker.address;
+                    self.selectedDeviceAddr = self.selectedMarker.contributor;
                     if(self.selectedDeviceId !== 0){
                         if(self.analyticsClicked){
                         } else {
@@ -476,7 +471,7 @@
                     }
                 } else if (type == 'daily'){
                     self.selectedDeviceLabel = self.selectedMarker.title;
-                    self.selectedDeviceAddr = self.selectedMarker.address;
+                    self.selectedDeviceAddr = self.selectedMarker.contributor;
                     if(self.selectedDeviceId === 0){
                         self.initializeGraphData();
                     }
@@ -493,9 +488,9 @@
             self.deviceDataFetched = null;
         };
 
-        this.updateSelectedData = function(deviceLabel, address){
+        this.updateSelectedData = function(deviceLabel, address, type){
             self.selectedDeviceLabel = deviceLabel;
-            self.selectedDeviceAddr = address;
+            self.selectedDeviceAddr = type;
         };
 
         this.activityArray = null;
@@ -615,6 +610,7 @@
 
         this.initializeGraphData = function(){
             self.aqiGraphData = [];
+            self.aqiAverage = [];
             self.aqiGraph = new RealtimeGraphFactory.getAreaGraph();
         };
 
@@ -653,7 +649,7 @@
             value = parseInt(value);
             length = self.aqiGraphData.length;
             self.aqiGraphData.push([time, value]);
-            
+            self.aqiAverage.push(parseInt(value));
         };
 
         //sort 2d array
@@ -673,11 +669,13 @@
         this.associateGraphData = function(){
             self.aqiGraphData.sort(self.sortGraphData);
             self.aqiGraph.series[0].data = self.aqiGraphData;
+            self.aqiFinal = Math.max.apply(Math, self.aqiAverage);
             if(self.graphWidth > 0){
                 self.aqiGraph.options.chart.width = self.graphWidth;
             }
             self.currentAverageAQI = Math.floor(self.currentAverageAQI);
-            self.aqiGraph.options.title.text = "Average AQI : "+self.currentAverageAQI;
+            self.aqiGraph.options.title.text = "Max AQI : "+self.aqiFinal;
+            //self.aqiGraph.options.title.text = "Average AQI : "+self.currentAverageAQI;
         };
 
         
