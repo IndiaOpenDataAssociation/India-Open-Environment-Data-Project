@@ -596,7 +596,7 @@
         };
 
         this.lastUpdatedTime = null;
-        this.selectedDeviceLabel = "A Global Air-Pollution Initiave";
+        this.selectedDeviceLabel = "An India Open-Data Initiative";
         this.selectedDeviceAddr = null;
         this.deviceDataFetched = false;
         this.selectedDeviceData = {};
@@ -622,7 +622,7 @@
                     }
                     
                 } else if (type == 'home') {
-                    self.selectedDeviceLabel = "A Global Air-Pollution Initiave";
+                    self.selectedDeviceLabel = "An India Open-Data Initiative";
                     self.selectedDeviceAddr = null;
                 } else {}
                 self.selectedModalType = type;
