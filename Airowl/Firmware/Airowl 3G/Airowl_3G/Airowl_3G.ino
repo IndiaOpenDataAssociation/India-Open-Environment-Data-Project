@@ -14,6 +14,11 @@ const unsigned char cmd_get_sensor[] =
     0x00, 0x00, 0x00, 0x47
 };
 
+//Ranges
+const int Range10_max = 120; const int Range10_min= 60;
+const int Range25_max = 350; const int Range25_min= 100;
+const int Range3_max = 1200; const int Range3_min= 951;
+
 #define ARRAYSIZE 15
 String apn[ARRAYSIZE] = {"www","airtelgprs.com","aircelgprs.com","TATA.DOCOMO.INTERNET","bsnlnet","internet","uninor","mtnl.net"};
 
@@ -25,6 +30,10 @@ void setup()
   GSM_Serial.begin(9600);               // the GPRS baud rate   
   Dust_Serial.begin(9600);             // Dust Sensor baud rate
   Serial.begin(19200);                 // the GPRS baud rate 
+  pinMode(A0, OUTPUT);
+  pinMode(A1, OUTPUT);
+  pinMode(A2, OUTPUT);
+  
   delay(500);
     //transmit comp data
   for (i = 0; i < sizeof(cmd_get_sensor); i++)
@@ -41,6 +50,8 @@ void loop()
    Winsen_dust();
    Serial.println("***********************************************************************************************");
    delay(2000);  
+
+   LED_blink(); // Blinking LED's of Airowl eyes.
   
   // GSM_Serial.listen();  
    SubmitHttpRequest();
@@ -91,8 +102,7 @@ void SubmitHttpRequest()
    if (Serial.readString()=="OK")
      APN = apn[j];
      break;
-  // else 
-   // Serial.println("GSM done"); 
+
   }
  
   ShowSerialData();
@@ -106,9 +116,11 @@ void SubmitHttpRequest()
  
   delay(2000); 
   ShowSerialData();
-  
-  String address = "AT+HTTPPARA=\"URL\",\"http://oizomdev.cloudapp.net/api/data?serial_number=5&W_DUST25=" + String(PM25) + "&W_DUST10=" + String(PM10) + "&W_DUST3=" + String(PM1) +"\"";
+
+  String address = "AT+HTTPPARA=\"URL\",\"http://oedpdev.eu-gb.mybluemix.net/v1/data?deviceId=AIROWL_001&type=AIROWL&key=hetvi_1234&pm1="+ String(PM1) + "&pm25="+ String(PM25) + "&pm10="+ String(PM10) +"\"";
  
+ // String address = "AT+HTTPPARA=\"URL\",\"http://oizomdev.cloudapp.net/api/data?serial_number=5&W_DUST25=" + String(PM25) + "&W_DUST10=" + String(PM10) + "&W_DUST3=" + String(PM1) +"\"";
+
   GSM_Serial.println(address);// setting the httppara, the second parameter is the website you want to access
   delay(1000);
  
@@ -147,20 +159,13 @@ void Winsen_dust()
     while(Dust_Serial.available())
     {
         data[i] = Dust_Serial.read();
-    //    Serial.println(data[i]);
-//        Serial.print(" Byte ");
-//        Serial.println(i);
-    //    Serial.print(" : ");
-     //   Dust_Serial.print(data[i], HEX );
-     //   Dust_Serial.print(" ");
-       
+     
         if(i == 23)
         {
             Dust_Serial.println();
             PM1 = ((data[4]*256) + data[5]);
             PM25 = ((data[6]*256) + data[7]);
             PM10 = ((data[8]*256) + data[9]);
-//            Msg= "PM 1: "+ String(PM1) +" | PM25: "+ String(PM25) +" | PM10: "+ String(PM10);
             Serial.print("PM 1.0 :");
             Serial.println(PM1);
             Serial.print("PM 2.5 :");
@@ -174,3 +179,25 @@ void Winsen_dust()
     }
     Serial.println("Calculation done");
 }
+
+void LED_blink()
+{
+  if( PM10>Range10_max || PM25>Range25_max || PM10>Range3_max )
+  {
+    digitalWrite(A0, LOW);
+    digitalWrite(A1, HIGH);
+    digitalWrite(A2, LOW); 
+  }
+  else if( PM10>Range10_min || PM25>Range25_min || PM10>Range3_min )
+  {
+    digitalWrite(A0, HIGH);
+    digitalWrite(A1, LOW);
+    digitalWrite(A2, LOW);
+  }
+  else
+  {
+    digitalWrite(A0, LOW);
+    digitalWrite(A1, LOW);
+    digitalWrite(A2, HIGH);
+  }
+}  
