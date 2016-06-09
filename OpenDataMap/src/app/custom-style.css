@@ -576,9 +576,9 @@ video#videoToPlay2{
 }
 
 .home-styles .overlay{
-	background-image: url(../assets/img/air.jpg);
+	background-image: url(../assets/img/AirOwl-Page-cover.jpg);
 	background-repeat: no-repeat;
-	background-position: center center;
+	background-position: right 45px;
 	background-attachment: fixed;
 }
 .real-data-home-bg{

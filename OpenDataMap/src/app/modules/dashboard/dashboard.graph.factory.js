@@ -53,7 +53,7 @@
                         "plotOptions": {
                             "series": {
                                 "stacking": ""
-                            }
+                            },
                         },
                         rangeSelector : {
                             selected : 1
