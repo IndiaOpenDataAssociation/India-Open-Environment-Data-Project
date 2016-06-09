@@ -536,10 +536,6 @@
             });
             self.dataResourcesCount = self.tempPublicData.length;
 
-            angular.forEach(data, function(item){
-                
-            });
-
             self.changeContributor(null);
             console.log("came here");
         });
