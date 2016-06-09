@@ -10,7 +10,7 @@
     {
         var self = this;
         self.selectedDevice = null;
-FieldsDataItems
+
         angular.extend($scope, {
             india: {
                 lat:22,
@@ -28,6 +28,50 @@ FieldsDataItems
                     scrollWheelZoom: true
             }
             });
+
+        console.log(AQIColorService.getPinPath(100));
+
+
+
+        AllPublicDataItems.query().$promise.then(function(data){
+            self.dataResourcesCount = data[0].length;
+            self.allPublicData = data[0];
+            angular.forEach(data[0],function(item){
+                 self.addNewMarker(item.deviceId, item.latitude, item.longitude, item.label, item.loc, item.imagePath, item.type);
+            });
+        });
+
+         this.markers = [];
+
+        this.addNewMarker = function(deviceId, latitudeVal, longitudeVal, titleVal, addressLabel, imagePath, contributor){
+            var newMarker = {
+                id: deviceId,
+                lat: latitudeVal,
+                lng: longitudeVal,
+                options: {
+                    draggable: false,
+                    icon: {
+                        url: imagePath
+                    }
+                },
+                contributor: contributor,
+                title: titleVal,
+                address: addressLabel,
+                events: {
+                   
+                },
+                icon: {
+                    url: "/assets/images/polludron-icon.png"
+                }
+                // show:true;
+            };
+            console.log("came here i times : ");
+            self.markers.push(newMarker);
+        };
+
+        $scope.markersToshow = this.markers;
+
+
 
 
         
