@@ -10,7 +10,9 @@
     <div class="row">
         <div class="col-sm-12 mobile-right-no-padding">
             <div class="col-sm-9 no-padding"> 
-                <ui-gmap-google-map center="$root.map.center" zoom='$root.map.zoom' options="options" id ="googleMap" control="$root.map.control">
+
+            <leaflet height ="680px" lf-center="india" defaults="defaults"> </leaflet>
+               <!--  <ui-gmap-google-map center="$root.map.center" zoom='$root.map.zoom' options="options" id ="googleMap" control="$root.map.control">
                     <ui-gmap-marker icon="'marker.icon'"
                      ng-repeat="marker in vm.markersToshow" 
                      click="vm.markerClicked(marker, marker.id,marker.title,marker.address,marker.contributor)" 
@@ -18,14 +20,14 @@
                      options="marker.options" 
                      events="marker.events" 
                      idkey="marker.id"> 
-                    </ui-gmap-marker> 
+                    </ui-gmap-marker>  -->
                    <!--  <ui-gmap-window id = "infowindow" show="marker.show" >
                     <div ng-non-bindable>test</div>
                     </ui-gmap-window> -->
                     <!--ui-gmap-markers models="vm.markersToshow" coords="'self'" click="'onClicked'" fit='true'
                          doCluster="true" >
                     </ui-gmap-markers-->
-                </ui-gmap-google-map>
+         <!--        </ui-gmap-google-map> -->
             </div>
             <div class="col-sm-3 screen-height no-padding blue-bg" >
                 <div class="row">
