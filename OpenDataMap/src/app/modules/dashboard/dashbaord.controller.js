@@ -149,7 +149,7 @@
                 if(item.city == self.selectedCity){
                     $rootScope.center.lat = item.latitude;
                     $rootScope.center.lng = item.longitude;
-                    $rootScope.center.zoom = 9;
+                    $rootScope.center.zoom = 10;
                 }
             });
         };  
@@ -159,8 +159,8 @@
 
         angular.extend($rootScope, {
             center: {
-                lat:22,
-                lng:73,
+                lat:22.9734,
+                lng:78.6569,
                 zoom:5
             },
              defaults: {
@@ -241,6 +241,15 @@
         //     self.selectedDeviceData = {}; 
         //     self.updateSelectedData(deviceLabel, deviceAddr, contributor);
         // };
+
+
+        var w = angular.element($window);
+        $scope.viewPortHeight = w.height() - 150;
+
+        this.windowWidth = w.width();
+        this.graphWidth = (this.windowWidth/4) - 40;
+
+
 
         this.lastUpdatedTime = null;
         this.selectedDeviceLabel = "An India Open-Data Initiative";
