@@ -177,8 +177,6 @@
 
             });
 
-              console.log(AQIColorService.getPinPath(100));
-
         this.selectedAQI = 0;
         this.dataResourcesCount = 0;
 
@@ -224,7 +222,7 @@
 
         $scope.events = {
             markers: {
-                enable: ['touchend','click']
+                enable: ['touchend','click','mouseover']
             }
         }
 
@@ -244,7 +242,7 @@
 
 
         var w = angular.element($window);
-        $scope.viewPortHeight = w.height() - 150;
+        $scope.viewPortHeight = w.height() - 164;
 
         this.windowWidth = w.width();
         this.graphWidth = (this.windowWidth/4) - 40;
