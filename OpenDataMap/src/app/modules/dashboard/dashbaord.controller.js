@@ -4,347 +4,199 @@
     angular.module('dashboard')
         .controller('DashboardCtrl', DashboardCtrl);
 
-    function DashboardCtrl(uiGmapIsReady,$document,$location,$scope, $rootScope, $window, $moment, AQIColorService, AllAQIDataItems,RealtimeGraphFactory, $cookies, $state, FieldsDataItems, AnalyticsDataItems, FieldsService, DeviceDataItems, AllPublicDataItems, $timeout) {
+    function DashboardCtrl(AQIColorService, AllAQIDataItems,RealtimeGraphFactory,
+     $cookies, $state, FieldsDataItems, AnalyticsDataItems, FieldsService, DeviceDataItems,
+      AllPublicDataItems, $timeout,$document,$location,$scope, $rootScope, $window, $moment) 
+    {
         var self = this;
         self.selectedDevice = null;
 
         self.cities = [
-            {
- "city": "Agra",
- "latitude" : 27.1767,
- "longitude" : 78.0081
- },
-{
- "city": "Bengaluru",
- "latitude" : 12.9716,
- "longitude" : 77.5946
- },
-{
- "city": "Chandrapur",
- "latitude" : 20.2095,
- "longitude" : 79.5603
- },
-{
- "city": "Chennai",
- "latitude" : 13.0827,
- "longitude" : 80.2707
- },
-{
- "city": "Delhi",
- "latitude" : 28.6139,
- "longitude" : 77.2090
- },
-{
- "city": "Faridabad",
- "latitude" : 28.4089,
- "longitude" : 77.3178
- },
-{
- "city": "Gaya",
- "latitude" : 24.7955,
- "longitude" : 84.9994
- },
-{
- "city": "Gurgaon",
- "latitude" : 28.4595,
- "longitude" : 77.0266
- },
-{
- "city": "Haldia",
- "latitude" : 22.0667,
- "longitude" : 88.0698
- },
-{
- "city": "Hyderabad",
- "latitude" : 17.3850,
- "longitude" : 78.4867
- },
-{
- "city": "Jaipur",
- "latitude" : 26.9124,
- "longitude" : 75.7873
- },
-{
- "city": "Jodhpur",
- "latitude" : 26.2389,
- "longitude" : 73.0243
- },
-{
- "city": "Kanpur",
- "latitude" : 26.4499,
- "longitude" : 80.3319
- },
-{
- "city": "Kolkata",
- "latitude" : 22.5726,
- "longitude" : 88.3639
- },
-{
- "city": "Lucknow",
- "latitude" : 26.8467,
- "longitude" : 80.9462
- },
-{
- "city": "Mumbai",
- "latitude" : 19.0760,
- "longitude" : 72.8777
- },
-{
- "city": "Muzaffarpur",
- "latitude" : 26.1209,
- "longitude" : 85.3647
- },
-{
- "city": "Nagpur",
- "latitude" : 21.1458,
- "longitude" : 79.0882
- },
-{
- "city": "Nashik",
- "latitude" : 19.9975,
- "longitude" : 73.7898
- },
-{
- "city": "Panchkula",
- "latitude" : 30.6942,
- "longitude" : 76.8606
- },
-{
- "city": "Patna",
- "latitude" : 25.5941,
- "longitude" : 85.1376
- },
-{
- "city": "Pune",
- "latitude" : 18.5204,
- "longitude" : 73.8567
- },
-{
- "city": "Rohtak",
- "latitude" : 28.8955,
- "longitude" : 76.6066
- },
-{
- "city": "Solapur",
- "latitude" : 17.6599,
- "longitude" : 75.9064
- },
-{
- "city": "Varanasi",
- "latitude" : 25.3176,
- "longitude" : 82.9739
-}
-        ];
-
-        $rootScope.zoom = 5;
+        {                      
+                     "city": "Agra",
+                     "latitude" : 27.1767,
+                     "longitude" : 78.0081
+                     },
+                    {
+                     "city": "Bengaluru",
+                     "latitude" : 12.9716,
+                     "longitude" : 77.5946
+                     },
+                    {
+                     "city": "Chandrapur",
+                     "latitude" : 20.2095,
+                     "longitude" : 79.5603
+                     },
+                    {
+                     "city": "Chennai",
+                     "latitude" : 13.0827,
+                     "longitude" : 80.2707
+                     },
+                    {
+                     "city": "Delhi",
+                     "latitude" : 28.6139,
+                     "longitude" : 77.2090
+                     },
+                    {
+                     "city": "Faridabad",
+                     "latitude" : 28.4089,
+                     "longitude" : 77.3178
+                     },
+                    {
+                     "city": "Gaya",
+                     "latitude" : 24.7955,
+                     "longitude" : 84.9994
+                     },
+                    {
+                     "city": "Gurgaon",
+                     "latitude" : 28.4595,
+                     "longitude" : 77.0266
+                     },
+                    {
+                     "city": "Haldia",
+                     "latitude" : 22.0667,
+                     "longitude" : 88.0698
+                     },
+                    {
+                     "city": "Hyderabad",
+                     "latitude" : 17.3850,
+                     "longitude" : 78.4867
+                     },
+                    {
+                     "city": "Jaipur",
+                     "latitude" : 26.9124,
+                     "longitude" : 75.7873
+                     },
+                    {
+                     "city": "Jodhpur",
+                     "latitude" : 26.2389,
+                     "longitude" : 73.0243
+                     },
+                    {
+                     "city": "Kanpur",
+                     "latitude" : 26.4499,
+                     "longitude" : 80.3319
+                     },
+                    {
+                     "city": "Kolkata",
+                     "latitude" : 22.5726,
+                     "longitude" : 88.3639
+                     },
+                    {
+                     "city": "Lucknow",
+                     "latitude" : 26.8467,
+                     "longitude" : 80.9462
+                     },
+                    {
+                     "city": "Mumbai",
+                     "latitude" : 19.0760,
+                     "longitude" : 72.8777
+                     },
+                    {
+                     "city": "Muzaffarpur",
+                     "latitude" : 26.1209,
+                     "longitude" : 85.3647
+                     },
+                    {
+                     "city": "Nagpur",
+                     "latitude" : 21.1458,
+                     "longitude" : 79.0882
+                     },
+                    {
+                     "city": "Nashik",
+                     "latitude" : 19.9975,
+                     "longitude" : 73.7898
+                     },
+                    {
+                     "city": "Panchkula",
+                     "latitude" : 30.6942,
+                     "longitude" : 76.8606
+                     },
+                    {
+                     "city": "Patna",
+                     "latitude" : 25.5941,
+                     "longitude" : 85.1376
+                     },
+                    {
+                     "city": "Pune",
+                     "latitude" : 18.5204,
+                     "longitude" : 73.8567
+                     },
+                    {
+                     "city": "Rohtak",
+                     "latitude" : 28.8955,
+                     "longitude" : 76.6066
+                     },
+                    {
+                     "city": "Solapur",
+                     "latitude" : 17.6599,
+                     "longitude" : 75.9064
+                     },
+                    {
+                     "city": "Varanasi",
+                     "latitude" : 25.3176,
+                     "longitude" : 82.9739
+                    }
+         ];
         self.selectedCity = '0';
         self.selectCity = function(){
             if(self.selectedCity == '0'){
-                $rootScope.map.center.latitude = 22.9734;
-                $rootScope.map.center.longitude = 78.6569;
-                $rootScope.map.zoom = 5;
+                $rootScope.center.lat = 22.9734;
+                $rootScope.center.lng = 78.6569;
+                $rootScope.center.zoom = 5;
             }
             angular.forEach(self.cities, function(item){
                 if(item.city == self.selectedCity){
-                    $rootScope.map.center.latitude = item.latitude;
-                    $rootScope.map.center.longitude = item.longitude;
-                    $rootScope.map.zoom = 11;
+                    $rootScope.center.lat = item.latitude;
+                    $rootScope.center.lng = item.longitude;
+                    $rootScope.center.zoom = 10;
                 }
             });
         };  
 
-        var clusterTypes = ['standard','ugly','beer'];
-          var selectedClusterTypes = {
-            ugly:{
-              title: 'Hi I am a Cluster!',
-              gridSize: 60, ignoreHidden: true,
-              minimumClusterSize: 2,
-              imageExtension: 'png',
-              imagePath: 'assets/images/cluster', imageSizes: [72]
-            },
-            beer:{
-              title: 'Beer!',
-              gridSize: 60,
-              ignoreHidden: true,
-              minimumClusterSize: 2,
-              enableRetinaIcons: true,
-              styles: [{
-                url: 'assets/images/beer.png',
-                textColor: '#ddddd',
-                textSize: 18,
-                width: 33,
-                height: 33,
-              }]
-            },
-            standard:{
-              title: 'Hi I am a Cluster!', gridSize: 60, ignoreHidden: true, minimumClusterSize: 2
-            }
-          };
-          var selectClusterType = function(value){
-            var cloned = _.clone($rootScope.map.randomMarkers, true);
-            $rootScope.map.randomMarkers = [];
-            $rootScope.map.clusterOptions = $scope.map.selectedClusterTypes[value] || $scope.map.selectedClusterTypes.standard;
-            $rootScope.map.clusterOptionsText =  angular.toJson($rootScope.map.clusterOptions);
-            if(!value){
-              value = 'standard';
-            }
-            $timeout(function(){
-              $rootScope.map.randomMarkers = cloned;
-            },200);
 
-            return value;
-          };
 
-        var mapObject = {
+
+        angular.extend($rootScope, {
             center: {
-                latitude: 23,
-                longitude: 75
+                lat:22.9734,
+                lng:78.6569,
+                zoom:5
             },
-            zoom: 9
-        };
-
-        var markerObject = {
-            id: 0,
-            coords: {
-                latitude: undefined,
-                longitude: undefined
-            },
-            options: {
-                draggable: true
-            },
-            events: {
-            },
-
-        };
-
-      // var infowindow = new google.maps.InfoWindow({
-      //     content: contentString,
-      //     maxWidth: 200
-      //   });
-
-        // this.markerClusterer
-        var styleArray = [
-          {
-            stylers: [
-              { hue: "#4fc9e8" },
-              { saturation: -20 }
-            ]
-          },{
-            featureType: "road",
-            elementType: "geometry",
-            stylers: [
-              { lightness: 100 },
-              { visibility: "simplified" }
-            ]
-          },{
-            featureType: "road",
-            elementType: "labels",
-            stylers: [
-              { visibility: "off" }
-            ]
-          }
-        ];
-
-        $scope.options = {
-           styles: styleArray
-        };
-
-        $scope.clusterOptions = {
-             minimumClusterSize: 3,
-            maxZoom:11,
-            styles: [{
-              width: 50,
-              height: 50,
-              textColor: '#ffffff',
-              textSize: 15,
-              url:"http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerclusterer/1.0.2/images/m1.png"
-            }],
-            keepSpiderfied:true
-        };
-
-        $rootScope.latitude = 22.9734;
-        $rootScope.longitude = 78.6569;
-
-        $rootScope.map = {
-            center: {
-                latitude: $rootScope.latitude,
-                longitude: $rootScope.longitude
-            },
-            zoom: $rootScope.zoom,
-            zoomControl: false,
-            disableDefaultUI: true,
-            control: {},
-            styles: [
-              {
-                stylers: [
-                  { hue: "#00ffe6" },
-                  { saturation: -20 }
-                ]
-              },{
-                featureType: "road",
-                elementType: "geometry",
-                stylers: [
-                  { lightness: 100 },
-                  { visibility: "simplified" }
-                ]
-              },{
-                featureType: "road",
-                elementType: "labels",
-                stylers: [
-                  { visibility: "off" }
-                ]
-              }
-            ],
-            randomMarkers : [],
-            doClusterRandomMarkers: true,
-          currentClusterType: 'standard',
-          clusterTypes: clusterTypes,
-          selectClusterType: selectClusterType,
-          selectedClusterTypes: selectedClusterTypes,
-          clusterOptions: selectedClusterTypes.standard
-        };
-
-        // var map1 = $rootScope.map.control.getGMap();
+             defaults: {
+                    tileLayer: "http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png",
+                    zoomControlPosition: 'topright',
+                    tileLayerOptions: {
+                        opacity: 0.9,
+                        detectRetina: true,
+                        reuseTiles: true,
+                    },
+                    scrollWheelZoom: true
+            }
 
 
-        //$rootScope.map.setOptions(styles);
-        $scope.marker = {
-            id: 0,
-            coords: {
-                latitude: undefined,
-                longitude: undefined
-            },
-            options: {
-                draggable: true
-            },
-            events: {}
-        };
-        $scope.marker.coords.latitude = 23.022505;
-        $scope.marker.coords.longitude = 72.57136209999999;
-        $scope.marker.events.dragend = function(marker, eventName, args) {
-            var lat = marker.getPosition().lat();
-            var lon = marker.getPosition().lng();
-            $scope.ngMessageEnable = false;
-            $rootScope.map.center.latitude = lat;
-            $rootScope.map.center.longitude = lon;
-            $scope.marker.options = {
-                draggable: true,
-                labelAnchor: "100 0",
-                labelClass: "marker-labels"
-            };
-        };
+            });
 
-        this.markers = [];
-        this.selectedContributor = null;
-        this.selectedDeviceId = 0;
-        this.imageUrl = "http://i.imgur.com/g7TTFQ5.png";
+        this.selectedAQI = 0;
+        this.dataResourcesCount = 0;
+
+        AllPublicDataItems.query().$promise.then(function(data){
+            // self.dataResourcesCount = data[0].length;
+            self.allPublicData = data[0];
+            angular.forEach(data[0],function(item){
+                item.imagePath = AQIColorService.getPinPath(item.aqi);
+                self.addNewMarker(item.deviceId, item.latitude, item.longitude, item.label, item.loc, item.imagePath, item.type);
+                self.dataResourcesCount = self.dataResourcesCount+1;
+            });
+        });
+
+         this.markers = [];
+
         this.addNewMarker = function(deviceId, latitudeVal, longitudeVal, titleVal, addressLabel, imagePath, contributor){
             var newMarker = {
                 id: deviceId,
-                coords: {
-                    latitude: latitudeVal,
-                    longitude: longitudeVal
-                },
+                lat: latitudeVal,
+                lng: longitudeVal,
                 options: {
                     draggable: false,
                     icon: {
@@ -358,210 +210,36 @@
                    
                 },
                 icon: {
-                    url: "/assets/images/polludron-icon.png"
+                    iconUrl: imagePath
                 }
                 // show:true;
             };
             console.log("came here i times : ");
             self.markers.push(newMarker);
         };
-        this.showOizomDevices = true;
-        this.showIODADevices = true;
-        this.socialShareSentence = "Find the Air Quality of your area. Stay updated about the air you breathe. #KnowWhatYouBreathe";
 
-        this.disableOizomDevices = function(){
-            if(self.showOizomDevices){
-                angular.forEach(self.markersToshow, function(item){
-                    if(item.contributor == 'POLLUDRON_PUBLIC'){
-                        var index = self.markersToshow.indexOf(item);
-                        self.markersToshow.splice(index, 1);
-                    }
-                });
-                self.showOizomDevices = !(self.showOizomDevices);
-            } else {
-                angular.forEach(self.markers, function(item){
-                    if(item.contributor == 'POLLUDRON_PUBLIC'){
-                        self.markersToshow.push(item);
-                    }
-                });
-                self.showOizomDevices = !(self.showOizomDevices);
+        $scope.markersToshow = this.markers;
+
+        $scope.events = {
+            markers: {
+                enable: ['touchend','click','mouseover']
             }
-        };
+        }
 
-        this.iodaNumArray = [];
-
-        this.disableIodaDevices = function(){
-            if(self.showIODADevices){
-                self.iodaNumArray = [];
-                angular.forEach(self.markersToshow, function(item){
-                    if(item.contributor == 'IODA'){
-                        var index = self.markersToshow.indexOf(item);
-                        self.iodaNumArray.push(index);
-                    }
-                });
-                for(var i=self.iodaNumArray.length;i>-1;i--){
-                    self.markersToshow.splice(self.iodaNumArray[i], 1);
-                }
-                self.showIODADevices = !(self.showIODADevices);
-            } else {
-                angular.forEach(self.markers, function(item){
-                    if(item.contributor == 'IODA'){
-                        self.markersToshow.push(item);
-                    }
-                });
-                self.showIODADevices = !(self.showIODADevices);
-            }
-        };
-
-        this.changeContributor = function(contributor){
-            self.markersToshow = [];
-            if(contributor !== null && contributor !== undefined){
-                angular.forEach(self.markers, function(item){
-                    if(item.contributor == contributor){
-                        self.markersToshow.push(item);
-                    }
-                });
-                self.selectedContributor = contributor;
-            } else if(contributor === null){
-                angular.forEach(self.markers, function(item){
-                    console.log("pushed to markersToshow");
-                    self.markersToshow.push(item);
-                });
-            } else {}
-        };
-
-      
-        // info_window =[];
-        // $scope.mouseOverEvent={
-        //     mouseover: markerMouseOver
+        // this.markerClicked = function(marker, deviceId, deviceLabel, deviceAddr, contributor){
+        //     deviceId = deviceId.replace(/ /g,'');
+        //     self.selectedDeviceId = deviceId;
+        //     self.initializeGraphColors();
+        //     // marker.show=true;
+        //     //marker.options.icon = 
+        //     self.getSelectedDeviceData(deviceId);
+        //     self.selectedModalType = 'daily';
+        //     self.analyticsClicked = false;
+        //     self.selectedMarker = marker;
+        //     self.selectedDeviceData = {}; 
+        //     self.updateSelectedData(deviceLabel, deviceAddr, contributor);
         // };
 
-        // function markerMouseOver () {
-        //      // body...  
-        // }
-
-
- 
-
-
-         // var abc = new MarkerClusterer($scope.ui-gmap-google-map,[]);
-        // var map = new google.maps.Map(document.getElementById('googleMap'));
-        // var mc = new MarkerClusterer();
-        // mc.setMap(mapObject);
-        // mc.addMarkers("markersToshow");
-
-        // function generateIcon(number,  color) {
-
-        //   var fontSize = 16,
-        //     imageWidth = 35,
-        //     imageHeight = 35;
-
-        //   var svg = d3.select(document.createElement('div')).append('svg')
-        //     .attr('viewBox', '0 0 100 100')
-        //     .append('g')
-
-          
-
-        //   var path = svg.append('path')
-        //     .attr('d', 'M1.493,13.895c-0.898-2.985,0.918-5.27,4.036-5.27h9.294c3.118,0,4.935,2.284,4.036,5.27l-7.05,23.352c-0.898,2.986-2.368,3.025-3.267,0.04L1.493,13.895z')
-        //     .attr('fill', '#303841')
-        //     .attr('transform', 'translate(30,60)');
-
-        //   var circles = svg.append('circle')
-        //     .attr('cx', '40')
-        //     .attr('cy', '40')
-        //     .attr('r', '33')
-        //     .style('fill', '#303841');
-        //   var circles = svg.append('circle')
-        //     .attr('cx', '40')
-        //     .attr('cy', '40')
-        //     .attr('r', '30')
-        //     .style('fill', color);
-        //   var text = svg.append('text')
-        //     .attr('dx', 27)
-        //     .attr('dy', 32)
-        //     .attr('text-anchor', 'middle')
-        //     .attr('style', 'font-size:' + fontSize + 'px; fill: #FFFFFF; font-family: Arial, Verdana; font-weight: bold')
-        //     .text(number);
-
-        //   var svgNode = svg.node().parentNode.cloneNode(true),
-        //     image = new Image();
-
-        //   d3.select(svgNode).select('clippath').remove();
-
-        //   var xmlSource = (new XMLSerializer()).serializeToString(svgNode);
-
-        //   image.onload = (function(imageWidth, imageHeight) {
-        //     var canvas = document.createElement('canvas'),
-        //       context = canvas.getContext('2d'),
-        //       dataURL;
-
-        //     d3.select(canvas)
-        //       .attr('width', imageWidth)
-        //       .attr('height', imageHeight);
-
-        //     context.drawImage(image, 0, 0, imageWidth, imageHeight);
-
-        //     dataURL = canvas.toDataURL();
-        //   }).bind(this, imageWidth, imageHeight);
-
-        //   image.src = 'data:image/svg+xml;base64,' + btoa(encodeURIComponent(xmlSource).replace(/%([0-9A-F]{2})/g, function(match, p1) {
-        //     return String.fromCharCode('0x' + p1);
-        //   }));
-        // };
-
-
-        this.selectedAQI = 0;
-        this.dataResourcesCount = 0;
-
-        this.allPublicData = [];
-        this.tempPublicData = [];
-        this.allUberData = [];
-        this.tempUberData = [];
-
-        //fetch all public data from server
-        AllPublicDataItems.query().$promise.then(function(data){
-            self.dataResourcesCount = data[0].length;
-            self.allPublicData = data[0];
-            self.allUberData = data[1];
-            angular.forEach(data[0],function(item){
-                self.tempPublicData.push(item);
-                item.imagePath = AQIColorService.getPinPath(item.aqi);
-                self.addNewMarker(item.deviceId, item.latitude, item.longitude, item.label, item.loc, item.imagePath, item.type);
-            });
-            angular.forEach(data[1],function(item){
-                self.tempUberData.push(item);
-                item.imagePath = "assets/images/pins/uber.svg";
-                //self.addNewMarker(item.deviceId, item.stop_lat, item.stop_lon, "Uber", "Roaming Around", item.imagePath, item.deviceType);
-            });
-            self.dataResourcesCount = self.tempPublicData.length;
-
-            angular.forEach(data, function(item){
-                
-            });
-
-            self.changeContributor(null);
-            console.log("came here");
-        });
-
-        // AllAQIDataItems.query().$promise.then(function(data){
-        //     angular.forEach(self.allPublicData, function(item){
-        //         angular.forEach(data, function(dataItem){
-        //             if(item.deviceId == dataItem.deviceId){
-        //                 item.aqi = dataItem.aqi;
-        //                 item.imagePath = AQIColorService.getPinPath(item.aqi);
-        //                 self.addNewMarker(item.deviceId, item.latitude, item.longitude, item.label, item.loc, item.imagePath, item.type);
-        //             }
-        //         });
-        //     });
-        //     angular.forEach(self.allUberData, function(item){
-        //         item.aqi = 0;
-        //         item.imagePath = "assets/images/pins/uber.svg";
-        //         self.addNewMarker(item.deviceId, item.stop_lat, item.stop_lon, "Uber", "Roaming Around", item.imagePath, item.deviceType);
-                
-        //     });
-            
-        // });
 
         var w = angular.element($window);
         $scope.viewPortHeight = w.height() - 164;
@@ -569,31 +247,7 @@
         this.windowWidth = w.width();
         this.graphWidth = (this.windowWidth/4) - 40;
 
-        //calling fields api to make basic calls and storing to cookies
-        FieldsDataItems.query().$promise.then(function(data) {
-            self.fieldItems = data;
-            FieldsService.storeFieldsData(self.fieldItems);
-            self.fieldsData = FieldsService.getFieldsData();
-        });
 
-        this.markersToshow = [];
-        $scope.onClicked = function(marker){
-            console.log('clicked here');
-        };
-        //click called 
-        this.markerClicked = function(marker, deviceId, deviceLabel, deviceAddr, contributor){
-            deviceId = deviceId.replace(/ /g,'');
-            self.selectedDeviceId = deviceId;
-            self.initializeGraphColors();
-            // marker.show=true;
-            //marker.options.icon = 
-            self.getSelectedDeviceData(deviceId);
-            self.selectedModalType = 'daily';
-            self.analyticsClicked = false;
-            self.selectedMarker = marker;
-            self.selectedDeviceData = {}; 
-            self.updateSelectedData(deviceLabel, deviceAddr, contributor);
-        };
 
         this.lastUpdatedTime = null;
         this.selectedDeviceLabel = "An India Open-Data Initiative";
@@ -603,7 +257,31 @@
         this.selectedModalType = 'home';
         this.analyticsClicked = false;
 
-        this.changeModalType = function(type){
+
+        $scope.$on('leafletDirectiveMarker.click', function markerClicked(e, args) {
+            console.log(e);
+            console.log(args.model);
+            args.model.id = args.model.id.replace(/ /g,'');
+            self.selectedDeviceId = args.model.id;
+            self.initializeGraphColors();
+            // marker.show=true;
+            //marker.options.icon = 
+            self.getSelectedDeviceData(args.model.id);
+            self.selectedModalType = 'daily';
+            self.analyticsClicked = false;
+            self.selectedMarker = args.model;
+            self.selectedDeviceData = {}; 
+            self.updateSelectedData(args.model.title, args.model.address, args.model.contributor);
+        });
+
+
+        this.updateSelectedData = function(deviceLabel, address, type){
+            self.selectedDeviceLabel = deviceLabel;
+            self.selectedDeviceAddr = type;
+        };
+
+
+         this.changeModalType = function(type){
             if(self.selectedDeviceId !== 0){
                 if(type == 'analytics'){
                     self.selectedDeviceLabel = self.selectedMarker.title;
@@ -638,8 +316,11 @@
             self.selectedDeviceAddr = type;
         };
 
+
+
         this.activityArray = null;
 
+        //called from marker markerClicked
         this.getSelectedDeviceData = function(deviceId){
             var _tempTime;
             DeviceDataItems.query({'deviceid':deviceId}).$promise.then(function(data){
@@ -710,6 +391,7 @@
                 self.humpercen = "p"+self.humpercen;
             }
         };
+
 
         this.setGraphColors = function(){
             if(self.visibleArea == 2){
@@ -822,6 +504,11 @@
             self.aqiGraph.options.title.text = "Max AQI : "+self.aqiFinal;
             //self.aqiGraph.options.title.text = "Average AQI : "+self.currentAverageAQI;
         };
+
+
+
+      
+
 
         
 

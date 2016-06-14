@@ -1,4 +1,4 @@
 (function() {
     'use strict';
-    angular.module('dashboard', ['config']);
+    angular.module('dashboard', ['config','leaflet-directive']);
 })();
