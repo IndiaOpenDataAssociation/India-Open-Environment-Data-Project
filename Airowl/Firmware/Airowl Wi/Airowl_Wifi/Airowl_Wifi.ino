@@ -24,6 +24,11 @@ int PM1=0, PM25=0, PM10=0;
 bool flag = false;
 bool cond = false;
 
+//Ranges
+const int Range10_max = 120; const int Range10_min= 60;
+const int Range25_max = 350; const int Range25_min= 100;
+const int Range3_max = 1200; const int Range3_min= 951;
+
 void setup(void)
 {
       //LED initiation
@@ -36,6 +41,17 @@ void setup(void)
     Dust_Serial.begin(9600); //Dust Sensor baud rate 
     Serial.begin(9600); //Serial baud rate 
     wifi.begin(9600);   //Esp8266 module baud rate     
+<<<<<<< HEAD
+=======
+    Dust_Serial.begin(9600); //Dust Sensor baud rate 
+
+    LED_blink();
+
+    pinMode(A0, OUTPUT);
+    pinMode(A1, OUTPUT);
+    pinMode(A2, OUTPUT);
+    
+>>>>>>> origin/master
     rx_empty(); //Empty the buffer or UART RX.
 
     initDustSensor(); //Initiate dust sensor to get the data. 
@@ -208,7 +224,12 @@ void loop(void)
       Serial.println("Get data from Dust");
       
       Winsen_dust(); //
+<<<<<<< HEAD
       LED_on();
+=======
+
+      LED_blink(); // Blinking LED's of Airowl eyes.
+>>>>>>> origin/master
       
       delay(2000);
       /////////////////////// WiFi////////////////////
@@ -220,7 +241,6 @@ void loop(void)
        {
          Serial.println("SEND DATA FAILED:");
        }
- 
      }   
 }
 //Send_Data_SIM_OZ Method is firstly make TCP connection to the server and then send the server.
@@ -1078,7 +1098,11 @@ void Winsen_dust()
     Serial.println("Calculation done");
 }
 
+<<<<<<< HEAD
 void LED_on()
+=======
+void LED_blink()
+>>>>>>> origin/master
 {
   if( PM10>Range10_max || PM25>Range25_max || PM10>Range3_max )
   {
@@ -1098,4 +1122,9 @@ void LED_on()
     digitalWrite(A1, LOW);
     digitalWrite(A2, HIGH);
   }
+<<<<<<< HEAD
 }
+=======
+}  
+
+>>>>>>> origin/master
