@@ -29,12 +29,17 @@ void setup()
 {
   GSM_Serial.begin(9600);               // the GPRS baud rate   
   Dust_Serial.begin(9600);             // Dust Sensor baud rate
-  Serial.begin(19200);                 // the GPRS baud rate 
+ // Serial.begin(19200);                 // the GPRS baud rate 
   pinMode(A0, OUTPUT);
   pinMode(A1, OUTPUT);
   pinMode(A2, OUTPUT);
-  
+
+   //LED initiation
+  digitalWrite(A0, HIGH); delay(1000); digitalWrite(A0, LOW);
+  digitalWrite(A1, HIGH); delay(1000); digitalWrite(A1, LOW);
+  digitalWrite(A2, HIGH); delay(1000); digitalWrite(A2, LOW);
   delay(500);
+  
     //transmit comp data
   for (i = 0; i < sizeof(cmd_get_sensor); i++)
   {
