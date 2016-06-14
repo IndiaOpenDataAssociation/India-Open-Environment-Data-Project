@@ -578,7 +578,7 @@ video#videoToPlay2{
 .home-styles .overlay{
 	background-image: url(../assets/img/AirOwl-Page-cover.jpg);
 	background-repeat: no-repeat;
-	background-position: right bottom;
+	background-position: right 45px;
 	background-attachment: fixed;
 }
 .real-data-home-bg{

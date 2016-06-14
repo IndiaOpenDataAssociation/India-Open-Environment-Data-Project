@@ -190,7 +190,7 @@
             });
         });
 
-         this.markers = [];
+        this.markers = [];
 
         this.addNewMarker = function(deviceId, latitudeVal, longitudeVal, titleVal, addressLabel, imagePath, contributor){
             var newMarker = {
@@ -241,6 +241,27 @@
         // };
 
 
+
+        // AllAQIDataItems.query().$promise.then(function(data){
+        //     angular.forEach(self.allPublicData, function(item){
+        //         angular.forEach(data, function(dataItem){
+        //             if(item.deviceId == dataItem.deviceId){
+        //                 item.aqi = dataItem.aqi;
+        //                 item.imagePath = AQIColorService.getPinPath(item.aqi);
+        //                 self.addNewMarker(item.deviceId, item.latitude, item.longitude, item.label, item.loc, item.imagePath, item.type);
+        //             }
+        //         });
+        //     });
+        //     angular.forEach(self.allUberData, function(item){
+        //         item.aqi = 0;
+        //         item.imagePath = "assets/images/pins/uber.svg";
+        //         self.addNewMarker(item.deviceId, item.stop_lat, item.stop_lon, "Uber", "Roaming Around", item.imagePath, item.deviceType);
+                
+        //     });
+            
+        // });
+
+
         var w = angular.element($window);
         $scope.viewPortHeight = w.height() - 164;
 
@@ -259,8 +280,8 @@
 
 
         $scope.$on('leafletDirectiveMarker.click', function markerClicked(e, args) {
-            console.log(e);
-            console.log(args.model);
+           // console.log(e);
+           //console.log(args.model);
             args.model.id = args.model.id.replace(/ /g,'');
             self.selectedDeviceId = args.model.id;
             self.initializeGraphColors();
