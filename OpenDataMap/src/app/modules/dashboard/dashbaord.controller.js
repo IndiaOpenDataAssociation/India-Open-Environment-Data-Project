@@ -173,6 +173,111 @@
                     },
                     scrollWheelZoom: true
             }
+            // layers: {
+            //      overlays: {
+            //          Agra:{
+            //             type: "markercluster",
+            //             visible: true
+            //          },
+            //         Bengaluru:{
+            //             type: "markercluster",
+            //                 visible: true
+            //         },
+            //     Chandrapur:{
+            //         type: "markercluster",
+            //                 visible: true
+            //     },
+            //     Chennai:{
+            //         type: "markercluster",
+            //                 visible: true
+            //     },
+            //          Delhi:{
+            //             type: "markercluster",
+            //                 visible: true
+            //          },
+            //       Faridabad:{
+            //         type: "markercluster",
+            //                 visible: true
+            //       },
+            //        Gaya:{
+            //         type: "markercluster",
+            //                 visible: true
+            //        },
+            //         Gurgaon:{
+            //             type: "markercluster",
+            //                 visible: true
+            //         },
+            //       Haldia:{
+            //         type: "markercluster",
+            //                 visible: true
+            //         },
+            //           Hyderabad:{
+            //             type: "markercluster",
+            //                 visible: true
+            //           },
+            //        Jaipur:{
+            //         type: "markercluster",
+            //                 visible: true
+            //        },
+            //      Jodhpur:{
+            //         type: "markercluster",
+            //                 visible: true
+            //      },
+            //       Kanpur:{
+            //         type: "markercluster",
+            //                 visible: true
+            //       },
+            //      Kolkata:{
+            //         type: "markercluster",
+            //                 visible: true
+            //      },
+            //        Lucknow:{
+            //         type: "markercluster",
+            //                 visible: true
+            //        },
+            //       Mumbai:{
+            //         type: "markercluster",
+            //                 visible: true
+            //       },
+            //       Muzaffarpur:{
+            //         type: "markercluster",
+            //                 visible: true
+            //       },
+            //      Nagpur:{
+            //         type: "markercluster",
+            //                 visible: true
+            //      },
+            //     Nashik:{
+            //         type: "markercluster",
+            //                 visible: true
+            //     },
+            //        Panchkula:{
+            //         type: "markercluster",
+            //                 visible: true
+            //        },
+            //           Patna:{
+            //             type: "markercluster",
+            //                 visible: true
+            //           },
+            //       Pune:{
+            //         type: "markercluster",
+            //                 visible: true
+            //       },
+            //          Rohtak:{
+            //             type: "markercluster",
+            //                 visible: true
+            //          },
+            //        Solapur:{
+            //         type: "markercluster",
+            //                 visible: true
+            //        },
+            //         Varanasi:{
+            //             type: "markercluster",
+            //                 visible: true
+            //         }
+                     
+            //      }
+            // }   
 
 
             });
@@ -185,24 +290,26 @@
             self.allPublicData = data[0];
             angular.forEach(data[0],function(item){
                 item.imagePath = AQIColorService.getPinPath(item.aqi);
-                self.addNewMarker(item.deviceId, item.latitude, item.longitude, item.label, item.loc, item.imagePath, item.type);
+                self.addNewMarker(item.deviceId, item.latitude, item.longitude, item.label, item.loc, item.imagePath, item.type,item.city);
                 self.dataResourcesCount = self.dataResourcesCount+1;
             });
         });
 
         this.markers = [];
 
-        this.addNewMarker = function(deviceId, latitudeVal, longitudeVal, titleVal, addressLabel, imagePath, contributor){
+        this.addNewMarker = function(deviceId, latitudeVal, longitudeVal, titleVal, addressLabel, imagePath, contributor,city){
             var newMarker = {
                 id: deviceId,
-                lat: latitudeVal,
-                lng: longitudeVal,
-                options: {
-                    draggable: false,
-                    icon: {
-                        url: imagePath
-                    }
-                },
+                    group: city,
+                    lat: latitudeVal,
+                    lng: longitudeVal,
+                
+                // options: {
+                //     draggable: false,
+                //     icon: {
+                //         url: imagePath
+                //     }
+                // },
                 contributor: contributor,
                 title: titleVal,
                 address: addressLabel,
@@ -214,7 +321,9 @@
                 }
                 // show:true;
             };
+
             console.log("came here i times : ");
+            console.log(city);
             self.markers.push(newMarker);
         };
 
