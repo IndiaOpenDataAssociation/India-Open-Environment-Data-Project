@@ -29,7 +29,7 @@ void setup()
 {
   GSM_Serial.begin(9600);               // the GPRS baud rate   
   Dust_Serial.begin(9600);             // Dust Sensor baud rate
- // Serial.begin(19200);                 // the GPRS baud rate 
+  Serial.begin(19200);                 // the GPRS baud rate 
   pinMode(A0, OUTPUT);
   pinMode(A1, OUTPUT);
   pinMode(A2, OUTPUT);
