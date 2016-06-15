@@ -11,6 +11,11 @@
 SoftwareSerial wifi(7, 8); //(RX, TX)
 SoftwareSerial Dust_Serial(2, 3); //(RX, TX)
 
+//Ranges
+const int Range10_max = 120; const int Range10_min= 60;
+const int Range25_max = 350; const int Range25_min= 100;
+const int Range3_max = 1200; const int Range3_min= 951;
+
 // Send server credentials
 char oz_action[] = "GET ";  // Edit to build your comp - "GET ", "POST ", "HEAD ", "OPTIONS " - note trailing space
 
@@ -19,24 +24,23 @@ int PM1=0, PM25=0, PM10=0;
 bool flag = false;
 bool cond = false;
 
-//Ranges
-const int Range10_max = 120; const int Range10_min= 60;
-const int Range25_max = 350; const int Range25_min= 100;
-const int Range3_max = 1200; const int Range3_min= 951;
-
 void setup(void)
 {
-    //Setting baud rate to communicate with ESP8266 
-    Serial.begin(9600); //Serial baud rate 
-    wifi.begin(9600);   //Esp8266 module baud rate     
-    Dust_Serial.begin(9600); //Dust Sensor baud rate 
-
-    LED_blink();
-
     pinMode(A0, OUTPUT);
     pinMode(A1, OUTPUT);
     pinMode(A2, OUTPUT);
     
+      //LED initiation
+    digitalWrite(A0, HIGH); delay(1000); digitalWrite(A0, LOW);
+    digitalWrite(A1, HIGH); delay(1000); digitalWrite(A1, LOW);
+    digitalWrite(A2, HIGH); delay(1000); digitalWrite(A2, LOW);
+    delay(500);
+      
+    //Setting baud rate to communicate with ESP8266 
+    Dust_Serial.begin(9600); //Dust Sensor baud rate 
+    Serial.begin(9600); //Serial baud rate 
+    wifi.begin(9600);   //Esp8266 module baud rate     
+
     rx_empty(); //Empty the buffer or UART RX.
 
     initDustSensor(); //Initiate dust sensor to get the data. 
@@ -211,6 +215,7 @@ void loop(void)
       Winsen_dust(); //
 
       LED_blink(); // Blinking LED's of Airowl eyes.
+
       
       delay(2000);
       /////////////////////// WiFi////////////////////
@@ -1099,5 +1104,7 @@ void LED_blink()
     digitalWrite(A1, LOW);
     digitalWrite(A2, HIGH);
   }
-}  
+
+}
+
 
