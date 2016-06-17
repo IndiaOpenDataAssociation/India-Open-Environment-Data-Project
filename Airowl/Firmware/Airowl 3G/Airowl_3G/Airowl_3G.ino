@@ -63,6 +63,7 @@ void loop()
    Serial.println("***********************************************************************************************");
 
   LED_blink(); // Blinking LED's of Airowl eyes.
+  for(int i=0;i<10000;i++);
 }
 
 
