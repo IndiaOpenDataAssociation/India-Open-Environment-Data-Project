@@ -113,9 +113,12 @@ void setup(void)
 
 void loop(void)
 { 
-  
-  if(checkAP())
-  {
+    do
+    {
+      checkAP();
+    
+    }while(!flag);
+ 
     Serial.println("Get data from Dust");
 
     Winsen_dust(); //
@@ -133,7 +136,7 @@ void loop(void)
     {
       Serial.println("SEND DATA FAILED:");
     }
-  }
+  
 }
 
 bool checkAP()
