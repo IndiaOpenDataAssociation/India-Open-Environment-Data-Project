@@ -21,6 +21,7 @@ String Data = "";
 //char pass[15] = {0};
 String ssid    = "";
 String pass = "";
+String DeviceId = "";
 
 void setup(void)
 {
@@ -32,6 +33,7 @@ void setup(void)
   digitalWrite(A0, HIGH); delay(1000); digitalWrite(A0, LOW);
   digitalWrite(A1, HIGH); delay(1000); digitalWrite(A1, LOW);
   digitalWrite(A2, HIGH); delay(1000); digitalWrite(A2, LOW);
+  digitalWrite(A0, HIGH);
   delay(500);
 
   //Setting baud rate to communicate with ESP8266
@@ -58,7 +60,12 @@ void setup(void)
   }
 
   delay(5000);
+  wifi.println(F("AT+CIPSTAMAC?"));
+  check(0, 5000);
+  DeviceId = "AirOwl_" + getMAC(Data);
+  Serial.println(DeviceId);
 
+   
   //Checking condition that operation mode is set to station and softap or not .
   if (setOprToStationSoftAP())
   {
@@ -77,7 +84,7 @@ void setup(void)
   }
 
   //Set SoftAP parameters.
-  if (setSoftAPParam("AirOwl", "12345678")) {
+  if (setSoftAPParam(DeviceId, "12345678")) {
     Serial.println("AP is set");
   }
   else
@@ -115,17 +122,20 @@ void loop(void)
     checkAP();
     
   Serial.println("Get data from Dust");
-
   Winsen_dust(); //
 
   LED_blink(); // Blinking LED's of Airowl eyes.
 
-
   delay(2000);
+  
   /////////////////////// WiFi////////////////////
   if (Send_Data_SIM_OZ() == 1)
   {
     Serial.println("SEND DATA DONE:");
+    digitalWrite(A0, LOW);
+    digitalWrite(A1, LOW);
+    digitalWrite(A2, LOW); 
+    delay(1000);
   }
   else
   {
@@ -194,7 +204,7 @@ bool checkAP()
         {
          
           rx_empty();
-          wifi.print(F("AT+CWJAP=\""));
+          wifi.print(F("AT+CWJAP_DEF=\""));
           wifi.print(ssid);
           wifi.print(F("\",\""));
           wifi.print(pass);
@@ -203,8 +213,9 @@ bool checkAP()
           if (check(0, 10000)) {
             Serial.print("Join AP success\r\n");
             flag = true;
+            digitalWrite(A0, LOW); 
             return 1;
-          }
+           }
           else
           {
             Serial.print("Join AP failure\r\n");
@@ -241,7 +252,7 @@ bool Send_Data_SIM_OZ()
       
       rx_empty();
      
-      String address = "GET /v1/data?deviceId=AIROWL_002&type=AIROWL&key=hetvi_1234&pm1="+ String(PM1) + "&pm25="+ String(PM25) + "&pm10="+ String(PM10);
+      String address = "GET /v1/data?deviceId=" + DeviceId + "&type=AIROWL&key=hetvi_1234&pm1="+ String(PM1) + "&pm25="+ String(PM25) + "&pm10="+ String(PM10);
       Serial.println(address);
       wifi.println(address);
       wifi.println("Host: oedpdev.eu-gb.mybluemix.net");
@@ -252,7 +263,7 @@ bool Send_Data_SIM_OZ()
         rx_empty();
         Serial.println("Data Sent");
         uint8_t buffer[50] = {0};
-
+  
         //Receive data from TCP  builded connection in single mode
         uint32_t len = recv(buffer, sizeof(buffer), 10000);
         if (len > 0) {
@@ -808,7 +819,12 @@ void initDustSensor()
   }
   delay(10);
 }
-
+String getMAC(String Data)
+{
+  int first= Data.indexOf('"');
+  int firstend = Data.indexOf('"', first + 1);
+  return(Data.substring(first+1 ,firstend));
+}
 void ReadData()
 {
   int first= Data.indexOf('=');
@@ -879,9 +895,9 @@ void LED_blink()
   }
   else if ( PM10 > Range10_min || PM25 > Range25_min || PM10 > Range3_min )
   {
-    digitalWrite(A0, HIGH);
-    digitalWrite(A1, LOW);
-    digitalWrite(A2, LOW);
+    analogWrite(A0, 0);
+    analogWrite(A1, 128);
+    analogWrite(A2, 1024);
   }
   else
   {
