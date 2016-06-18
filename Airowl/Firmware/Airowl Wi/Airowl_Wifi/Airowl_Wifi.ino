@@ -49,6 +49,7 @@ void setup(void)
   //Checking condition that restart function resond correctly or not.
   if (restart())
   {
+    Serial.println(Data);
     Serial.println("Board Restart ok");
   }
   else
@@ -84,9 +85,6 @@ void setup(void)
     Serial.println("AP not set");
   }
 
-  //Get local IP address of ESP8266 wifi module.
-  Serial.println(getLocalIP());
-
   //Checking condition that multiple connection is set correctly or not.
   if (enableMUX()) {
     Serial.print("multiple ok\r\n");
@@ -113,87 +111,60 @@ void setup(void)
 
 void loop(void)
 { 
-  
-  if(checkAP())
+  while(!flag)
+    checkAP();
+    
+  Serial.println("Get data from Dust");
+
+  Winsen_dust(); //
+
+  LED_blink(); // Blinking LED's of Airowl eyes.
+
+
+  delay(2000);
+  /////////////////////// WiFi////////////////////
+  if (Send_Data_SIM_OZ() == 1)
   {
-    Serial.println("Get data from Dust");
-
-    Winsen_dust(); //
-
-    LED_blink(); // Blinking LED's of Airowl eyes.
-
-
-    delay(2000);
-    /////////////////////// WiFi////////////////////
-    if (Send_Data_SIM_OZ() == 1)
-    {
-      Serial.println("SEND DATA DONE:");
-    }
-    else
-    {
-      Serial.println("SEND DATA FAILED:");
-    }
+    Serial.println("SEND DATA DONE:");
+  }
+  else
+  {
+    Serial.println("SEND DATA FAILED:");
   }
 }
 
 bool checkAP()
 {
-//    uint8_t buffer[75] = {0};
-    uint8_t mux_id;
-//    uint32_t len = recv(&mux_id, buffer, sizeof(buffer), 100);// Receive data from all of TCP already builded connection in multiple mode.
-//    
-//    if (len > 0) {
-        
-      rx_empty();
+    uint8_t mux_id;        
+    rx_empty();
       
 
-      Data = "";
-      uint8_t buffer[128] = {0};
-      uint8_t res[2] = {'O','K'};
-      uint32_t len = recv(&mux_id, buffer, sizeof(buffer), 100);
-      if (len > 0) {
-          
-          Serial.print("Received from :");
-          Serial.print(mux_id);
-          Serial.print("[");
-          //Store data data character by character in the data string .
-          for(uint32_t i = 0; i < len; i++) {
-              Serial.print((char)buffer[i]);
-              Data += (char)buffer[i]; 
-          }
-          Serial.print("]\r\n");
-//                Serial.print("I am printing data : ");
-//                Serial.println(Data);
-          
-          ReadData();
-          
-          wifi.print(F("AT+CIPSEND="));
-          wifi.print(mux_id);
-          wifi.print(F(","));
-          wifi.println(2);
-          if (check(0, 5000)) {
-            rx_empty();
-            wifi.println("ok");
-            if (check(0, 10000))
-            {
-              Serial.println("Send back ok");
-            }
-          }
-          else
-          {
-            Serial.println("Could not sent response");
-          }
+    Data = "";
+    uint8_t buffer[128] = {0};
+    uint32_t len = recv(&mux_id, buffer, sizeof(buffer), 100);
+    if (len > 0) {
         
-      //Checking condiotion that TCP connection is released or not in multiple mode.
-      if (releaseTCP(mux_id)) {
-          Serial.print("release tcp ");
-          Serial.print(mux_id);
-          Serial.println(" ok");
-        } else {
-          Serial.print("release tcp");
-          Serial.print(mux_id);
-          Serial.println(" err");
+        Serial.print("Received from :");
+        Serial.print(mux_id);
+        Serial.print("[");
+        //Store data data character by character in the data string .
+        for(uint32_t i = 0; i < len; i++) {
+            Serial.print((char)buffer[i]);
+            Data += (char)buffer[i]; 
         }
+        Serial.print("]\r\n");        
+        ReadData();
+      
+    //Checking condiotion that TCP connection is released or not in multiple mode.
+    if (releaseTCP(mux_id)) {
+        Serial.print("release tcp ");
+        Serial.print(mux_id);
+        Serial.println(" ok");
+      } else {
+        Serial.print("release tcp");
+        Serial.print(mux_id);
+        Serial.println(" err");
+      }
       
       if (ssid!="" && pass!="")
       {
@@ -219,9 +190,8 @@ bool checkAP()
           Serial.println("Mux disable err");
         }
 
-//        delay(2000);
-//        for (int i = 0; i < 3; i++)
-//        {
+        for (int i = 0; i < 3; i++)
+        {
          
           rx_empty();
           wifi.print(F("AT+CWJAP=\""));
@@ -229,18 +199,17 @@ bool checkAP()
           wifi.print(F("\",\""));
           wifi.print(pass);
           wifi.println(F("\""));
+          delay(2000);
           if (check(0, 10000)) {
             Serial.print("Join AP success\r\n");
-            Serial.print("IP: ");
-            Serial.println(getLocalIP());
+            flag = true;
             return 1;
           }
           else
           {
             Serial.print("Join AP failure\r\n");
-            return 0;    
           }
-  //      }
+       }
       }
       else
       {
@@ -248,10 +217,7 @@ bool checkAP()
         Serial.println("Fail");
       }
     }
-    else
-    {
-      return 0;
-    }
+   return 0;
 }
 
 
@@ -262,7 +228,7 @@ bool Send_Data_SIM_OZ()
   rx_empty();
   wifi.println("AT+CIPSTART=\"TCP\",\"oedpdev.eu-gb.mybluemix.net\",80");
   
-  if (check(0, 10000) || Data.indexOf("CONNECT") != -1)
+  if (check(0, 20000) || Data.indexOf("CONNECT") != -1)
   {
     Serial.println("create tcp ok\r\n");
     int len = 130;
@@ -274,7 +240,10 @@ bool Send_Data_SIM_OZ()
     if(check(1, 5000)) {
       
       rx_empty();
-      wifi.println("GET /v1/data?deviceId=AIROWL_002&type=AIROWL&key=hetvi_1234&pm1=45&pm25=67&pm10=89 HTTP/1.1");
+     
+      String address = "GET /v1/data?deviceId=AIROWL_002&type=AIROWL&key=hetvi_1234&pm1="+ String(PM1) + "&pm25="+ String(PM25) + "&pm10="+ String(PM10);
+      Serial.println(address);
+      wifi.println(address);
       wifi.println("Host: oedpdev.eu-gb.mybluemix.net");
       wifi.println("");
       
@@ -311,6 +280,15 @@ bool Send_Data_SIM_OZ()
     }
     else
     {
+      rx_empty();
+      wifi.println(F("AT+CIPCLOSE"));
+      
+      if(check(0, 5000))
+      {
+        Serial.print("release tcp ok\r\n");
+      } else {
+        Serial.print("release tcp err\r\n");
+      }
       Serial.println("> cant find");
     }
     return 1;
@@ -482,30 +460,6 @@ bool sATCWSAP(String ssid, String pwd)
     return true;
   }
   return false;
-}
-
-/*getLocalIP:-
-  Get the IP address of ESP8266 wifi module.
-
-  @return the IP list.
-*/
-String getLocalIP(void)
-{
-  String list;
-  eATCIFSR(list);
-  return list;
-}
-/*eATCIFSR:-
-  Get the IP address using AT+CIFSR
-  @param list
-  @retval true - success.
-  @retval false - failure.
-*/
-bool eATCIFSR(String &list)
-{
-  rx_empty();
-  wifi.println("AT+CIFSR");
-  return recvFindAndFilter("OK", "\r\r\n", "\r\n\r\nOK", list, 10000);
 }
 
 /*enableMUX:-
@@ -791,55 +745,6 @@ String recvString(String target, uint32_t timeout)
   }
   return data;
 }
-
-///*recvString:-
-//   Recvive data from uart. Return all received data if one of target1 and target2 found or timeout.
-//*/
-//String recvString(String target1, String target2, uint32_t timeout)
-//{
-//  String data;
-//  char a;
-//  unsigned long start = millis();
-//  while (millis() - start < timeout) {
-//    while (wifi.available() > 0) {
-//      a = wifi.read();
-//      if (a == '\0') continue;
-//      data += a;
-//    }
-//    if (data.indexOf(target1) != -1) {
-//      break;
-//    } else if (data.indexOf(target2) != -1) {
-//      break;
-//    }
-//  }
-//  return data;
-//}
-//
-///*recvString:-
-//  Recvive data from uart. Return all received data if one of target1, target2 and target3 found or timeout.
-//*/
-//
-//String recvString(String target1, String target2, String target3, uint32_t timeout)
-//{
-//  String data;
-//  char a;
-//  unsigned long start = millis();
-//  while (millis() - start < timeout) {
-//    while (wifi.available() > 0) {
-//      a = wifi.read();
-//      if (a == '\0') continue;
-//      data += a;
-//    }
-//    if (data.indexOf(target1) != -1) {
-//      break;
-//    } else if (data.indexOf(target2) != -1) {
-//      break;
-//    } else if (data.indexOf(target3) != -1) {
-//      break;
-//    }
-//  }
-//  return data;
-//}
 
 /*restart:-
   Restart ESP8266 by "AT+RST".
