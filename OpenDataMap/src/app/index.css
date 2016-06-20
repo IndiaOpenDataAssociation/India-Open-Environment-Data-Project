@@ -1019,9 +1019,8 @@ h6, .h6{
     color: #fff;
     font-size: 12px;
     width: 100%;
-    bottom: 45px;
     height: 50px;
-  /*  bottom: 60px;*/
+  bottom: 70px;
 }
 
 /* modal icons */
@@ -1558,7 +1557,7 @@ div {
 
 .social-share{
     position: absolute;
-    bottom: 95px;
+    bottom: 125px;
     left: 10px;
     width: 50px;
     text-align: center;
