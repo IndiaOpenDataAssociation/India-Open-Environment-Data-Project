@@ -27,17 +27,18 @@ int i = 0;
 String APN;
 void setup()
 {
-  GSM_Serial.begin(9600);               // the GPRS baud rate   
+  GSM_Serial.begin(9600);              // the GPRS baud rate   
   Dust_Serial.begin(9600);             // Dust Sensor baud rate
- // Serial.begin(19200);                 // the GPRS baud rate 
+  //Serial.begin(19200);                 // the GPRS baud rate 
   pinMode(A0, OUTPUT);
   pinMode(A1, OUTPUT);
   pinMode(A2, OUTPUT);
 
    //LED initiation
-  digitalWrite(A0, HIGH); delay(1000); digitalWrite(A0, LOW);
+  digitalWrite(A0, HIGH); delay(1000); digitalWrite(A0, LOW); 
   digitalWrite(A1, HIGH); delay(1000); digitalWrite(A1, LOW);
   digitalWrite(A2, HIGH); delay(1000); digitalWrite(A2, LOW);
+  digitalWrite(A0, HIGH);  
   delay(500);
   
     //transmit comp data
@@ -55,13 +56,14 @@ void loop()
    Winsen_dust();
    Serial.println("***********************************************************************************************");
    delay(2000);  
-
-   LED_blink(); // Blinking LED's of Airowl eyes.
-  
+   
   // GSM_Serial.listen();  
    SubmitHttpRequest();
    delay(5000);
    Serial.println("***********************************************************************************************");
+
+  LED_blink(); // Blinking LED's of Airowl eyes.
+  for(int i=0;i<10000;i++);
 }
 
 
@@ -145,6 +147,9 @@ void SubmitHttpRequest()
   GSM_Serial.println("");
   delay(100);
   Serial.println("GSM done");
+    digitalWrite(A0, LOW);
+    digitalWrite(A1, LOW);
+    digitalWrite(A2, LOW); 
 }
 
 void ShowSerialData()
@@ -195,9 +200,9 @@ void LED_blink()
   }
   else if( PM10>Range10_min || PM25>Range25_min || PM10>Range3_min )
   {
-    digitalWrite(A0, HIGH);
-    digitalWrite(A1, LOW);
-    digitalWrite(A2, LOW);
+    analogWrite(A0, 0);
+    analogWrite(A1, 128);
+    analogWrite(A2, 1024);
   }
   else
   {
