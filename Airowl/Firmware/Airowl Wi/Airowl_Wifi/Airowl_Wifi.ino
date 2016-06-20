@@ -47,7 +47,14 @@ void setup(void)
 
   Serial.print("setup begin\r\n");
 
-  
+  if(eATSETUART(9600)) 
+    {
+     Serial.print("Baudrate done\r\n");
+    }       
+   else {
+     Serial.print("Error in setting baud rate");
+   }
+   
   //Checking condition that restart function resond correctly or not.
   if (restart())
   {
@@ -65,7 +72,14 @@ void setup(void)
   DeviceId = "AirOwl_" + getMAC(Data);
   Serial.println(DeviceId);
 
-   
+  wifi.println(F("AT+CIPSTATUS"));
+  check(0, 5000);
+  if(getStatus(Data) == "2")
+  { 
+    flag = true;
+    goto Skip;
+  }
+  
   //Checking condition that operation mode is set to station and softap or not .
   if (setOprToStationSoftAP())
   {
@@ -112,9 +126,11 @@ void setup(void)
   } else {
     Serial.print("set tcp server timout err\r\n");
   }
-
+Skip:
   Serial.print("setup end\r\n");
+   
 }
+
 
 void loop(void)
 { 
@@ -231,7 +247,32 @@ bool checkAP()
    return 0;
 }
 
+bool eATSETUART(uint32_t baudrate)
+{
+   rx_empty();
+   
+   wifi.print(F("AT+UART_DEF="));
+   
+   wifi.print(baudrate);
+   wifi.print(F(","));
+   wifi.print(8);
+   wifi.print(F(","));
+   wifi.print(1);
+   wifi.print(F(","));
+   wifi.print(0);
+   wifi.print(F(","));
+   wifi.println(0);
+   
+   if(check(0,7000)){
 
+     wifi.begin(baudrate);
+     return true;
+   }
+   else{
+   return false;
+   }
+
+}
 //Send_Data_SIM_OZ Method is firstly make TCP connection to the server and then send the server.
 bool Send_Data_SIM_OZ()
 {
@@ -824,6 +865,12 @@ String getMAC(String Data)
   int first= Data.indexOf('"');
   int firstend = Data.indexOf('"', first + 1);
   return(Data.substring(first+1 ,firstend));
+}
+
+String getStatus(String Data)
+{
+  String first= Data.substring(Data.indexOf(':'));
+  return(first.substring(1,2));
 }
 void ReadData()
 {
