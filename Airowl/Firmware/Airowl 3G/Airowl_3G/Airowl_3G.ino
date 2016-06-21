@@ -1,69 +1,63 @@
-
 #include <SoftwareSerial.h>
-#include <String.h>
- 
+
 SoftwareSerial GSM_Serial(7, 8);
 SoftwareSerial Dust_Serial(2, 3);
 
+int PM1 = 0, PM25 = 0, PM10 = 0;
 
-String Msg;
- byte data[24];
-const unsigned char cmd_get_sensor[] =
-{
-    0xff, 0x01, 0x78, 0x40, 0x00,
-    0x00, 0x00, 0x00, 0x47
-};
+String Data = "";
+String command = "";
+String deviceID = "AirOwl_";
 
-//Ranges
-const int Range10_max = 120; const int Range10_min= 60;
-const int Range25_max = 350; const int Range25_min= 100;
-const int Range3_max = 1200; const int Range3_min= 951;
-
-#define ARRAYSIZE 15
-String apn[ARRAYSIZE] = {"www","airtelgprs.com","aircelgprs.com","TATA.DOCOMO.INTERNET","bsnlnet","internet","uninor","mtnl.net"};
-
-int PM1=0, PM25=0, PM10=0;
-int i = 0;
-String APN;
 void setup()
 {
-  GSM_Serial.begin(9600);              // the GPRS baud rate   
+  GSM_Serial.begin(9600);              // the GPRS baud rate
+   
   Dust_Serial.begin(9600);             // Dust Sensor baud rate
-  //Serial.begin(19200);                 // the GPRS baud rate 
-  pinMode(A0, OUTPUT);
-  pinMode(A1, OUTPUT);
-  pinMode(A2, OUTPUT);
-
-   //LED initiation
-  digitalWrite(A0, HIGH); delay(1000); digitalWrite(A0, LOW); 
-  digitalWrite(A1, HIGH); delay(1000); digitalWrite(A1, LOW);
-  digitalWrite(A2, HIGH); delay(1000); digitalWrite(A2, LOW);
-  digitalWrite(A0, HIGH);  
-  delay(500);
   
-    //transmit comp data
-  for (i = 0; i < sizeof(cmd_get_sensor); i++)
+ // Serial.begin(9600);                 // the GPRS baud rate
+
+  //LED initiation
+  analogWrite(A0, 1024); delay(1000); analogWrite(A0, 0);
+  analogWrite(A1, 1024); delay(1000); analogWrite(A1, 0);
+  analogWrite(A2, 1024); delay(1000); analogWrite(A2, 0);
+  delay(1000);
+  blue();
+
+  const unsigned char cmd_get_sensor[] =
+  {
+    0xff, 0x01, 0x78, 0x40, 0x00,
+    0x00, 0x00, 0x00, 0x47
+  };
+
+  //transmit comp data
+  for (int i = 0; i < sizeof(cmd_get_sensor); i++)
   {
     Dust_Serial.write(cmd_get_sensor[i]);
   }
   delay(10);
-    
-}
- 
-void loop()
-{  
-  // Dust_Serial.listen();
-   Winsen_dust();
-   Serial.println("***********************************************************************************************");
-   delay(2000);  
-   
-  // GSM_Serial.listen();  
-   SubmitHttpRequest();
-   delay(5000);
-   Serial.println("***********************************************************************************************");
 
+  deviceId();
+  
+}
+
+void loop()
+{
+
+ // Serial.println("***********************************************************************************************");
+  Winsen_dust();
+  delay(2000);
+
+  SubmitHttpRequest();
+ // Serial.println("***********************************************************************************************");
+  delay(1000);
   LED_blink(); // Blinking LED's of Airowl eyes.
-  for(int i=0;i<10000;i++);
+  
+  for(int i = 0; i < 60; i++)
+  {
+    delay(1000);
+  }
+  
 }
 
 
@@ -71,143 +65,208 @@ void SubmitHttpRequest()
 {
   GSM_Serial.listen();
 
-  GSM_Serial.println("AT+CSQ");
-  delay(1000);
- 
-  ShowSerialData();// this code is to show the data from gprs shield, in order to easily see the process of how the gprs shield submit a http request, and the following is for this purpose too.
- 
-  GSM_Serial.println("AT+CGATT?");
-  delay(1000);
- 
-  ShowSerialData();
- 
   GSM_Serial.println("AT+SAPBR=3,1,\"CONTYPE\",\"GPRS\"");//setting the SAPBR, the connection type is using gprs
-  delay(1000);
- 
-  ShowSerialData();
-  int j;
 
-  String APN1 = "AT+SAPBR=3,1,\"APN\","+ String(apn[j]) + "\"";
-  String APN2 = "AT+SAPBR=3,1,\"APN\",\"mtnl\",\"mtnl123\","+ String(apn[j]) + "\"";
- 
-
-  int size=sizeof(apn);
-  for (j = 0; j <size ; j++)
+  if(check(0, 5000))
   {
-    if (j == (size-1)) 
-    {
-      GSM_Serial.println(APN2);
-     
-    }
-    else
-    {
-    GSM_Serial.println(APN1);
-     Serial.println("apn done");
-    }
-    delay(2000);
-    
-   if (Serial.readString()=="OK")
-     APN = apn[j];
-     break;
-
+   // Serial.println("GPRS connection ok");
   }
- 
-  ShowSerialData();
- 
-  GSM_Serial.println("AT+SAPBR=1,1");//setting the SAPBR, for detail you can refer to the AT command mamual
-  delay(2000);
- 
-  ShowSerialData();
- 
+  else
+  {
+   // Serial.println("GPRS connection err");
+  }
+
+  rx_empty();
+
+  GSM_Serial.println("AT+HTTPTERM");
+  if(check(0, 5000))
+  {
+   // Serial.println("Terminate done");
+  }
+  else
+  {
+   // Serial.println("Terminate err");
+  }
+  
   GSM_Serial.println("AT+HTTPINIT"); //init the HTTP request
- 
-  delay(2000); 
-  ShowSerialData();
 
-  String address = "AT+HTTPPARA=\"URL\",\"http://oedpdev.eu-gb.mybluemix.net/v1/data?deviceId=AIROWL_001&type=AIROWL&key=hetvi_1234&pm1="+ String(PM1) + "&pm25="+ String(PM25) + "&pm10="+ String(PM10) +"\"";
- 
- // String address = "AT+HTTPPARA=\"URL\",\"http://oizomdev.cloudapp.net/api/data?serial_number=5&W_DUST25=" + String(PM25) + "&W_DUST10=" + String(PM10) + "&W_DUST3=" + String(PM1) +"\"";
+  if(check(0, 5000))
+  {
+   // Serial.println("HTTP connection ok");
+  }
+  else
+  {
+   // Serial.println("HTTP connection err");
+  }
+  
+  //rx_empty();
+  command = "AT+HTTPPARA=\"URL\",\"http://oedpdev.eu-gb.mybluemix.net/v1/data?deviceId=" + deviceID + "&type=AIROWL&key=hetvi_1234&pm1=" + String(PM1) + "&pm25=" + String(PM25) + "&pm10=" + String(PM10) + "\"";
 
-  GSM_Serial.println(address);// setting the httppara, the second parameter is the website you want to access
-  delay(1000);
- 
-  ShowSerialData();
- 
-  GSM_Serial.println("AT+HTTPACTION=0");//submit the request 
-  delay(10000);//the delay is very important, the delay time is base on the return from the website, if the return datas are very large, the time required longer.
-  //while(!GSM_Serial.available());
- 
-  ShowSerialData();
- 
+ // Serial.println(command);
+  GSM_Serial.println(command);
+  delay(5000);
+
+  GSM_Serial.println("AT+HTTPACTION=0");//submit the request
+  
+  if(check(0, 5000))
+  {
+   // Serial.println("Send ok");
+  }
+  else
+  {
+   // Serial.println("Send err");
+  }
+
   GSM_Serial.println("AT+HTTPREAD");// read the data from the website you access
-  delay(300);
- 
-  ShowSerialData();
- 
   GSM_Serial.println("");
-  delay(100);
-  Serial.println("GSM done");
-    digitalWrite(A0, LOW);
-    digitalWrite(A1, LOW);
-    digitalWrite(A2, LOW); 
-}
 
-void ShowSerialData()
-{
-    GSM_Serial.listen();
-    
-    while(GSM_Serial.available()!=0)
-    Serial.write(GSM_Serial.read());
+  if(check(0, 10000))
+  {
+   // Serial.println("GSM done");
+  }
+  else
+  {
+   // Serial.println("GSM err");
+  }
+  
+  digitalWrite(A0, LOW);
+  digitalWrite(A1, LOW);
+  digitalWrite(A2, LOW);
 }
 
 void Winsen_dust()
 {
-    Dust_Serial.listen();
-    
-    i=0;    
-    while(!Dust_Serial.available());
-    while(Dust_Serial.available())
+  
+  Dust_Serial.listen();
+  byte data[24];
+  int i = 0;
+  
+  while (!Dust_Serial.available());
+  while (Dust_Serial.available())
+  {
+    data[i] = Dust_Serial.read();
+
+    if (i == 23)
     {
-        data[i] = Dust_Serial.read();
-     
-        if(i == 23)
-        {
-            Dust_Serial.println();
-            PM1 = ((data[4]*256) + data[5]);
-            PM25 = ((data[6]*256) + data[7]);
-            PM10 = ((data[8]*256) + data[9]);
-            Serial.print("PM 1.0 :");
-            Serial.println(PM1);
-            Serial.print("PM 2.5 :");
-            Serial.println(PM25);
-            Serial.print("PM 10 :");
-            Serial.println(PM10);
-            Serial.println("");
-        }
-        i++;
-        delay(10) ;
+      Dust_Serial.println();
+      PM1 = ((data[4] * 256) + data[5]);
+      PM25 = ((data[6] * 256) + data[7]);
+      PM10 = ((data[8] * 256) + data[9]);
+     // Serial.print("PM 1.0 :");
+     // Serial.println(PM1);
+     // Serial.print("PM 2.5 :");
+     // Serial.println(PM25);
+     // Serial.print("PM 10 :");
+     // Serial.println(PM10);
+     // Serial.println("");
     }
-    Serial.println("Calculation done");
+    i++;
+    delay(10) ;
+  }
+ // Serial.println("Calculation done");
 }
 
 void LED_blink()
 {
-  if( PM10>Range10_max || PM25>Range25_max || PM10>Range3_max )
+  //Ranges
+  const int Range1_max = 120; const int Range1_min = 60;
+  const int Range25_max = 350; const int Range25_min = 100;
+  const int Range10_max = 1200; const int Range10_min = 951;
+
+  if ( PM1 > Range1_max || PM25 > Range25_max || PM10 > Range10_max )
   {
-    digitalWrite(A0, LOW);
-    digitalWrite(A1, HIGH);
-    digitalWrite(A2, LOW); 
+    red();
   }
-  else if( PM10>Range10_min || PM25>Range25_min || PM10>Range3_min )
+  else if ( PM1 > Range1_min || PM25 > Range25_min || PM10 > Range10_min )
   {
-    analogWrite(A0, 0);
-    analogWrite(A1, 128);
-    analogWrite(A2, 1024);
+    yellow();
   }
   else
   {
-    digitalWrite(A0, LOW);
-    digitalWrite(A1, LOW);
-    digitalWrite(A2, HIGH);
+    green();
   }
-}  
+}
+
+void blue()
+{
+    analogWrite(A0, 1024);
+    analogWrite(A1, 0);
+    analogWrite(A2, 0);
+}
+
+void green()
+{
+    analogWrite(A0, 0);
+    analogWrite(A1, 0);
+    analogWrite(A2, 1024);
+}
+
+void red()
+{
+    analogWrite(A0, 0);
+    analogWrite(A1, 1024);
+    analogWrite(A2, 0);
+}
+
+void yellow()
+{
+    analogWrite(A0, 0);
+    analogWrite(A1, 128);
+    analogWrite(A2, 1024);
+}
+
+bool check(int v, uint32_t timeout)
+{
+  unsigned long start = millis();
+  char a;
+  Data = "";
+
+  while (millis() - start < timeout) {
+    while (GSM_Serial.available() > 0) {
+      a = GSM_Serial.read();
+      if (a == '\0') continue;
+      Data += a;
+    }
+    if (Data.indexOf("OK") != -1 && v == 0)
+    {
+     // Serial.println(Data);
+      return 1;
+    }
+    if (Data.indexOf(">") != -1 && v == 1)
+    {
+     // Serial.println(Data);
+      return 1;
+    }
+    if (Data.indexOf("\r\r\n") != -1 && v == 2)
+    {
+     // Serial.println(Data);
+      return 1;
+    }
+  }
+ // Serial.println(Data);
+  return 0;
+}
+
+void deviceId(void)
+{
+  GSM_Serial.listen();
+  
+  GSM_Serial.println("AT+GSN");
+
+  if(check(0, 5000))
+  {
+    int first = Data.indexOf("\n");
+    int second = Data.indexOf("\n", first+3);
+    deviceID = deviceID + Data.substring(first + 3, second - 1);
+  }
+}
+
+
+void rx_empty(void)
+{
+  GSM_Serial.listen();
+  while (GSM_Serial.available() > 0) {
+    GSM_Serial.read();
+  }
+}
+
