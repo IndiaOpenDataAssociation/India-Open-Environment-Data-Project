@@ -4,10 +4,14 @@ SoftwareSerial GSM_Serial(7, 8);
 SoftwareSerial Dust_Serial(2, 3);
 
 int PM1 = 0, PM25 = 0, PM10 = 0;
+int count = 0;
 
 String Data = "";
 String command = "";
 String deviceID = "AirOwl_";
+
+int publishInterval = 18000;
+unsigned long lastPublishMillis;
 
 void setup()
 {
@@ -15,7 +19,7 @@ void setup()
    
   Dust_Serial.begin(9600);             // Dust Sensor baud rate
   
- // Serial.begin(9600);                 // the GPRS baud rate
+ //Serial.begin(9600);                 // the GPRS baud rate
 
   //LED initiation
   analogWrite(A0, 1024); delay(1000); analogWrite(A0, 0);
@@ -38,24 +42,25 @@ void setup()
   delay(10);
 
   deviceId();
+  lastPublishMillis = millis();
   
 }
 
 void loop()
 {
 
- // Serial.println("***********************************************************************************************");
+ //Serial.println("***********************************************************************************************");
   Winsen_dust();
   delay(2000);
 
-  SubmitHttpRequest();
- // Serial.println("***********************************************************************************************");
-  delay(1000);
-  LED_blink(); // Blinking LED's of Airowl eyes.
-  
-  for(int i = 0; i < 60; i++)
+  if (millis() - lastPublishMillis > publishInterval) 
   {
+    SubmitHttpRequest();
+    //Serial.println("***********************************************************************************************");
     delay(1000);
+    LED_blink(); // Blinking LED's of Airowl eyes.
+    PM1 = 0; PM25 = 0; PM10 = 0; count = 0;
+    lastPublishMillis = millis();
   }
   
 }
@@ -65,15 +70,19 @@ void SubmitHttpRequest()
 {
   GSM_Serial.listen();
 
+  PM1 = int(PM1 / count);
+  PM25 = int(PM25 / count);
+  PM10 = int(PM10 / count);
+
   GSM_Serial.println("AT+SAPBR=3,1,\"CONTYPE\",\"GPRS\"");//setting the SAPBR, the connection type is using gprs
 
   if(check(0, 5000))
   {
-   // Serial.println("GPRS connection ok");
+   //Serial.println("GPRS connection ok");
   }
   else
   {
-   // Serial.println("GPRS connection err");
+   //Serial.println("GPRS connection err");
   }
 
   rx_empty();
@@ -81,28 +90,28 @@ void SubmitHttpRequest()
   GSM_Serial.println("AT+HTTPTERM");
   if(check(0, 5000))
   {
-   // Serial.println("Terminate done");
+   //Serial.println("Terminate done");
   }
   else
   {
-   // Serial.println("Terminate err");
+   //Serial.println("Terminate err");
   }
   
   GSM_Serial.println("AT+HTTPINIT"); //init the HTTP request
 
   if(check(0, 5000))
   {
-   // Serial.println("HTTP connection ok");
+   //Serial.println("HTTP connection ok");
   }
   else
   {
-   // Serial.println("HTTP connection err");
+   //Serial.println("HTTP connection err");
   }
   
   //rx_empty();
   command = "AT+HTTPPARA=\"URL\",\"http://oedpdev.eu-gb.mybluemix.net/v1/data?deviceId=" + deviceID + "&type=AIROWL&key=hetvi_1234&pm1=" + String(PM1) + "&pm25=" + String(PM25) + "&pm10=" + String(PM10) + "\"";
 
- // Serial.println(command);
+ //Serial.println(command);
   GSM_Serial.println(command);
   delay(5000);
 
@@ -110,11 +119,11 @@ void SubmitHttpRequest()
   
   if(check(0, 5000))
   {
-   // Serial.println("Send ok");
+   //Serial.println("Send ok");
   }
   else
   {
-   // Serial.println("Send err");
+   //Serial.println("Send err");
   }
 
   GSM_Serial.println("AT+HTTPREAD");// read the data from the website you access
@@ -122,11 +131,11 @@ void SubmitHttpRequest()
 
   if(check(0, 10000))
   {
-   // Serial.println("GSM done");
+   //Serial.println("GSM done");
   }
   else
   {
-   // Serial.println("GSM err");
+   //Serial.println("GSM err");
   }
   
   digitalWrite(A0, LOW);
@@ -149,21 +158,22 @@ void Winsen_dust()
     if (i == 23)
     {
       Dust_Serial.println();
-      PM1 = ((data[4] * 256) + data[5]);
-      PM25 = ((data[6] * 256) + data[7]);
-      PM10 = ((data[8] * 256) + data[9]);
-     // Serial.print("PM 1.0 :");
-     // Serial.println(PM1);
-     // Serial.print("PM 2.5 :");
-     // Serial.println(PM25);
-     // Serial.print("PM 10 :");
-     // Serial.println(PM10);
-     // Serial.println("");
+      PM1 += ((data[4] * 256) + data[5]);
+      PM25 += ((data[6] * 256) + data[7]);
+      PM10 += ((data[8] * 256) + data[9]);
+      count++;
+     //Serial.print("PM 1.0 :");
+     //Serial.println(PM1 / count);
+     //Serial.print("PM 2.5 :");
+     //Serial.println(PM25 / count);
+     //Serial.print("PM 10 :");
+     //Serial.println(PM10 / count);
+     //Serial.println("");
     }
     i++;
     delay(10) ;
   }
- // Serial.println("Calculation done");
+ //Serial.println("Calculation done");
 }
 
 void LED_blink()
@@ -229,21 +239,21 @@ bool check(int v, uint32_t timeout)
     }
     if (Data.indexOf("OK") != -1 && v == 0)
     {
-     // Serial.println(Data);
+     //Serial.println(Data);
       return 1;
     }
     if (Data.indexOf(">") != -1 && v == 1)
     {
-     // Serial.println(Data);
+     //Serial.println(Data);
       return 1;
     }
     if (Data.indexOf("\r\r\n") != -1 && v == 2)
     {
-     // Serial.println(Data);
+     //Serial.println(Data);
       return 1;
     }
   }
- // Serial.println(Data);
+ //Serial.println(Data);
   return 0;
 }
 
