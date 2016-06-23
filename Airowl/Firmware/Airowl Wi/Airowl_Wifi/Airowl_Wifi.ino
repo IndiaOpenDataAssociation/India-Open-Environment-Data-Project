@@ -302,8 +302,11 @@ bool checkAP()
 bool Send_Data_SIM_OZ()
 {
   //Serial.println("Searching For Server");
-
-  command = "GET /v1/data?deviceId=" + deviceID + "&type=AIROWL&key=hetvi_1234&pm1="+ String(int(PM1/count)) + "&pm25="+ String(int(PM25/count)) + "&pm10="+ String(int(PM10/count)) + " HTTP/1.1";
+  PM1 = int(PM1 / count);
+  PM25 = int(PM25 / count);
+  PM10 = int(PM10 / count);
+  
+  command = "GET /v1/data?deviceId=" + deviceID + "&type=AIROWL&key=hetvi_1234&pm1="+ String(PM1) + "&pm25="+ String(PM25) + "&pm10="+ String(PM10) + " HTTP/1.1";
 
   //Serial.println(command);
   rx_empty();
@@ -977,7 +980,6 @@ void Winsen_dust()
 
 void LED_blink()
 {
-
   if ( PM1 > Range1_max || PM25 > Range25_max || PM10 > Range10_max )
   {
     analogWrite(A0, 0);
@@ -985,7 +987,7 @@ void LED_blink()
     analogWrite(A2, 0);
   }
   else if ( PM1 > Range1_min || PM25 > Range25_min || PM10 > Range10_min )
-  {
+  {  
     analogWrite(A0, 0);
     analogWrite(A1, 128);
     analogWrite(A2, 1024);
