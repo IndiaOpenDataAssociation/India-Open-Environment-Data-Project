@@ -3,7 +3,7 @@
 SoftwareSerial GSM_Serial(7, 8);
 SoftwareSerial Dust_Serial(2, 3);
 
-String deviceID = "AirOwl_";
+String deviceID = "Airowl_";
 
 bool initFlag = true;
 
