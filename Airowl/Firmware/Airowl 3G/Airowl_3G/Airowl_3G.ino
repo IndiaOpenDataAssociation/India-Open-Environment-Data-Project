@@ -111,7 +111,11 @@ void SubmitHttpRequest(unsigned int PM1, unsigned int PM25, unsigned int PM10)
 
   rx_empty();
 
+<<<<<<< HEAD
   String command = "AT+HTTPPARA=\"URL\",\"http://oedpdev.eu-gb.mybluemix.net/v1/data?deviceId=" + deviceID + "&type=AIROWL3G&key=hetvi_1234&pm1=" + String(PM25) + "&pm25=" + String(PM10) + "&pm10=" + String(PM1) + "\"";
+=======
+  String command = "AT+HTTPPARA=\"URL\",\"http://oedpdev.eu-gb.mybluemix.net/v1/data?deviceId=" + deviceID + "&type=AIROWL&key=hetvi_1234&pm1=" + String(PM25) + "&pm25=" + String(PM10) + "&pm10=" + String(PM1) + "\"";
+>>>>>>> origin/master
 
   //Serial.println(command);
   GSM_Serial.println(command);
@@ -373,4 +377,3 @@ void rx_empty(void)
     GSM_Serial.read();
   }
 }
-
