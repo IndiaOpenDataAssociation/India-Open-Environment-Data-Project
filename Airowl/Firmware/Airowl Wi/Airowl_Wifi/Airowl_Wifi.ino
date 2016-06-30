@@ -1,35 +1,18 @@
 //Including libraries
-#include <SoftwareSerial.h> //Include software serial library, ESP8266 library dependency
-#include <String.h> //Include string library which have all string handling functions 
+#include <SoftwareSerial.h> //Include software //Serial library, ESP8266 library dependency
 
-//Software serial interface to connect  ESP8266 wifi module and dust sensor using Rx and Tx pin
+//Software //Serial interface to connect  ESP8266 wifi module and dust sensor using Rx and Tx pin
 SoftwareSerial wifi(7, 8); //(RX, TX)
 SoftwareSerial Dust_Serial(2, 3); //(RX, TX)
 
 //Initialization
-int PM1 = 0, PM25 = 0, PM10 = 0;
-int count = 0;
 bool flag = false;
-
-// Data to store recieved buffer
-String Data = "";
 
 // Unique Device Id
 String deviceID = "";
 
 // HOST Name to send data
 char HOST_NAME[] = "Host: oedpdev.eu-gb.mybluemix.net";
-
-// Command to store sending string
-String command = "";
-
-// Store SSID & Password for wifi
-char ssid[15] = {0};
-char pass[15] = {0};
-
-// Timer Intervals
-int publishInterval = 18000;
-unsigned long lastPublishMillis;
 
 //Ranges
 const int Range1_max = 120; const int Range1_min = 60;
@@ -47,7 +30,7 @@ void setup(void)
 
   //Setting baud rate to communicate with ESP8266
   Dust_Serial.begin(9600); //Dust Sensor baud rate
-  //Serial.begin(9600); //Serial baud rate
+  //Serial.begin(9600);
   wifi.begin(9600);   //Esp8266 module baud rate
 
   rx_empty(); //Empty the buffer or UART RX.
@@ -74,15 +57,16 @@ void setup(void)
   {
     //Serial.println("Board Restart err");
   }
-
+  String Data;
+  
   delay(5000);
   wifi.println(F("AT+CIPSTAMAC?"));
-  check(0, 5000);
+  check(0, 5000, Data);
   deviceID = "AirOwl_" + getMAC(Data);
   //Serial.println(deviceID);
 
   wifi.println(F("AT+CIPSTATUS"));
-  check(0, 5000);
+  check(0, 5000, Data);
   if(getStatus(Data) == "2")
   { 
     flag = true;
@@ -90,6 +74,7 @@ void setup(void)
 
   if(!flag)
   {
+    red();
     //Checking condition that operation mode is set to station and softap or not .
     if (setOprToStationSoftAP())
     {
@@ -116,9 +101,6 @@ void setup(void)
       //Serial.println("AP not set");
     }
   
-    //Get local IP address of ESP8266 wifi module.
-    //Serial.println(getLocalIP());
-  
     //Checking condition that multiple connection is set correctly or not.
     if (enableMUX()) {
       //Serial.print("multiple ok\r\n");
@@ -141,7 +123,6 @@ void setup(void)
     }
   }
   //Serial.print("setup end\r\n");
-  lastPublishMillis = millis();
 }
 
 void loop(void)
@@ -150,36 +131,37 @@ void loop(void)
     checkAP();
 
   //Serial.println("Get data from Dust");
-
-  Winsen_dust(); //
-
-  if (millis() - lastPublishMillis > publishInterval) 
+  
+  unsigned int PM1, PM25, PM10;
+  
+  if (Winsen_dust(PM1, PM25, PM10))
   {
-    delay(2000);
-    /////////////////////// WiFi////////////////////
-    if (Send_Data_SIM_OZ() == 1)
+    if (Send_Data_SIM_OZ(PM1, PM25, PM10) == 1)
     {
       //Serial.println("SEND DATA DONE:");
       analogWrite(A0, LOW);
       analogWrite(A1, LOW);
       analogWrite(A2, LOW); 
       delay(1000);
-      LED_blink(); // Blinking LED's of Airowl eyes.
-      PM1 = 0; PM25 = 0; PM10 = 0; count = 0;
+      LED_blink(PM1, PM25, PM10); // Blinking LED's of Airowl eyes.
     }
     else
     {
       //Serial.println("SEND DATA FAILED:");
     }
-    lastPublishMillis = millis();
+    delay(1000);
   }
   
 }
 
-bool checkAP()
+void checkAP()
 {
     uint8_t buffer[75] = {0};
     uint8_t mux_id;
+    // Store SSID & Password for wifi
+    char ssid[15] = {0};
+    char pass[15] = {0};
+
     uint32_t len = recv(&mux_id, buffer, sizeof(buffer), 100);// Receive data from all of TCP already builded connection in multiple mode.
     
     if (len > 0) {
@@ -188,12 +170,15 @@ bool checkAP()
       wifi.print(F("AT+CIPSEND="));
       wifi.print(mux_id);
       wifi.print(F(","));
-      wifi.println(2);
-      if (check(0, 5000)) {
+      wifi.println(6);
+      if (check(1, 5000)) {
         rx_empty();
         wifi.println("ok");
+        wifi.println("");
+        
         if (check(0, 10000))
         {
+          rx_empty();
           //Serial.println("Send back ok");
         }
       }
@@ -202,7 +187,7 @@ bool checkAP()
         //Serial.println("Could not sent response");
       }
 
-      Data = "";
+      String Data = "";
       //Store data data character by character in the data string .
       for (uint32_t i = 0; i < len; i++) {
         Data += (char)buffer[i];
@@ -222,7 +207,7 @@ bool checkAP()
       
       Data.substring(first + 1, firstend).toCharArray(ssid, 15); //Fetching  substring between "=" and "&" from the data string
       delay(200);
-      Data.substring(firstend + 5 , lastend).toCharArray(pass, 15);
+      Data.substring(firstend + 6 , lastend).toCharArray(pass, 15);
       
       //Serial.println(ssid);
       //Serial.println(pass);
@@ -276,43 +261,45 @@ bool checkAP()
           if (check(0, 10000)) {
             //Serial.print("Join AP success\r\n");
             //Serial.print("IP: ");
-            //Serial.println(getLocalIP());
-            return 1;
+            flag = true;
+            green();
+            delay(1000);
+            blue();
+            return;
           }
           else
           {
-            return 0;
+            blue();
+            delay(1000);
+            red();
             //Serial.print("Join AP failure\r\n");
+            return;    
           }
         }
       }
       else
       {
-        return 0;
+        return;
       }
     }
     else
     {
-      return 0;
+      return;
     }
 }
 
-
 //Send_Data_SIM_OZ Method is firstly make TCP connection to the server and then send the server.
-bool Send_Data_SIM_OZ()
+bool Send_Data_SIM_OZ(unsigned int PM1, unsigned int PM25, unsigned int PM10)
 {
   //Serial.println("Searching For Server");
-  PM1 = int(PM1 / count);
-  PM25 = int(PM25 / count);
-  PM10 = int(PM10 / count);
   
-  command = "GET /v1/data?deviceId=" + deviceID + "&type=AIROWL&key=hetvi_1234&pm1="+ String(PM1) + "&pm25="+ String(PM25) + "&pm10="+ String(PM10) + " HTTP/1.1";
+  String command = "GET /v1/data?deviceId=" + deviceID + "&type=AIROWLWI&key=hetvi_1234&pm1="+ String(PM1) + "&pm25="+ String(PM25) + "&pm10="+ String(PM10) + " HTTP/1.1";
 
   //Serial.println(command);
   rx_empty();
   wifi.println("AT+CIPSTART=\"TCP\",\"oedpdev.eu-gb.mybluemix.net\",80");
   
-  if (check(0, 10000) || Data.indexOf("CONNECT") != -1)
+  if (check(0, 10000))
   {
     //Serial.println("create tcp ok\r\n");
     int len = command.length() + strlen(HOST_NAME) + 6;
@@ -373,40 +360,15 @@ bool Send_Data_SIM_OZ()
   }
 }
 
-bool check(int v, uint32_t timeout)
-{
-  unsigned long start = millis();
-  char a;
-  Data = "";
-  
-  while (millis() - start < timeout) {
-    while (wifi.available() > 0) {
-      a = wifi.read();
-      if (a == '\0') continue;
-      Data += a;
-    }
-    if(Data.indexOf("OK") != -1 && v == 0)
-    {
-      return 1;
-    }
-    if(Data.indexOf(">") != -1 && v == 1)
-    {
-      return 1;
-    }
-    if(Data.indexOf("\r\r\n") != -1 && v == 2)
-    {
-      return 1;
-    }
-  }
-  return 0;
-}
-
 /* Get Mac Address */
 String getMAC(String Data)
 {
   int first= Data.indexOf('"');
   int firstend = Data.indexOf('"', first + 1);
-  return(Data.substring(first+1 ,firstend));
+  Data = Data.substring(first + 11, firstend);
+  Data.remove(1,1);
+  Data.remove(3,1);
+  return(Data);
 }
 
 /* Get wifi connection Status */
@@ -564,7 +526,7 @@ bool sATCWSAP(String ssid, String pwd)
   wifi.print(F("\","));
   wifi.print(5);
   wifi.print(F(","));
-  wifi.println(3);
+  wifi.println(0);
   
   if (check(0, 5000)) {
     return true;
@@ -639,7 +601,7 @@ bool sATCIPMUX(uint8_t mode)
   wifi.print(F("AT+CIPMUX="));
   wifi.println(mode);
 
-  if (check(2, 1000)) {
+  if (check(0, 1000)) {
     return true;
   }
   return false;
@@ -658,7 +620,7 @@ bool startTCPServer(uint32_t port)
   wifi.print(F("AT+CIPSERVER=1,"));
   wifi.println(port);
   
-  if ( check(0, 1000) || Data.indexOf("no change") != -1) {
+  if (check(0, 1000)) {
     return true;
   }
   else
@@ -694,7 +656,7 @@ bool sATCIPSERVER(uint8_t mode, uint32_t port)
     wifi.print(F("AT+CIPSERVER=1,"));
     wifi.println(port);
 
-    if (check(0, 1000) || Data.indexOf("no change") != -1) {
+    if (check(0, 1000)) {
       return true;
     }
     return false;
@@ -841,7 +803,7 @@ bool releaseTCP(uint8_t mux_id)
   wifi.print(F("AT+CIPCLOSE="));
   wifi.println(mux_id);
 
-  if (check(2, 5000) || Data.indexOf("link is not") != -1) {
+  if (check(2, 5000)) {
     return true;
   }
   return false;
@@ -942,61 +904,164 @@ void initDustSensor()
   }
   delay(10);
 }
-/* Winsen_dust
-  Calculate dust pm0.3 pm2.5 pm10 value
-*/
-void Winsen_dust()
+
+boolean Winsen_dust(unsigned int &PM1, unsigned int &PM25, unsigned int &PM10)
 {
+
+  PM1 = 0, PM25 = 0, PM10 = 0;
+  unsigned int count = 0;
+
+  unsigned long lastPublishMillis = millis();
+
   byte data[24];
-  Dust_Serial.listen();
+  byte i = 0;
+  int sum;
 
-  int i = 0;
-  while (!Dust_Serial.available());
-  while (Dust_Serial.available())
+  while (1)
   {
-    data[i] = Dust_Serial.read();
+    i = 0;
+    Dust_Serial.listen();
 
-    if (i == 23)
+    while (!Dust_Serial.available());
+    while (Dust_Serial.available())
     {
-      Dust_Serial.println();
-      PM1 += ((data[4] * 256) + data[5]);
-      PM25 += ((data[6] * 256) + data[7]);
-      PM10 += ((data[8] * 256) + data[9]);
-      count++;
-      //Serial.print("PM 1.0 :");
-      //Serial.println(PM1/count);
-      //Serial.print("PM 2.5 :");
-      //Serial.println(PM25/count);
-      //Serial.print("PM 10 :");
-      //Serial.println(PM10/count);
-      //Serial.println("");
+      data[i] = Dust_Serial.read();
+      if (data[0] == 0x42)
+      {
+        if (data[1] == 0x4D)
+        {
+          if (i == 23)
+          {
+            PM1 += ((data[4] * 256) + data[5]);
+            PM25 += ((data[6] * 256) + data[7]);
+            PM10 += ((data[8] * 256) + data[9]);
+            count++;
+            //Serial.print("count : ");
+            //Serial.println(count);
+            //Serial.print("PM 1.0 :");
+            //Serial.println(PM1 / count);
+            //Serial.print("PM 2.5 :");
+            //Serial.println(PM25 / count);
+            //Serial.print("PM 10 :");
+            //Serial.println(PM10 / count);
+            //Serial.println("");
+            Dust_Serial.flush();
+            break;
+          }
+        }
+        i++;
+        delay(10);
+      }
     }
-    i++;
-    delay(10) ;
+
+    delay(2000);
+    if (millis() - lastPublishMillis > 100000UL)
+    {
+      PM1 = PM1 / count;
+      PM25 = PM25 / count;
+      PM10 = PM10 / count;
+      return 1;
+    }
   }
-  
-  //Serial.println("Calculation done");
 }
 
-void LED_blink()
+void LED_blink(unsigned int PM1, unsigned int PM25, unsigned int PM10)
 {
-  if ( PM1 > Range1_max || PM25 > Range25_max || PM10 > Range10_max )
+  
+  if ( PM1 > Range1_max && PM25 > Range25_max && PM10 > Range10_max )
   {
-    analogWrite(A0, 0);
-    analogWrite(A1, 1024);
-    analogWrite(A2, 0);
+    red();
   }
-  else if ( PM1 > Range1_min || PM25 > Range25_min || PM10 > Range10_min )
-  {  
-    analogWrite(A0, 0);
-    analogWrite(A1, 128);
-    analogWrite(A2, 1024);
+  else if ( PM1 > Range1_min && PM25 > Range25_min && PM10 > Range10_min )
+  {
+    yellow();
   }
   else
   {
-    analogWrite(A0, 0);
-    analogWrite(A1, 0);
-    analogWrite(A2, 1024);
+    green();
   }
+}
 
+void blue()
+{
+  analogWrite(A0, 1024);
+  analogWrite(A1, 0);
+  analogWrite(A2, 0);
+}
+
+void green()
+{
+  analogWrite(A0, 0);
+  analogWrite(A1, 0);
+  analogWrite(A2, 1024);
+}
+
+void red()
+{
+  analogWrite(A0, 0);
+  analogWrite(A1, 1024);
+  analogWrite(A2, 0);
+}
+
+void yellow()
+{
+  analogWrite(A0, 0);
+  analogWrite(A1, 1024);
+  analogWrite(A2, 1024);
+}
+
+bool check(int v, uint32_t timeout, String &Data)
+{
+  unsigned long start = millis();
+  char a;
+  Data = "";
+
+  while (millis() - start < timeout) {
+    while (wifi.available() > 0) {
+      a = wifi.read();
+      if (a == '\0') continue;
+      Data += a;
+    }
+    if (Data.indexOf("OK") != -1 && v == 0)
+    {
+      return 1;
+    }
+    if (Data.indexOf(">") != -1 && v == 1)
+    {
+      return 1;
+    }
+    if (Data.indexOf(":") != -1 && v == 2)
+    {
+      return 1;
+    }
+  }
+  return 0;
+}
+
+bool check(int v, uint32_t timeout)
+{
+  unsigned long start = millis();
+  char a;
+  String Data = "";
+
+  while (millis() - start < timeout) {
+    while (wifi.available() > 0) {
+      a = wifi.read();
+      if (a == '\0') continue;
+      Data += a;
+    }
+    if (Data.indexOf("OK") != -1 && v == 0)
+    {
+      return 1;
+    }
+    if (Data.indexOf(">") != -1 && v == 1)
+    {
+      return 1;
+    }
+    if (Data.indexOf(":") != -1 && v == 2)
+    {
+      return 1;
+    }
+  }
+  return 0;
 }
