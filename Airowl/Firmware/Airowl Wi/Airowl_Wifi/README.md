@@ -1,5 +1,5 @@
 Airowl Wi
-
+-------------------
 **Preloaded / Preferred characteristics**
 
  - Code does not print anything on Serial Monitor. 
@@ -9,9 +9,8 @@ Airowl Wi
 
  ***How to enable printing on Serial Monitor for easy debugging?***
 
+***How to enable printing on Serial Monitor for easy debugging?***
 Ans: The code is designed in such a way to avoid any kind of lagging/sticking of code due to printing on Serial Monitor. For that all the Serial print commands are commented. For debugging purpose these Serial print commands can be easily uncommented just by following these simple steps.
-
- 
 
  - Open the Arduino code “Airowl_wifi” present in the same folder.
  - Press Ctrl + F to search within the code
@@ -24,7 +23,16 @@ Ans: The code is designed in such a way to avoid any kind of lagging/sticking of
 
 ***How to reset the Baud rate of ESP8266 at 9600?***
 
-Ans: For resetting the Baud rate of ESP8266 modules open the Arduino code “BaudRate_ESP” present in the same folder. Just change the baud rate as according to your need and upload the code on your Airowl’s Arduino Nano.
+Ans: Follow these easy steps:
+
+ - Open the Arduino code “Serial_talk” present in the same folder and upload it to Arduino Nano.
+ - Update the ***baud*** variable to the Baud rate you want to work on.
+ - Open the Serial Monitor at the same updated Baud rate.
+ - Enter the following commands on Serial monitor
+  
+ ![enter image description here](https://lh3.googleusercontent.com/-SjDnph8kHso/V3o_wTzFndI/AAAAAAAAESQ/qk4K7UWvPNgh7gnR70FjbBIr6GSodUCPgCLcB/s0/SET_BAUD.PNG "SET_BAUD.PNG")
+
+Here in this case the updated baudrate is taken as '115200' . Replace it with the baudrate you want to set.
 As you’ve replaced the preloaded code from the Arduino you need to upload back the “Airowl_wifi” code into Arduino Nano. Extra care must be taken to change the baud rate in “Airowl_wifi” also.
 
 ***How to upload code on Arduino Nano?***
