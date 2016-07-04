@@ -7,12 +7,13 @@ SoftwareSerial Dust_Serial(2, 3); //(RX, TX)
 
 //Initialization
 bool flag = false;
+bool initFlag = true;
 
 // Unique Device Id
 String deviceID = "";
 
 // HOST Name to send data
-char HOST_NAME[] = "Host: oedpdev.eu-gb.mybluemix.net";
+char HOST_NAME[] = "Host: api.airpollution.online";
 
 //Ranges
 const int Range1_max = 120; const int Range1_min = 60;
@@ -293,11 +294,11 @@ bool Send_Data_SIM_OZ(unsigned int PM1, unsigned int PM25, unsigned int PM10)
 {
   //Serial.println("Searching For Server");
   
-  String command = "GET /v1/data?deviceId=" + deviceID + "&type=AIROWLWI&key=hetvi_1234&pm1="+ String(PM1) + "&pm25="+ String(PM25) + "&pm10="+ String(PM10) + " HTTP/1.1";
+  String command = "GET /v1/airowl/data?deviceId=" + deviceID + "&type=AIROWLWI&key=indiaopendata&pm1="+ String(PM1) + "&pm25="+ String(PM25) + "&pm10="+ String(PM10) + " HTTP/1.1";
 
   //Serial.println(command);
   rx_empty();
-  wifi.println("AT+CIPSTART=\"TCP\",\"oedpdev.eu-gb.mybluemix.net\",80");
+  wifi.println("AT+CIPSTART=\"TCP\",\"api.airpollution.online\",80");
   
   if (check(0, 10000))
   {
@@ -952,6 +953,15 @@ boolean Winsen_dust(unsigned int &PM1, unsigned int &PM25, unsigned int &PM10)
         i++;
         delay(10);
       }
+    }
+
+    if(count == 3 && initFlag == true)
+    {
+      PM1 = PM1 / count;
+      PM25 = PM25 / count;
+      PM10 = PM10 / count;
+      initFlag = false;
+      return 1;
     }
 
     delay(2000);
