@@ -7,9 +7,8 @@ Airowl Wi
 
 **Frequently asked questions**
 
- ***How to enable printing on Serial Monitor for easy debugging?***
-
 ***How to enable printing on Serial Monitor for easy debugging?***
+
 Ans: The code is designed in such a way to avoid any kind of lagging/sticking of code due to printing on Serial Monitor. For that all the Serial print commands are commented. For debugging purpose these Serial print commands can be easily uncommented just by following these simple steps.
 
  - Open the Arduino code “Airowl_wifi” present in the same folder.
