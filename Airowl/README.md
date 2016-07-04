@@ -6,7 +6,11 @@ Wikipedia link For all the information about : [AirWol](http://knowledge.indiaop
 
 Details about folder content : 
 
- - **Design** :  
+ **Design** :  It contains all the design file of AirOwl.
+
+**Firmware :** It contains firmware for AirOw 3G and AirOwl Wi. It also has FAQ related to AirOwl.
+
+**Schematic :** It contains schematic files for AirOwl PCB, You can download and print it your self.
 
 Features :
 ----------
