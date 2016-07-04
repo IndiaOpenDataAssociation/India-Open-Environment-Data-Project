@@ -5,6 +5,8 @@ SoftwareSerial Dust_Serial(2, 3);
 
 String deviceID = "AirOwl_";
 
+bool initFlag = true;
+
 void setup()
 {
   GSM_Serial.begin(9600);              // the GPRS baud rate
@@ -111,7 +113,7 @@ void SubmitHttpRequest(unsigned int PM1, unsigned int PM25, unsigned int PM10)
 
   rx_empty();
 
-  String command = "AT+HTTPPARA=\"URL\",\"http://oedpdev.eu-gb.mybluemix.net/v1/data?deviceId=" + deviceID + "&type=AIROWL3G&key=hetvi_1234&pm1=" + String(PM25) + "&pm25=" + String(PM10) + "&pm10=" + String(PM1) + "\"";
+  String command = "AT+HTTPPARA=\"URL\",\"http://api.airpollution.online/v1/airowl/data?deviceId=" + deviceID + "&type=AIROWL3G&key=indiaopendata&pm1=" + String(PM25) + "&pm25=" + String(PM10) + "&pm10=" + String(PM1) + "\"";
 
   //Serial.println(command);
   GSM_Serial.println(command);
@@ -224,7 +226,14 @@ boolean Winsen_dust(unsigned int &PM1, unsigned int &PM25, unsigned int &PM10)
         delay(10);
       }
     }
-
+    if(count == 3 && initFlag == true)
+    {
+      PM1 = PM1 / count;
+      PM25 = PM25 / count;
+      PM10 = PM10 / count;
+      initFlag = false;
+      return 1;
+    }
     delay(2000);
     if (millis() - lastPublishMillis > 100000UL)
     {
