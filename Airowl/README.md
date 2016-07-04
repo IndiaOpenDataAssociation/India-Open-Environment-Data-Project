@@ -2,7 +2,7 @@ AirOwl
 ======
 Airowl is a D-i-Y (Do-it-Yourself) kit which helps you to build your own personal Air Quality Monitoring device. The device would give you real-time air quality data on the app and update you of the air that you are breathing.
 
-Wikipedia link For all the information about : [AirWol](http://knowledge.indiaopendata.com/index.php/AirOwl)
+Wikipedia link For all the information about : [AirOwl](http://knowledge.indiaopendata.com/index.php/AirOwl)
 
 Details about folder content : 
 
