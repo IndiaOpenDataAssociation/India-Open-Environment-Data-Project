@@ -1753,7 +1753,7 @@ codrops menu
 .white-vertical-card{
 	padding: 50px 25px;
 	margin-bottom: 25px;
-	min-height: 502px;
+	height: 440px;
 	box-shadow: 4px 4px 4px rgba(94,94,94,0.5);
 	background-color: rgba(255,255,255,0.9);
 }
