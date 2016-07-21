@@ -1,0 +1,60 @@
+{
+  "name": "leaflet.markercluster",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Leaflet/Leaflet.markercluster.git"
+  },
+  "version": "1.0.0-rc.1.0",
+  "description": "Provides Beautiful Animated Marker Clustering functionality for Leaflet",
+  "peerDependencies": {
+    "leaflet": "~1.0.0-rc.1"
+  },
+  "devDependencies": {
+    "jshint": "~2.1.3",
+    "mocha": "~1.10.0",
+    "karma": "~0.8.5",
+    "uglify-js": "~2.3.6",
+    "jake": "~0.5.16",
+    "magic-string": "^0.7.0"
+  },
+  "main": "dist/leaflet.markercluster.js",
+  "scripts": {
+    "test": "jake test",
+    "prepublish": "jake"
+  },
+  "keywords": [
+    "gis",
+    "map"
+  ],
+  "license": "MIT",
+  "gitHead": "336fec3242091c2a01ff3867b39a5f836f9b1a64",
+  "bugs": {
+    "url": "https://github.com/Leaflet/Leaflet.markercluster/issues"
+  },
+  "homepage": "https://github.com/Leaflet/Leaflet.markercluster#readme",
+  "_id": "leaflet.markercluster@1.0.0-rc.1.0",
+  "_shasum": "8c4badf9879c8c36c2595577940c85f26e0a4041",
+  "_from": "leaflet.markercluster@1.0.0-rc.1.0",
+  "_npmVersion": "3.8.5",
+  "_nodeVersion": "5.9.1",
+  "_npmUser": {
+    "name": "danzel",
+    "email": "danzel@localhost.geek.nz"
+  },
+  "dist": {
+    "shasum": "8c4badf9879c8c36c2595577940c85f26e0a4041",
+    "tarball": "https://registry.npmjs.org/leaflet.markercluster/-/leaflet.markercluster-1.0.0-rc.1.0.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "danzel",
+      "email": "danzel@localhost.geek.nz"
+    }
+  ],
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/leaflet.markercluster-1.0.0-rc.1.0.tgz_1461642725680_0.43907046294771135"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/leaflet.markercluster/-/leaflet.markercluster-1.0.0-rc.1.0.tgz"
+}
