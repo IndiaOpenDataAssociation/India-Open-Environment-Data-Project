@@ -22,15 +22,8 @@
     "angular-momentjs": "~0.2.2",
     "highcharts-ng": "~0.0.8",
     "highcharts": "~4.1.7",
-<<<<<<< HEAD
-    "angular-swagger-ui": "~0.3.1"
-=======
     "angular-swagger-ui": "~0.3.1",
-    "angular-socialshare": "1.4.3",
-    "angular-leaflet-directive": "0.10.0",
-    "leaflet": "0.7.7",
     "font-awesome": "^4.6.3"
->>>>>>> 86c9a45ab1db7aca0f216dbba1a5e80a3f95e239
   },
   "devDependencies": {
     "angular-mocks": "~1.4.0"

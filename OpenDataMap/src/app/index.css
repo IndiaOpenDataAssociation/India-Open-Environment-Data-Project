@@ -1020,13 +1020,7 @@ h6, .h6{
     color: #fff;
     font-size: 12px;
     width: 100%;
-<<<<<<< HEAD
-    bottom: -10px;
-  /*  bottom: 60px;*/
-=======
-    height: 50px;
-  bottom: 70px;
->>>>>>> 86c9a45ab1db7aca0f216dbba1a5e80a3f95e239
+    bottom: 0px;
 }
 
 /* modal icons */

@@ -12,7 +12,6 @@
         self.selectedDevice = null;
 
         self.cities = [
-<<<<<<< HEAD
             {
              "city": "Agra",
              "latitude" : 27.1767,
@@ -146,134 +145,7 @@
         ];
 
         $rootScope.zoom = 5;
-=======
-        {                      
-                     "city": "Agra",
-                     "latitude" : 27.1767,
-                     "longitude" : 78.0081
-                     },
-                    {
-                     "city": "Bengaluru",
-                     "latitude" : 12.9716,
-                     "longitude" : 77.5946
-                     },
-                    {
-                     "city": "Chandrapur",
-                     "latitude" : 20.2095,
-                     "longitude" : 79.5603
-                     },
-                    {
-                     "city": "Chennai",
-                     "latitude" : 13.0827,
-                     "longitude" : 80.2707
-                     },
-                    {
-                     "city": "Delhi",
-                     "latitude" : 28.6139,
-                     "longitude" : 77.2090
-                     },
-                    {
-                     "city": "Faridabad",
-                     "latitude" : 28.4089,
-                     "longitude" : 77.3178
-                     },
-                    {
-                     "city": "Gaya",
-                     "latitude" : 24.7955,
-                     "longitude" : 84.9994
-                     },
-                    {
-                     "city": "Gurgaon",
-                     "latitude" : 28.4595,
-                     "longitude" : 77.0266
-                     },
-                    {
-                     "city": "Haldia",
-                     "latitude" : 22.0667,
-                     "longitude" : 88.0698
-                     },
-                    {
-                     "city": "Hyderabad",
-                     "latitude" : 17.3850,
-                     "longitude" : 78.4867
-                     },
-                    {
-                     "city": "Jaipur",
-                     "latitude" : 26.9124,
-                     "longitude" : 75.7873
-                     },
-                    {
-                     "city": "Jodhpur",
-                     "latitude" : 26.2389,
-                     "longitude" : 73.0243
-                     },
-                    {
-                     "city": "Kanpur",
-                     "latitude" : 26.4499,
-                     "longitude" : 80.3319
-                     },
-                    {
-                     "city": "Kolkata",
-                     "latitude" : 22.5726,
-                     "longitude" : 88.3639
-                     },
-                    {
-                     "city": "Lucknow",
-                     "latitude" : 26.8467,
-                     "longitude" : 80.9462
-                     },
-                    {
-                     "city": "Mumbai",
-                     "latitude" : 19.0760,
-                     "longitude" : 72.8777
-                     },
-                    {
-                     "city": "Muzaffarpur",
-                     "latitude" : 26.1209,
-                     "longitude" : 85.3647
-                     },
-                    {
-                     "city": "Nagpur",
-                     "latitude" : 21.1458,
-                     "longitude" : 79.0882
-                     },
-                    {
-                     "city": "Nashik",
-                     "latitude" : 19.9975,
-                     "longitude" : 73.7898
-                     },
-                    {
-                     "city": "Panchkula",
-                     "latitude" : 30.6942,
-                     "longitude" : 76.8606
-                     },
-                    {
-                     "city": "Patna",
-                     "latitude" : 25.5941,
-                     "longitude" : 85.1376
-                     },
-                    {
-                     "city": "Pune",
-                     "latitude" : 18.5204,
-                     "longitude" : 73.8567
-                     },
-                    {
-                     "city": "Rohtak",
-                     "latitude" : 28.8955,
-                     "longitude" : 76.6066
-                     },
-                    {
-                     "city": "Solapur",
-                     "latitude" : 17.6599,
-                     "longitude" : 75.9064
-                     },
-                    {
-                     "city": "Varanasi",
-                     "latitude" : 25.3176,
-                     "longitude" : 82.9739
-                    }
-         ];
->>>>>>> 86c9a45ab1db7aca0f216dbba1a5e80a3f95e239
+
         self.selectedCity = '0';
         self.selectCity = function(){
             if(self.selectedCity == '0'){
@@ -290,48 +162,6 @@
             });
         };  
 
-<<<<<<< HEAD
-        var clusterTypes = ['standard','ugly','beer'];
-          var selectedClusterTypes = {
-            ugly:{
-              title: 'Hi I am a Cluster!',
-              gridSize: 60, ignoreHidden: true,
-              minimumClusterSize: 2,
-              imageExtension: 'png',
-              imagePath: 'assets/images/cluster', imageSizes: [72]
-            },
-            beer:{
-              title: 'Beer!',
-              gridSize: 60,
-              ignoreHidden: true,
-              minimumClusterSize: 2,
-              enableRetinaIcons: true,
-              styles: [{
-                url: 'assets/images/beer.png',
-                textColor: '#ddddd',
-                textSize: 18,
-                width: 33,
-                height: 33,
-              }]
-            },
-            standard:{
-              title: 'Hi I am a Cluster!', gridSize: 60, ignoreHidden: true, minimumClusterSize: 2
-            }
-          };
-          var selectClusterType = function(value){
-            var cloned = _.clone($rootScope.map.randomMarkers, true);
-            $rootScope.map.randomMarkers = [];
-            $rootScope.map.clusterOptions = $scope.map.selectedClusterTypes[value] || $scope.map.selectedClusterTypes.standard;
-            $rootScope.map.clusterOptionsText =  angular.toJson($rootScope.map.clusterOptions);
-            if(!value){
-              value = 'standard';
-            }
-            $timeout(function(){
-              $rootScope.map.randomMarkers = cloned;
-            },200);
-
-            return value;
-          };
 
         var mapObject = {
             center: {
@@ -380,135 +210,9 @@
         $scope.options = {
            styles: styleArray
         };
-=======
->>>>>>> 86c9a45ab1db7aca0f216dbba1a5e80a3f95e239
 
 
 
-        angular.extend($rootScope, {
-            center: {
-                lat:22.9734,
-                lng:78.6569,
-                zoom:5
-            },
-             defaults: {
-                    tileLayer: "http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png",
-                    zoomControlPosition: 'topright',
-                    tileLayerOptions: {
-                        opacity: 0.9,
-                        detectRetina: true,
-                        reuseTiles: true,
-                    },
-                    scrollWheelZoom: true
-            }
-            // layers: {
-            //      overlays: {
-            //          Agra:{
-            //             type: "markercluster",
-            //             visible: true
-            //          },
-            //         Bengaluru:{
-            //             type: "markercluster",
-            //                 visible: true
-            //         },
-            //     Chandrapur:{
-            //         type: "markercluster",
-            //                 visible: true
-            //     },
-            //     Chennai:{
-            //         type: "markercluster",
-            //                 visible: true
-            //     },
-            //          Delhi:{
-            //             type: "markercluster",
-            //                 visible: true
-            //          },
-            //       Faridabad:{
-            //         type: "markercluster",
-            //                 visible: true
-            //       },
-            //        Gaya:{
-            //         type: "markercluster",
-            //                 visible: true
-            //        },
-            //         Gurgaon:{
-            //             type: "markercluster",
-            //                 visible: true
-            //         },
-            //       Haldia:{
-            //         type: "markercluster",
-            //                 visible: true
-            //         },
-            //           Hyderabad:{
-            //             type: "markercluster",
-            //                 visible: true
-            //           },
-            //        Jaipur:{
-            //         type: "markercluster",
-            //                 visible: true
-            //        },
-            //      Jodhpur:{
-            //         type: "markercluster",
-            //                 visible: true
-            //      },
-            //       Kanpur:{
-            //         type: "markercluster",
-            //                 visible: true
-            //       },
-            //      Kolkata:{
-            //         type: "markercluster",
-            //                 visible: true
-            //      },
-            //        Lucknow:{
-            //         type: "markercluster",
-            //                 visible: true
-            //        },
-            //       Mumbai:{
-            //         type: "markercluster",
-            //                 visible: true
-            //       },
-            //       Muzaffarpur:{
-            //         type: "markercluster",
-            //                 visible: true
-            //       },
-            //      Nagpur:{
-            //         type: "markercluster",
-            //                 visible: true
-            //      },
-            //     Nashik:{
-            //         type: "markercluster",
-            //                 visible: true
-            //     },
-            //        Panchkula:{
-            //         type: "markercluster",
-            //                 visible: true
-            //        },
-            //           Patna:{
-            //             type: "markercluster",
-            //                 visible: true
-            //           },
-            //       Pune:{
-            //         type: "markercluster",
-            //                 visible: true
-            //       },
-            //          Rohtak:{
-            //             type: "markercluster",
-            //                 visible: true
-            //          },
-            //        Solapur:{
-            //         type: "markercluster",
-            //                 visible: true
-            //        },
-            //         Varanasi:{
-            //             type: "markercluster",
-            //                 visible: true
-            //         }
-                     
-            //      }
-            // }   
-
-
-            });
 
         this.selectedAQI = 0;
         this.dataResourcesCount = 0;
@@ -563,45 +267,7 @@
             }
         }
 
-        // this.markerClicked = function(marker, deviceId, deviceLabel, deviceAddr, contributor){
-        //     deviceId = deviceId.replace(/ /g,'');
-        //     self.selectedDeviceId = deviceId;
-        //     self.initializeGraphColors();
-        //     // marker.show=true;
-        //     //marker.options.icon = 
-        //     self.getSelectedDeviceData(deviceId);
-        //     self.selectedModalType = 'daily';
-        //     self.analyticsClicked = false;
-        //     self.selectedMarker = marker;
-        //     self.selectedDeviceData = {}; 
-        //     self.updateSelectedData(deviceLabel, deviceAddr, contributor);
-        // };
 
-
-
-<<<<<<< HEAD
-=======
-        // AllAQIDataItems.query().$promise.then(function(data){
-        //     angular.forEach(self.allPublicData, function(item){
-        //         angular.forEach(data, function(dataItem){
-        //             if(item.deviceId == dataItem.deviceId){
-        //                 item.aqi = dataItem.aqi;
-        //                 item.imagePath = AQIColorService.getPinPath(item.aqi);
-        //                 self.addNewMarker(item.deviceId, item.latitude, item.longitude, item.label, item.loc, item.imagePath, item.type);
-        //             }
-        //         });
-        //     });
-        //     angular.forEach(self.allUberData, function(item){
-        //         item.aqi = 0;
-        //         item.imagePath = "assets/images/pins/uber.svg";
-        //         self.addNewMarker(item.deviceId, item.stop_lat, item.stop_lon, "Uber", "Roaming Around", item.imagePath, item.deviceType);
-                
-        //     });
-            
-        // });
-
-
->>>>>>> 86c9a45ab1db7aca0f216dbba1a5e80a3f95e239
         var w = angular.element($window);
         $scope.viewPortHeight = w.height() - 164;
 
@@ -609,7 +275,6 @@
         this.graphWidth = (this.windowWidth/4) - 40;
 
 
-<<<<<<< HEAD
         this.markersToshow = [];
         $scope.onClicked = function(marker){
             console.log('clicked here');
@@ -626,8 +291,6 @@
             self.selectedDeviceData = {}; 
             self.updateSelectedData(deviceLabel, deviceAddr, contributor);
         };
-=======
->>>>>>> 86c9a45ab1db7aca0f216dbba1a5e80a3f95e239
 
         this.lastUpdatedTime = null;
         this.selectedDeviceLabel = "An India Open-Data Initiative";
@@ -637,22 +300,6 @@
         this.selectedModalType = 'home';
         this.analyticsClicked = false;
 
-
-        $scope.$on('leafletDirectiveMarker.click', function markerClicked(e, args) {
-           // console.log(e);
-           //console.log(args.model);
-            args.model.id = args.model.id.replace(/ /g,'');
-            self.selectedDeviceId = args.model.id;
-            self.initializeGraphColors();
-            // marker.show=true;
-            //marker.options.icon = 
-            self.getSelectedDeviceData(args.model.id);
-            self.selectedModalType = 'daily';
-            self.analyticsClicked = false;
-            self.selectedMarker = args.model;
-            self.selectedDeviceData = {}; 
-            self.updateSelectedData(args.model.title, args.model.address, args.model.contributor);
-        });
 
 
         this.updateSelectedData = function(deviceLabel, address, type){
@@ -885,15 +532,6 @@
             //self.aqiGraph.options.title.text = "Average AQI : "+self.currentAverageAQI;
         };
 
-<<<<<<< HEAD
-=======
-
-
-      
-
-
-        
->>>>>>> 86c9a45ab1db7aca0f216dbba1a5e80a3f95e239
 
         this.rightPanelVisible = false;
         this.toggleRightPanel = function(){
