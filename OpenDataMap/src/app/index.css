@@ -305,7 +305,7 @@
     vertical-align: middle;
     }
     .trans-bg.img-container img{
-        max-height: 27px;
+        max-height: 23px;
     }
     .trans-bg.label-container{
         padding: 7px 8px 6px 8px;
@@ -320,7 +320,7 @@
     .bottom-row{
     position: absolute;
     background-color: #464f56;
-    bottom: 5px;
+    bottom: -20px;
     width: 100%;
     }
 
@@ -833,9 +833,10 @@ h6, .h6{
     background-color: rgba(255, 255, 255, 0.1);
 }
 .activity-container{
+    font-size: 12px;
     margin-bottom: 4px;
 }
-
+.activity-container {}
 .label-container > p{
     margin : 5px 8px 5px 8px;
 }
@@ -843,7 +844,7 @@ h6, .h6{
     padding:8px;
 }
 .div-68 img{
-    max-height: 26px;
+    max-height: 20px;
     margin:auto;
 }
 /* 
@@ -950,7 +951,7 @@ h6, .h6{
 .home-info-container{
     background-color: rgba(255, 255,255,0.1);
     margin-top: 25px;
-    padding: 25px 0px;
+    padding: 10px;
 
 }
 .gm-style-mtc, .gm-svpc{
@@ -1013,14 +1014,13 @@ h6, .h6{
 */
 .bottom-panel{
     position: absolute;
-    padding-top: 8px;
+    padding: 8px 0px !important;
   /*  padding-bottom: 8px;*/
     background-color: #303841;
     color: #fff;
     font-size: 12px;
     width: 100%;
-    bottom: 45px;
-    height: 50px;
+    bottom: -10px;
   /*  bottom: 60px;*/
 }
 
@@ -1116,7 +1116,7 @@ hr#whitelong{
     cursor: pointer;
 }
 .fa-stack:hover, .fa-stack:active, .fa-stack:focus{
-    color: #25345b;
+    color: #00b3bf;
     cursor: pointer;
 }
 .fa-inverse:hover, .fa-inverse:active, .fa-inverse:focus{
@@ -1464,7 +1464,7 @@ div {
 }
 @media (max-width:500px){
     .angular-google-map-container{
-        height: 80vh;
+        height: 100vh;
     }
     .title-container{
         width: 100%;
@@ -1488,7 +1488,7 @@ div {
 }
 @media (min-width: 728px) and (max-width: 1281px){
     .bottom-panel{
-        bottom: 27px; /* 27px */
+        bottom: 0px; /* 27px */
     }
 }
 .airowl-tab .nav-tabs > li{
@@ -1625,4 +1625,42 @@ select.city-search{
     cursor: pointer;
     box-shadow: none;
     outline: none;
+}
+.right-panel-section{
+    position: fixed;
+    top: 45px;
+    bottom: 60px;
+    right: 0px;
+    height: 100%;
+}
+.close-panel{
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    font-size: 16px;
+    
+}
+.close-panel-ico{
+    color: #E7EFEE;
+    font-size: 16px;
+}
+.close-panel-ico:hover,
+.close-panel-ico:focus{
+    color: #00b3bf;
+}
+.toggleRightPanel{
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 16px;
+}
+.fa-inverse{
+    color: #00b3bf;
+}
+.aqiinfo-img{
+    height: 150px;
+    margin-top: 25px;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
 }

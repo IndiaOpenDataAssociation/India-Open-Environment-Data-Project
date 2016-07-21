@@ -1,15 +1,10 @@
-<script type="text/javascript">
-    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-        // statement
-        $("#scrollable").slimScroll({destroy: true});
-    }
-</script>
+
 <div >
 <div class="no-overflow-y">
 <section class="no-padding">
     <div class="row">
         <div class="col-sm-12 mobile-right-no-padding">
-            <div class="col-sm-9 no-padding"> 
+            <div class="col-sm-12 no-padding"> 
                 <ui-gmap-google-map center="$root.map.center" zoom='$root.map.zoom' options="options" id ="googleMap" control="$root.map.control">
                     <ui-gmap-marker icon="'marker.icon'"
                      ng-repeat="marker in vm.markersToshow" 
@@ -27,7 +22,19 @@
                     </ui-gmap-markers-->
                 </ui-gmap-google-map>
             </div>
-            <div class="col-sm-3 screen-height no-padding blue-bg" >
+            
+        </div>
+        
+    </div>
+</section>
+<div class="toggleRightPanel" ng-hide="vm.rightPanelVisible == true" ng-click="vm.toggleRightPanel();">
+    <span class="fa-stack fa-lg">
+      <i class="fa fa-circle fa-stack-2x"></i>
+      <i class="fa fa-bars fa-stack-1x fa-inverse"></i>
+    </span>
+</div>
+<!-- <section class=" no-padding"> -->
+    <div id="rightPanel" ng-show="vm.rightPanelVisible == true" class="col-sm-3 screen-height no-padding blue-bg right-panel-section" style="float:right">
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="col-sm-12 dark-blue-bg name-container">
@@ -36,7 +43,7 @@
                                 id = "avatarimg"
                                 class="margin-h-auto img-avatar img-responsive">
                             </div>
-                            <div  class=" no-padding toggle" ng-class="(vm.selectedModalType == 'home') ? 'col-sm-12 text-center' : 'col-sm-10 text-left'">
+                            <div  class=" no-padding toggle" ng-class="(vm.selectedModalType == 'home') ? 'col-sm-12 text-left' : 'col-sm-10 text-left'">
                                 <div style="min-height:39px;" class="" ng-show="vm.selectedDeviceAddr == null">
                                     <p class="device-label white-font bold" style="padding-top: 9px;"> {{vm.selectedDeviceLabel}}</p>
                                 </div>
@@ -44,6 +51,13 @@
                                     <p class="device-label white-font bold"> {{vm.selectedDeviceLabel}}</p>
                                     <p class="device-address white-font">{{vm.selectedDeviceAddr}} </p>
                                 </div>
+                            </div>
+                            <div id="closeRightPanelIco" ng-click="vm.toggleRightPanel();" class="close-panel text-center">
+                                <a class="close-panel-ico">
+                                    <i class="fa fa-close">
+                                        
+                                    </i>
+                                </a>
                             </div>
                         </div>
                         <div class="col-sm-12 gray-bg device-type-container">
@@ -56,7 +70,7 @@
                                 <h6 class="leftfloat" ng-hide="vm.selectedModalType == 'home'">as of: {{vm.lastUpdatedTime}}</h6>
                             </div>
                         </div>
-                        <div id="scrollable" slimscroll="{height: viewPortHeight}">
+                        <div id="scrollable" >
                             <div class="toggle" ng-show="vm.selectedModalType == 'home'" >
                                 <div ng-include src="config.moduleDir + 'dashboard/views/home.html'" include-replace></div>
                             </div>
@@ -104,10 +118,7 @@
                 </div>
                 </div>
             </div>
-        </div>
-        
-    </div>
-</section>
+<!-- </section> -->
 <section class="bottom-panel" ng-show="true">
     <div class="">
         <div class="row">
@@ -144,7 +155,7 @@
 </div>
 </div>
 
-<div class="social-share">
+<!-- <div class="social-share">
     <div class="individual-social-container">
         <div class="">
              <a facebook-feed-share class="facebookShare" 
@@ -162,9 +173,9 @@
                 data-text="{{vm.socialShareSentence}}" ></a>
         </div>
     </div>
-</div>
+</div> -->
 
-<div class="select-city-box">
+<div class="select-city-box" >
     <select class="city-search" ng-change="vm.selectCity()" ng-model="vm.selectedCity">
       <option value="0" ng-value="0" selected> India</option>
       <option ng-repeat="item in vm.cities" value="{{item.city}}" ng-value="{{item.city}}" >{{item.city}}</option>

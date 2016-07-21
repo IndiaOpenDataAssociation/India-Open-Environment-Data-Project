@@ -589,11 +589,12 @@ video#videoToPlay2{
 	background-attachment: fixed;
 }
 .know-everything-home-bg{
-	background-image: url(../assets/img/benifit-banner.jpg);
+	/*background-image: url(../assets/img/benifit-banner.jpg);
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center center;
-	background-attachment: fixed;
+	background-attachment: fixed;*/
+	background-color: #f8f8f8;
 }
 .outdoor-how-bg{
 	background-image: url(../img/how/outdoor.jpg);

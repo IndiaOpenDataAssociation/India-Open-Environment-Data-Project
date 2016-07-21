@@ -1,7 +1,7 @@
 (function() {
     'use strict';
     angular
-        .module('app', ['djds4rce.angular-socialshare','ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.router', 'ui.bootstrap',
+        .module('app', ['ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ui.router', 'ui.bootstrap',
             'validation',
             'angular-momentjs',
             'ui.select',
@@ -9,7 +9,6 @@
             'highcharts-ng',
             'ui.slimscroll',
             'monospaced.elastic',
-            'google.places',
             'config',
             'dashboard',
             'about',

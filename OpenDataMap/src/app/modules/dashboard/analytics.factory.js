@@ -4,7 +4,7 @@
     angular.module('dashboard')
         .factory('AnalyticsDataItems', AnalyticsDataItems);
 
-    function AnalyticsDataItems($resource, $cookies, $state, config) {
+    function AnalyticsDataItems($resource, $state, config) {
         return $resource(config.api + 'all/public/data/:deviceid' , {
                 deviceid: '@deviceid'
             }, {

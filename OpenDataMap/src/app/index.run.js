@@ -31,11 +31,10 @@
         .run(runBlock);
 
     /** @ngInject */
-    function runBlock($rootScope, $state, config, $FB, $cookies, $http, AuthenticationService, $timeout) {
+    function runBlock($rootScope, $state, config, $http, AuthenticationService, $timeout) {
         AuthenticationService.setUser();
         $rootScope.config = config;
         $rootScope.$state = $state;
-        $FB.init('1143339922353483');
     }
 
 })();
