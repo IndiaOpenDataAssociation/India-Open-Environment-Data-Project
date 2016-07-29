@@ -16,6 +16,9 @@
 .red{
     color: #ec1c24;
 }
+span.small-desc {
+    font-size: 12px;
+}
 @media (min-width: 300px) and (max-width: 728px){
       .margin-10px{
         margin: 20px;
@@ -318,10 +321,10 @@
     font-weight: bold;
     }
     .bottom-row{
-    position: absolute;
+    position: fixed;
     background-color: #464f56;
-    bottom: -20px;
-    width: 100%;
+    bottom: 30px;
+    width: 25%;
     }
 
     .img-bottom-nav{
@@ -1013,7 +1016,7 @@ h6, .h6{
     bottom panel
 */
 .bottom-panel{
-    position: absolute;
+    position: fixed;
     padding: 8px 0px !important;
   /*  padding-bottom: 8px;*/
     background-color: #303841;
@@ -1021,6 +1024,7 @@ h6, .h6{
     font-size: 12px;
     width: 100%;
     bottom: 0px;
+  /*  bottom: 60px;*/
 }
 
 /* modal icons */
@@ -1557,7 +1561,7 @@ div {
 
 .social-share{
     position: absolute;
-    bottom: 125px;
+    bottom: 95px;
     left: 10px;
     width: 50px;
     text-align: center;

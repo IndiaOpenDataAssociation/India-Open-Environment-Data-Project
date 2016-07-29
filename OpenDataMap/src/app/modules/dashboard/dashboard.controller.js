@@ -4,10 +4,7 @@
     angular.module('dashboard')
         .controller('DashboardCtrl', DashboardCtrl);
 
-    function DashboardCtrl(AQIColorService, AllAQIDataItems,RealtimeGraphFactory,
-     $cookies, $state, FieldsDataItems, AnalyticsDataItems, FieldsService, DeviceDataItems,
-      AllPublicDataItems, $timeout,$document,$location,$scope, $rootScope, $window, $moment) 
-    {
+    function DashboardCtrl(uiGmapIsReady,$document,$location,$scope, $rootScope, $window, $moment, AQIColorService, AllAQIDataItems,RealtimeGraphFactory, $cookies, $state, FieldsDataItems, AnalyticsDataItems, FieldsService, DeviceDataItems, AllPublicDataItems, $timeout) {
         var self = this;
         self.selectedDevice = null;
 
@@ -145,23 +142,63 @@
         ];
 
         $rootScope.zoom = 5;
-
         self.selectedCity = '0';
         self.selectCity = function(){
             if(self.selectedCity == '0'){
-                $rootScope.center.lat = 22.9734;
-                $rootScope.center.lng = 78.6569;
-                $rootScope.center.zoom = 5;
+                $rootScope.map.center.latitude = 22.9734;
+                $rootScope.map.center.longitude = 78.6569;
+                $rootScope.map.zoom = 5;
             }
             angular.forEach(self.cities, function(item){
                 if(item.city == self.selectedCity){
-                    $rootScope.center.lat = item.latitude;
-                    $rootScope.center.lng = item.longitude;
-                    $rootScope.center.zoom = 10;
+                    $rootScope.map.center.latitude = item.latitude;
+                    $rootScope.map.center.longitude = item.longitude;
+                    $rootScope.map.zoom = 11;
                 }
             });
         };  
 
+        var clusterTypes = ['standard','ugly','beer'];
+          var selectedClusterTypes = {
+            ugly:{
+              title: 'Hi I am a Cluster!',
+              gridSize: 60, ignoreHidden: true,
+              minimumClusterSize: 2,
+              imageExtension: 'png',
+              imagePath: 'assets/images/cluster', imageSizes: [72]
+            },
+            beer:{
+              title: 'Beer!',
+              gridSize: 60,
+              ignoreHidden: true,
+              minimumClusterSize: 2,
+              enableRetinaIcons: true,
+              styles: [{
+                url: 'assets/images/beer.png',
+                textColor: '#ddddd',
+                textSize: 18,
+                width: 33,
+                height: 33,
+              }]
+            },
+            standard:{
+              title: 'Hi I am a Cluster!', gridSize: 60, ignoreHidden: true, minimumClusterSize: 2
+            }
+          };
+          var selectClusterType = function(value){
+            var cloned = _.clone($rootScope.map.randomMarkers, true);
+            $rootScope.map.randomMarkers = [];
+            $rootScope.map.clusterOptions = $scope.map.selectedClusterTypes[value] || $scope.map.selectedClusterTypes.standard;
+            $rootScope.map.clusterOptionsText =  angular.toJson($rootScope.map.clusterOptions);
+            if(!value){
+              value = 'standard';
+            }
+            $timeout(function(){
+              $rootScope.map.randomMarkers = cloned;
+            },200);
+
+            return value;
+          };
 
         var mapObject = {
             center: {
@@ -211,37 +248,108 @@
            styles: styleArray
         };
 
+        $scope.clusterOptions = {
+             minimumClusterSize: 3,
+            maxZoom:11,
+            styles: [{
+              width: 50,
+              height: 50,
+              textColor: '#ffffff',
+              textSize: 15,
+              url:"http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerclusterer/1.0.2/images/m1.png"
+            }],
+            keepSpiderfied:true
+        };
+
+        $rootScope.latitude = 22.9734;
+        $rootScope.longitude = 78.6569;
+
+        $rootScope.map = {
+            center: {
+                latitude: $rootScope.latitude,
+                longitude: $rootScope.longitude
+            },
+            zoom: $rootScope.zoom,
+            zoomControl: false,
+            disableDefaultUI: true,
+            control: {},
+            styles: [
+              {
+                stylers: [
+                  { hue: "#00ffe6" },
+                  { saturation: -20 }
+                ]
+              },{
+                featureType: "road",
+                elementType: "geometry",
+                stylers: [
+                  { lightness: 100 },
+                  { visibility: "simplified" }
+                ]
+              },{
+                featureType: "road",
+                elementType: "labels",
+                stylers: [
+                  { visibility: "off" }
+                ]
+              }
+            ],
+            randomMarkers : [],
+            doClusterRandomMarkers: true,
+          currentClusterType: 'standard',
+          clusterTypes: clusterTypes,
+          selectClusterType: selectClusterType,
+          selectedClusterTypes: selectedClusterTypes,
+          clusterOptions: selectedClusterTypes.standard
+        };
+
+        // var map1 = $rootScope.map.control.getGMap();
 
 
-
-        this.selectedAQI = 0;
-        this.dataResourcesCount = 0;
-
-        AllPublicDataItems.query().$promise.then(function(data){
-            // self.dataResourcesCount = data[0].length;
-            self.allPublicData = data[0];
-            angular.forEach(data[0],function(item){
-                item.imagePath = AQIColorService.getPinPath(item.aqi);
-                self.addNewMarker(item.deviceId, item.latitude, item.longitude, item.label, item.loc, item.imagePath, item.type,item.city);
-                self.dataResourcesCount = self.dataResourcesCount+1;
-            });
-        });
+        //$rootScope.map.setOptions(styles);
+        $scope.marker = {
+            id: 0,
+            coords: {
+                latitude: undefined,
+                longitude: undefined
+            },
+            options: {
+                draggable: true
+            },
+            events: {}
+        };
+        $scope.marker.coords.latitude = 23.022505;
+        $scope.marker.coords.longitude = 72.57136209999999;
+        $scope.marker.events.dragend = function(marker, eventName, args) {
+            var lat = marker.getPosition().lat();
+            var lon = marker.getPosition().lng();
+            $scope.ngMessageEnable = false;
+            $rootScope.map.center.latitude = lat;
+            $rootScope.map.center.longitude = lon;
+            $scope.marker.options = {
+                draggable: true,
+                labelAnchor: "100 0",
+                labelClass: "marker-labels"
+            };
+        };
 
         this.markers = [];
-
-        this.addNewMarker = function(deviceId, latitudeVal, longitudeVal, titleVal, addressLabel, imagePath, contributor,city){
+        this.selectedContributor = null;
+        this.selectedDeviceId = 0;
+        this.imageUrl = "http://i.imgur.com/g7TTFQ5.png";
+        this.addNewMarker = function(deviceId, latitudeVal, longitudeVal, titleVal, addressLabel, imagePath, contributor){
             var newMarker = {
                 id: deviceId,
-                    group: city,
-                    lat: latitudeVal,
-                    lng: longitudeVal,
-                
-                // options: {
-                //     draggable: false,
-                //     icon: {
-                //         url: imagePath
-                //     }
-                // },
+                coords: {
+                    latitude: latitudeVal,
+                    longitude: longitudeVal
+                },
+                options: {
+                    draggable: false,
+                    icon: {
+                        url: imagePath
+                    }
+                },
                 contributor: contributor,
                 title: titleVal,
                 address: addressLabel,
@@ -249,24 +357,108 @@
                    
                 },
                 icon: {
-                    iconUrl: imagePath
+                    url: "/assets/images/polludron-icon.png"
                 }
                 // show:true;
             };
-
             console.log("came here i times : ");
-            console.log(city);
             self.markers.push(newMarker);
         };
+        this.showOizomDevices = true;
+        this.showIODADevices = true;
+        this.socialShareSentence = "Find the Air Quality of your area. Stay updated about the air you breathe. #KnowWhatYouBreathe";
 
-        $scope.markersToshow = this.markers;
-
-        $scope.events = {
-            markers: {
-                enable: ['touchend','click','mouseover']
+        this.disableOizomDevices = function(){
+            if(self.showOizomDevices){
+                angular.forEach(self.markersToshow, function(item){
+                    if(item.contributor == 'POLLUDRON_PUBLIC'){
+                        var index = self.markersToshow.indexOf(item);
+                        self.markersToshow.splice(index, 1);
+                    }
+                });
+                self.showOizomDevices = !(self.showOizomDevices);
+            } else {
+                angular.forEach(self.markers, function(item){
+                    if(item.contributor == 'POLLUDRON_PUBLIC'){
+                        self.markersToshow.push(item);
+                    }
+                });
+                self.showOizomDevices = !(self.showOizomDevices);
             }
-        }
+        };
 
+        this.iodaNumArray = [];
+
+        this.disableIodaDevices = function(){
+            if(self.showIODADevices){
+                self.iodaNumArray = [];
+                angular.forEach(self.markersToshow, function(item){
+                    if(item.contributor == 'IODA'){
+                        var index = self.markersToshow.indexOf(item);
+                        self.iodaNumArray.push(index);
+                    }
+                });
+                for(var i=self.iodaNumArray.length;i>-1;i--){
+                    self.markersToshow.splice(self.iodaNumArray[i], 1);
+                }
+                self.showIODADevices = !(self.showIODADevices);
+            } else {
+                angular.forEach(self.markers, function(item){
+                    if(item.contributor == 'IODA'){
+                        self.markersToshow.push(item);
+                    }
+                });
+                self.showIODADevices = !(self.showIODADevices);
+            }
+        };
+
+        this.changeContributor = function(contributor){
+            self.markersToshow = [];
+            if(contributor !== null && contributor !== undefined){
+                angular.forEach(self.markers, function(item){
+                    if(item.contributor == contributor){
+                        self.markersToshow.push(item);
+                    }
+                });
+                self.selectedContributor = contributor;
+            } else if(contributor === null){
+                angular.forEach(self.markers, function(item){
+                    console.log("pushed to markersToshow");
+                    self.markersToshow.push(item);
+                });
+            } else {}
+        };
+
+      
+
+        this.selectedAQI = 0;
+        this.dataResourcesCount = 0;
+
+        this.allPublicData = [];
+        this.tempPublicData = [];
+        this.allUberData = [];
+        this.tempUberData = [];
+
+        //fetch all public data from server
+        AllPublicDataItems.query().$promise.then(function(data){
+            self.dataResourcesCount = data[0].length;
+            self.allPublicData = data[0];
+            self.allUberData = data[1];
+            angular.forEach(data[0],function(item){
+                self.tempPublicData.push(item);
+                item.imagePath = AQIColorService.getPinPath(item.aqi);
+                self.addNewMarker(item.deviceId, item.latitude, item.longitude, item.label, item.loc, item.imagePath, item.type);
+            });
+            angular.forEach(data[1],function(item){
+                self.tempUberData.push(item);
+                item.imagePath = "assets/images/pins/uber.svg";
+                //self.addNewMarker(item.deviceId, item.stop_lat, item.stop_lon, "Uber", "Roaming Around", item.imagePath, item.deviceType);
+            });
+            self.dataResourcesCount = self.tempPublicData.length;
+
+            self.changeContributor(null);
+            console.log("came here");
+        });
 
         var w = angular.element($window);
         $scope.viewPortHeight = w.height() - 164;
@@ -274,6 +466,12 @@
         this.windowWidth = w.width();
         this.graphWidth = (this.windowWidth/4) - 40;
 
+        //calling fields api to make basic calls and storing to cookies
+        FieldsDataItems.query().$promise.then(function(data) {
+            self.fieldItems = data;
+            FieldsService.storeFieldsData(self.fieldItems);
+            self.fieldsData = FieldsService.getFieldsData();
+        });
 
         this.markersToshow = [];
         $scope.onClicked = function(marker){
@@ -287,6 +485,7 @@
             self.getSelectedDeviceData(deviceId);
             self.selectedModalType = 'daily';
             self.analyticsClicked = false;
+            self.rightPanelVisible = true;
             self.selectedMarker = marker;
             self.selectedDeviceData = {}; 
             self.updateSelectedData(deviceLabel, deviceAddr, contributor);
@@ -300,15 +499,7 @@
         this.selectedModalType = 'home';
         this.analyticsClicked = false;
 
-
-
-        this.updateSelectedData = function(deviceLabel, address, type){
-            self.selectedDeviceLabel = deviceLabel;
-            self.selectedDeviceAddr = type;
-        };
-
-
-         this.changeModalType = function(type){
+        this.changeModalType = function(type){
             if(self.selectedDeviceId !== 0){
                 if(type == 'analytics'){
                     self.selectedDeviceLabel = self.selectedMarker.title;
@@ -343,11 +534,8 @@
             self.selectedDeviceAddr = type;
         };
 
-
-
         this.activityArray = null;
 
-        //called from marker markerClicked
         this.getSelectedDeviceData = function(deviceId){
             var _tempTime;
             DeviceDataItems.query({'deviceid':deviceId}).$promise.then(function(data){
@@ -418,7 +606,6 @@
                 self.humpercen = "p"+self.humpercen;
             }
         };
-
 
         this.setGraphColors = function(){
             if(self.visibleArea == 2){
