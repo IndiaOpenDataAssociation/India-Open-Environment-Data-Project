@@ -1063,9 +1063,9 @@ Nav Icons
 #nav-icon1, #nav-icon2, #nav-icon3, #nav-icon4 {
   width: 30px;
   height: 30px;
-  left:60%;
-  position: relative;
-  margin: 20px auto;
+  right: 10px;
+  position: fixed;
+  margin: 10px auto;
   -webkit-transform: rotate(0deg);
   -moz-transform: rotate(0deg);
   -o-transform: rotate(0deg);

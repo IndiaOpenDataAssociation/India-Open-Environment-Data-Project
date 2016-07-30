@@ -1667,3 +1667,54 @@ select.city-search{
     margin-left: auto;
     display: block;
 }
+
+@media(max-width: 500px){
+    .right-sub-header{
+        padding:5px 0px;
+        margin: 0px;
+    }
+    h5, .h5{
+        font-size: 14px;
+        margin: 0px;
+    }
+    select{display: none}
+    svg{
+        margin-top: -11px;
+    }
+    .bottom-row{
+        bottom: 0px;
+        position: fixed;
+    }
+    html,body{
+        overflow-y: hidden;
+    }
+    .img-bottom-nav{
+        width: auto;
+    }
+    #rightPanel{
+        width: 100%;
+    }
+    .g-label{
+        bottom: -50px;
+    }
+    #scrollable{
+        margin-top: 35px;
+    }
+    .highcharts-container{
+        margin-top: 25px;
+    }
+    .aqiinfo-mobile{
+        display: inline-block;
+        height: 194px;
+        margin-top: -10px;
+        top: -56px;
+        margin-right: auto;
+        position: relative;
+        margin-left: 50%;
+        margin-right: 50%;
+        left: -25%;
+    }
+    .margin-top-default{
+        margin-top: 0px;
+    }
+}
