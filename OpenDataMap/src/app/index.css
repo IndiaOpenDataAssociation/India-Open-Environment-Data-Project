@@ -16,8 +16,20 @@
 .red{
     color: #ec1c24;
 }
+.whole-page-overlay{
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    z-index: 1000;
+    background-color: rgba(255,255,255,0.8);
+}
 span.small-desc {
     font-size: 12px;
+}
+.theme-link{
+    color: #00b3bf;
 }
 @media (min-width: 300px) and (max-width: 728px){
       .margin-10px{
@@ -1617,11 +1629,13 @@ div {
     top: 60px;
     left:25px;
     max-width: 300px;
+    z-index: 10000;
 }
 select.city-search{
     padding: 8px;
     width: 250px;
     color: #00b3bf;
+    z-index: 10000;
     font-size: 16px;
     background-color: rgba(255,255,255,0.95);
     border-radius: 6px;

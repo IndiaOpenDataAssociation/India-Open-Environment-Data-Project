@@ -8,6 +8,8 @@
         var self = this;
         self.selectedDevice = null;
 
+        self.maploaded = false;
+
         self.cities = [
             {
              "city": "Agra",
@@ -144,6 +146,7 @@
         $rootScope.zoom = 5;
         self.selectedCity = '0';
         self.selectCity = function(){
+            this.maploaded = true;
             if(self.selectedCity == '0'){
                 $rootScope.map.center.latitude = 22.9734;
                 $rootScope.map.center.longitude = 78.6569;
@@ -457,7 +460,7 @@
             self.dataResourcesCount = self.tempPublicData.length;
 
             self.changeContributor(null);
-            console.log("came here");
+            self.maploaded = true;
         });
 
         var w = angular.element($window);
