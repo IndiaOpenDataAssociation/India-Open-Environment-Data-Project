@@ -22,7 +22,7 @@ void setup()
   delay(1000);
   blue();
 
-  init_winson();
+  init_dust();
 
   deviceId();
 }
@@ -31,7 +31,7 @@ void loop()
 {
   unsigned int PM1, PM25, PM10;
 
-  if (Winsen_dust(PM1, PM25, PM10))
+  if (Get_dust(PM1, PM25, PM10))
   {
     SubmitHttpRequest(PM1, PM25, PM10);
     //Serial.println("***********************************************************************************************");
@@ -41,7 +41,7 @@ void loop()
   }
 }
 
-void init_winson()
+void init_dust()
 {
   const unsigned char cmd_get_sensor[] =
   {
@@ -178,7 +178,7 @@ void SubmitHttpRequest(unsigned int PM1, unsigned int PM25, unsigned int PM10)
   digitalWrite(A2, LOW);
 }
 
-boolean Winsen_dust(unsigned int &PM1, unsigned int &PM25, unsigned int &PM10)
+boolean Get_dust(unsigned int &PM1, unsigned int &PM25, unsigned int &PM10)
 {
 
   PM1 = 0, PM25 = 0, PM10 = 0;
