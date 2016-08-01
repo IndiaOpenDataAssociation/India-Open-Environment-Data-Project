@@ -135,7 +135,7 @@ void loop(void)
   
   unsigned int PM1, PM25, PM10;
   
-  if (Winsen_dust(PM1, PM25, PM10))
+  if (Get_dust(PM1, PM25, PM10))
   {
     if (Send_Data_SIM_OZ(PM1, PM25, PM10) == 1)
     {
@@ -906,7 +906,7 @@ void initDustSensor()
   delay(10);
 }
 
-boolean Winsen_dust(unsigned int &PM1, unsigned int &PM25, unsigned int &PM10)
+boolean Get_dust(unsigned int &PM1, unsigned int &PM25, unsigned int &PM10)
 {
 
   PM1 = 0, PM25 = 0, PM10 = 0;
