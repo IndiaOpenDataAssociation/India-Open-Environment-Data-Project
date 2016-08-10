@@ -40,15 +40,15 @@ void setup(void)
 
   //Serial.print("setup begin\r\n");
 
-//  if(set_baudrate(9600))
-//  {
-//    //Serial.println("Baudrate set ok");
-//  }
-//  else
-//  {
-//    //Serial.println("Baudrate set err");
-//  }
-  
+  //  if(set_baudrate(9600))
+  //  {
+  //    //Serial.println("Baudrate set ok");
+  //  }
+  //  else
+  //  {
+  //    //Serial.println("Baudrate set err");
+  //  }
+
   //Checking condition that restart function resond correctly or not.
   if (restart())
   {
@@ -59,7 +59,7 @@ void setup(void)
     //Serial.println("Board Restart err");
   }
   String Data;
-  
+
   delay(5000);
   wifi.println(F("AT+CIPSTAMAC?"));
   check(0, 5000, Data);
@@ -68,12 +68,12 @@ void setup(void)
 
   wifi.println(F("AT+CIPSTATUS"));
   check(0, 5000, Data);
-  if(getStatus(Data) == "2")
-  { 
+  if (getStatus(Data) == "2")
+  {
     flag = true;
   }
 
-  if(!flag)
+  if (!flag)
   {
     red();
     //Checking condition that operation mode is set to station and softap or not .
@@ -83,7 +83,7 @@ void setup(void)
     } else {
       //Serial.print("to station + softap err\r\n");
     }
-  
+
     //Checking condition that static ip is correctly set to 192.168.12.1 or not.
     if (setAPIp("192.168.12.1")) {
       //Serial.println("set ap's ip is ok");
@@ -92,7 +92,7 @@ void setup(void)
     {
       //Serial.println("set ap's is is error");
     }
-  
+
     //Set SoftAP parameters.
     if (setSoftAPParam(deviceID.c_str(), "12345678")) {
       //Serial.println("AP is set");
@@ -101,21 +101,21 @@ void setup(void)
     {
       //Serial.println("AP not set");
     }
-  
+
     //Checking condition that multiple connection is set correctly or not.
     if (enableMUX()) {
       //Serial.print("multiple ok\r\n");
     } else {
       //Serial.print("multiple err\r\n");
     }
-  
+
     //Checking condition that starting TCP server connection with port 8090 is correctly or not.
     if (startTCPServer(8090)) {
       //Serial.print("start tcp server ok\r\n");
     } else {
       //Serial.print("start tcp server err\r\n");
     }
-  
+
     //Checking condition that the timeout of TCP Server is set 10 correctly or not.
     if (setTCPServerTimeout(10)) {
       //Serial.print("set tcp server timout 10 seconds\r\n");
@@ -127,14 +127,14 @@ void setup(void)
 }
 
 void loop(void)
-{ 
-  while(!flag)
+{
+  while (!flag)
     checkAP();
 
   //Serial.println("Get data from Dust");
-  
+
   unsigned int PM1, PM25, PM10;
-  
+
   if (Get_dust(PM1, PM25, PM10))
   {
     if (Send_Data_SIM_OZ(PM1, PM25, PM10) == 1)
@@ -142,7 +142,7 @@ void loop(void)
       //Serial.println("SEND DATA DONE:");
       analogWrite(A0, LOW);
       analogWrite(A1, LOW);
-      analogWrite(A2, LOW); 
+      analogWrite(A2, LOW);
       delay(1000);
       LED_blink(PM1, PM25, PM10); // Blinking LED's of Airowl eyes.
     }
@@ -152,154 +152,153 @@ void loop(void)
     }
     delay(1000);
   }
-  
+
 }
 
 void checkAP()
 {
-    uint8_t buffer[75] = {0};
-    uint8_t mux_id;
-    // Store SSID & Password for wifi
-    char ssid[15] = {0};
-    char pass[15] = {0};
+  uint8_t buffer[75] = {0};
+  uint8_t mux_id;
+  // Store SSID & Password for wifi
+  char ssid[15] = {0};
+  char pass[15] = {0};
 
-    uint32_t len = recv(&mux_id, buffer, sizeof(buffer), 100);// Receive data from all of TCP already builded connection in multiple mode.
-    
-    if (len > 0) {
-        
+  uint32_t len = recv(&mux_id, buffer, sizeof(buffer), 100);// Receive data from all of TCP already builded connection in multiple mode.
+
+  if (len > 0) {
+
+    rx_empty();
+    wifi.print(F("AT+CIPSEND="));
+    wifi.print(mux_id);
+    wifi.print(F(","));
+    wifi.println(6);
+    if (check(1, 5000)) {
       rx_empty();
-      wifi.print(F("AT+CIPSEND="));
-      wifi.print(mux_id);
-      wifi.print(F(","));
-      wifi.println(6);
-      if (check(1, 5000)) {
+      wifi.println("ok");
+      wifi.println("");
+
+      if (check(0, 10000))
+      {
         rx_empty();
-        wifi.println("ok");
-        wifi.println("");
-        
-        if (check(0, 10000))
-        {
-          rx_empty();
-          //Serial.println("Send back ok");
-        }
+        //Serial.println("Send back ok");
       }
-      else
-      {
-        //Serial.println("Could not sent response");
-      }
+    }
+    else
+    {
+      //Serial.println("Could not sent response");
+    }
 
-      String Data = "";
-      //Store data data character by character in the data string .
-      for (uint32_t i = 0; i < len; i++) {
-        Data += (char)buffer[i];
-      }
-      
-      //Serial.print("Received from :");
+    String Data = "";
+    //Store data data character by character in the data string .
+    for (uint32_t i = 0; i < len; i++) {
+      Data += (char)buffer[i];
+    }
+
+    //Serial.print("Received from :");
+    //Serial.print(mux_id);
+    //Serial.print("[");
+    //Serial.print(Data);
+    //Serial.print("]\r\n");
+    //Serial.print("I am printing data : ");
+
+    // Fteching wanted substring from received data
+    int first = Data.indexOf('='); //Index number of first "=" in the data string
+    int firstend = Data.indexOf('&');//Index number of first "&" in the data string
+    int lastend = Data.indexOf(' ', firstend); //Index number of first space in the data string
+
+    Data.substring(first + 1, firstend).toCharArray(ssid, 15); //Fetching  substring between "=" and "&" from the data string
+    delay(200);
+    Data.substring(firstend + 6 , lastend).toCharArray(pass, 15);
+
+    //Serial.println(ssid);
+    //Serial.println(pass);
+
+    //Checking condiotion that TCP connection is released or not in multiple mode.
+    if (releaseTCP(mux_id)) {
+      //Serial.print("release tcp ");
       //Serial.print(mux_id);
-      //Serial.print("[");
-      //Serial.print(Data);
-      //Serial.print("]\r\n");
-      //Serial.print("I am printing data : ");
-      
-      // Fteching wanted substring from received data
-      int first = Data.indexOf('='); //Index number of first "=" in the data string
-      int firstend = Data.indexOf('&');//Index number of first "&" in the data string
-      int lastend = Data.indexOf(' ', firstend); //Index number of first space in the data string
-      
-      Data.substring(first + 1, firstend).toCharArray(ssid, 15); //Fetching  substring between "=" and "&" from the data string
-      delay(200);
-      Data.substring(firstend + 6 , lastend).toCharArray(pass, 15);
-      
-      //Serial.println(ssid);
-      //Serial.println(pass);
+      //Serial.println(" ok");
+    } else {
+      //Serial.print("release tcp");
+      //Serial.print(mux_id);
+      //Serial.println(" err");
+    }
 
-      //Checking condiotion that TCP connection is released or not in multiple mode.
-      if (releaseTCP(mux_id)) {
-          //Serial.print("release tcp ");
-          //Serial.print(mux_id);
-          //Serial.println(" ok");
-        } else {
-          //Serial.print("release tcp");
-          //Serial.print(mux_id);
-          //Serial.println(" err");
-        }
-      
-      if (strlen(ssid) > 0 && strlen(pass) > 0)
+    if (strlen(ssid) > 0 && strlen(pass) > 0)
+    {
+
+      //Checking condiotion that TCP connection is stoped or not in multiple mode.
+      if (stopTCPServer())
       {
-
-        //Checking condiotion that TCP connection is stoped or not in multiple mode.
-        if (stopTCPServer())
-        {
-          //Serial.println("TCP Server stop ok");
-        }
-        else
-        {
-          //Serial.println("TCP Server stop err");
-        }
-
-        //Checking condition that only one TCP connection is built or not.
-        delay(2000);
-        if (disableMUX())
-        {
-          //Serial.println("mux disable ok");
-        }
-        else
-        {
-          //Serial.println("Mux disable err");
-        }
-
-        delay(2000);
-        for (int i = 0; i < 3; i++)
-        {
-         
-          rx_empty();
-          wifi.print(F("AT+CWJAP_DEF=\""));
-          wifi.print(ssid);
-          wifi.print(F("\",\""));
-          wifi.print(pass);
-          wifi.println(F("\""));
-          
-          if (check(0, 10000)) {
-            //Serial.print("Join AP success\r\n");
-            //Serial.print("IP: ");
-            flag = true;
-            green();
-            delay(1000);
-            blue();
-            return;
-          }
-          else
-          {
-            blue();
-            delay(1000);
-            red();
-            //Serial.print("Join AP failure\r\n");
-            return;    
-          }
-        }
+        //Serial.println("TCP Server stop ok");
       }
       else
       {
-        return;
+        //Serial.println("TCP Server stop err");
+      }
+
+      //Checking condition that only one TCP connection is built or not.
+      delay(2000);
+      if (disableMUX())
+      {
+        //Serial.println("mux disable ok");
+      }
+      else
+      {
+        //Serial.println("Mux disable err");
+      }
+
+      delay(2000);
+      for (int i = 0; i < 3; i++)
+      {
+        rx_empty();
+        wifi.print(F("AT+CWJAP_DEF=\""));
+        wifi.print(ssid);
+        wifi.print(F("\",\""));
+        wifi.print(pass);
+        wifi.println(F("\""));
+
+        if (check(0, 10000)) {
+          //Serial.print("Join AP success\r\n");
+          //Serial.print("IP: ");
+          flag = true;
+          green();
+          delay(1000);
+          blue();
+          return;
+        }
+        else
+        {
+          blue();
+          delay(1000);
+          red();
+          //Serial.print("Join AP failure\r\n");
+          return;
+        }
       }
     }
     else
     {
       return;
     }
+  }
+  else
+  {
+    return;
+  }
 }
 
 //Send_Data_SIM_OZ Method is firstly make TCP connection to the server and then send the server.
 bool Send_Data_SIM_OZ(unsigned int PM1, unsigned int PM25, unsigned int PM10)
 {
   //Serial.println("Searching For Server");
-  
-  String command = "GET /v1/airowl/data?deviceId=" + deviceID + "&type=AIROWLWI&key=indiaopendata&pm1="+ String(PM1) + "&pm25="+ String(PM25) + "&pm10="+ String(PM10) + " HTTP/1.1";
+
+  String command = "GET /v1/airowl/data?deviceId=" + deviceID + "&type=AIROWLWI&key=indiaopendata&pm1=" + String(PM1) + "&pm25=" + String(PM25) + "&pm10=" + String(PM10) + " HTTP/1.1";
 
   //Serial.println(command);
   rx_empty();
   wifi.println("AT+CIPSTART=\"TCP\",\"api.airpollution.online\",80");
-  
+
   if (check(0, 10000))
   {
     //Serial.println("create tcp ok\r\n");
@@ -308,15 +307,15 @@ bool Send_Data_SIM_OZ(unsigned int PM1, unsigned int PM25, unsigned int PM10)
     rx_empty();
     wifi.print(F("AT+CIPSEND="));
     wifi.println(len);
-    
-    if(check(1, 5000)) {
-      
+
+    if (check(1, 5000)) {
+
       rx_empty();
       wifi.println(command);
       wifi.println(HOST_NAME);
       wifi.println("");
-      
-      if(check(0, 1000))
+
+      if (check(0, 1000))
       {
         rx_empty();
         //Serial.println("Data Sent");
@@ -336,11 +335,11 @@ bool Send_Data_SIM_OZ(unsigned int PM1, unsigned int PM25, unsigned int PM10)
           //Serial.println("Send data err");
         }
       }
-      
+
       rx_empty();
       wifi.println(F("AT+CIPCLOSE"));
-      
-      if(check(0, 5000))
+
+      if (check(0, 5000))
       {
         //Serial.print("release tcp ok\r\n");
       } else {
@@ -364,26 +363,26 @@ bool Send_Data_SIM_OZ(unsigned int PM1, unsigned int PM25, unsigned int PM10)
 /* Get Mac Address */
 String getMAC(String Data)
 {
-  int first= Data.indexOf('"');
+  int first = Data.indexOf('"');
   int firstend = Data.indexOf('"', first + 1);
   Data = Data.substring(first + 11, firstend);
-  Data.remove(1,1);
-  Data.remove(3,1);
-  return(Data);
+  Data.remove(1, 1);
+  Data.remove(3, 1);
+  return (Data);
 }
 
 /* Get wifi connection Status */
 String getStatus(String Data)
 {
-  String first= Data.substring(Data.indexOf(':'));
-  return(first.substring(1,2));
+  String first = Data.substring(Data.indexOf(':'));
+  return (first.substring(1, 2));
 }
 
 /* Set Baudrate */
 bool set_baudrate(int baudrate)
 {
   rx_empty();
-  
+
   wifi.print(F("AT+UART_DEF="));
   wifi.print(baudrate);
   wifi.print(F(","));
@@ -394,14 +393,14 @@ bool set_baudrate(int baudrate)
   wifi.print(0);
   wifi.print(F(","));
   wifi.println(0);
-  
-  if(check(0,5000)){
-    
+
+  if (check(0, 5000)) {
+
     // Set new baudrate
     wifi.begin(baudrate);
     return true;
   }
-  else{
+  else {
     return false;
   }
 }
@@ -450,7 +449,7 @@ bool sATCWMODE(uint8_t mode)
   rx_empty();
   wifi.print(F("AT+CWMODE="));
   wifi.println(mode);
-  
+
   if (check(0, 1000)) {
     return true;
   }
@@ -528,7 +527,7 @@ bool sATCWSAP(String ssid, String pwd)
   wifi.print(5);
   wifi.print(F(","));
   wifi.println(0);
-  
+
   if (check(0, 5000)) {
     return true;
   }
@@ -620,7 +619,7 @@ bool startTCPServer(uint32_t port)
   rx_empty();
   wifi.print(F("AT+CIPSERVER=1,"));
   wifi.println(port);
-  
+
   if (check(0, 1000)) {
     return true;
   }
@@ -651,7 +650,7 @@ bool stopTCPServer(void)
 */
 bool sATCIPSERVER(uint8_t mode, uint32_t port)
 {
-  
+
   if (mode) {
     rx_empty();
     wifi.print(F("AT+CIPSERVER=1,"));
@@ -915,47 +914,58 @@ boolean Get_dust(unsigned int &PM1, unsigned int &PM25, unsigned int &PM10)
   unsigned long lastPublishMillis = millis();
 
   byte data[24];
-  byte i = 0;
-  int sum;
+  byte j = 0;
+  unsigned int checksum = 0;
 
   while (1)
   {
-    i = 0;
+    j = 0;
+    
     Dust_Serial.listen();
+
+    checksum = 0;
 
     while (!Dust_Serial.available());
     while (Dust_Serial.available())
     {
-      data[i] = Dust_Serial.read();
-      if (data[0] == 0x42)
-      {
-        if (data[1] == 0x4D)
-        {
-          if (i == 23)
+      data[j] = Dust_Serial.read();
+      if (j <= 21) {
+        checksum += data[j];
+      }
+
+      if (j == 23) {
+        if (checksum == ((256 * data[22]) + data[23])) {
+          if (data[0] == 0x42)
           {
-            PM1 += ((data[4] * 256) + data[5]);
-            PM25 += ((data[6] * 256) + data[7]);
-            PM10 += ((data[8] * 256) + data[9]);
-            count++;
-            //Serial.print("count : ");
-            //Serial.println(count);
-            //Serial.print("PM 1.0 :");
-            //Serial.println(PM1 / count);
-            //Serial.print("PM 2.5 :");
-            //Serial.println(PM25 / count);
-            //Serial.print("PM 10 :");
-            //Serial.println(PM10 / count);
-            //Serial.println("");
-            Dust_Serial.flush();
-            break;
+            if (data[1] == 0x4D)
+            {
+              PM1 += ((data[4] * 256) + data[5]);
+              PM25 += ((data[6] * 256) + data[7]);
+              PM10 += ((data[8] * 256) + data[9]);
+              count++;
+              //Serial.print("count : ");
+              //Serial.println(count);
+              //Serial.print("PM 1.0 :");
+              //Serial.println(PM1 / count);
+              //Serial.print("PM 2.5 :");
+              //Serial.println(PM25 / count);
+              //Serial.print("PM 10 :");
+              //Serial.println(PM10 / count);
+              //Serial.println("");
+              Dust_Serial.flush();
+              break;
+            }
           }
         }
-        i++;
-        delay(10);
+        else
+        {
+          break;
+        }
       }
+      j++;
     }
 
-    if(count == 3 && initFlag == true)
+    if (count == 3 && initFlag == true)
     {
       PM1 = PM1 / count;
       PM25 = PM25 / count;
@@ -967,17 +977,26 @@ boolean Get_dust(unsigned int &PM1, unsigned int &PM25, unsigned int &PM10)
     delay(2000);
     if (millis() - lastPublishMillis > 100000UL)
     {
-      PM1 = PM1 / count;
-      PM25 = PM25 / count;
-      PM10 = PM10 / count;
+      if (count > 0)
+      {
+        PM1 = PM1 / count;
+        PM25 = PM25 / count;
+        PM10 = PM10 / count;
+
+      }
+      else
+      {
+        initDustSensor();
+      }
       return 1;
     }
   }
 }
 
+
 void LED_blink(unsigned int PM1, unsigned int PM25, unsigned int PM10)
 {
-  
+
   if ( PM1 > Range1_max && PM25 > Range25_max && PM10 > Range10_max )
   {
     red();
