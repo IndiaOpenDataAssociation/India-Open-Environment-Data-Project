@@ -113,7 +113,7 @@ void SubmitHttpRequest(unsigned int PM1, unsigned int PM25, unsigned int PM10)
 
   rx_empty();
 
-  String command = "AT+HTTPPARA=\"URL\",\"http://api.airpollution.online/v1/airowl/data?deviceId=" + deviceID + "&type=AIROWL3G&key=indiaopendata&pm1=" + String(PM25) + "&pm25=" + String(PM10) + "&pm10=" + String(PM1) + "\"";
+  String command = "AT+HTTPPARA=\"URL\",\"http://api.airpollution.online/v1/airowl/data?deviceId=" + deviceID + "&type=AIROWL3G&key=indiaopendata&pm1=" + String(PM1) + "&pm25=" + String(PM25) + "&pm10=" + String(PM10) + "\"";
 
   //Serial.println(command);
   GSM_Serial.println(command);
