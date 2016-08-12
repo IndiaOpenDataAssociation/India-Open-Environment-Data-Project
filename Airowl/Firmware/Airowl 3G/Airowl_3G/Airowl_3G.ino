@@ -22,7 +22,7 @@ void setup()
   delay(1000);
   blue();
 
-  init_dust();
+  initDustSensor();
 
   deviceId();
 }
@@ -41,7 +41,7 @@ void loop()
   }
 }
 
-void init_dust()
+void initDustSensor()
 {
   const unsigned char cmd_get_sensor[] =
   {
