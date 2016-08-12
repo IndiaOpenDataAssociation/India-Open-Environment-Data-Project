@@ -187,46 +187,58 @@ boolean Get_dust(unsigned int &PM1, unsigned int &PM25, unsigned int &PM10)
   unsigned long lastPublishMillis = millis();
 
   byte data[24];
-  byte i = 0;
-  int sum;
+  byte j = 0;
+  unsigned int checksum = 0;
 
   while (1)
   {
-    i = 0;
+    j = 0;
+    
     Dust_Serial.listen();
+
+    checksum = 0;
 
     while (!Dust_Serial.available());
     while (Dust_Serial.available())
     {
-      data[i] = Dust_Serial.read();
-      if (data[0] == 0x42)
-      {
-        if (data[1] == 0x4D)
-        {
-          if (i == 23)
+      data[j] = Dust_Serial.read();
+      if (j <= 21) {
+        checksum += data[j];
+      }
+
+      if (j == 23) {
+        if (checksum == ((256 * data[22]) + data[23])) {
+          if (data[0] == 0x42)
           {
-            PM1 += ((data[4] * 256) + data[5]);
-            PM25 += ((data[6] * 256) + data[7]);
-            PM10 += ((data[8] * 256) + data[9]);
-            count++;
-            //Serial.print("count : ");
-            //Serial.println(count);
-            //Serial.print("PM 1.0 :");
-            //Serial.println(PM1 / count);
-            //Serial.print("PM 2.5 :");
-            //Serial.println(PM25 / count);
-            //Serial.print("PM 10 :");
-            //Serial.println(PM10 / count);
-            //Serial.println("");
-            Dust_Serial.flush();
-            break;
+            if (data[1] == 0x4D)
+            {
+              PM1 += ((data[4] * 256) + data[5]);
+              PM25 += ((data[6] * 256) + data[7]);
+              PM10 += ((data[8] * 256) + data[9]);
+              count++;
+              //Serial.print("count : ");
+              //Serial.println(count);
+              //Serial.print("PM 1.0 :");
+              //Serial.println(PM1 / count);
+              //Serial.print("PM 2.5 :");
+              //Serial.println(PM25 / count);
+              //Serial.print("PM 10 :");
+              //Serial.println(PM10 / count);
+              //Serial.println("");
+              Dust_Serial.flush();
+              break;
+            }
           }
         }
-        i++;
-        delay(10);
+        else
+        {
+          break;
+        }
       }
+      j++;
     }
-    if(count == 3 && initFlag == true)
+
+    if (count == 3 && initFlag == true)
     {
       PM1 = PM1 / count;
       PM25 = PM25 / count;
@@ -234,12 +246,21 @@ boolean Get_dust(unsigned int &PM1, unsigned int &PM25, unsigned int &PM10)
       initFlag = false;
       return 1;
     }
+
     delay(2000);
     if (millis() - lastPublishMillis > 100000UL)
     {
-      PM1 = PM1 / count;
-      PM25 = PM25 / count;
-      PM10 = PM10 / count;
+      if (count > 0)
+      {
+        PM1 = PM1 / count;
+        PM25 = PM25 / count;
+        PM10 = PM10 / count;
+
+      }
+      else
+      {
+        initDustSensor();
+      }
       return 1;
     }
   }
