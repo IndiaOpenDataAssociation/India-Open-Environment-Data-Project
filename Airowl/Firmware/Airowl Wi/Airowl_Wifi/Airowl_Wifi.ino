@@ -17,8 +17,8 @@ char HOST_NAME[] = "Host: api.airpollution.online";
 
 //Ranges
 const int Range1_max = 120; const int Range1_min = 60;
-const int Range25_max = 350; const int Range25_min = 100;
-const int Range10_max = 1200; const int Range10_min = 951;
+const int Range25_max = 250; const int Range25_min = 100;
+const int Range10_max = 430; const int Range10_min = 250;
 
 void setup(void)
 {
