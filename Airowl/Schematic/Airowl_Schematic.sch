@@ -239,6 +239,7 @@
 <pin name="3V3" x="5.08" y="-2.54" visible="pin" length="short" direction="pwr" rot="R90"/>
 <pin name="D13" x="2.54" y="-2.54" length="short" rot="R90"/>
 <text x="15.24" y="5.08" size="1.27" layer="96" font="vector">&gt;VALUE</text>
+<text x="43.18" y="0" size="1.778" layer="95" rot="R90">&gt;NAME</text>
 </symbol>
 </symbols>
 <devicesets>
@@ -686,6 +687,7 @@
 <pin name="GND" x="-5.08" y="-17.78" length="middle" rot="R90"/>
 <pin name="RX" x="10.16" y="-17.78" length="middle" rot="R90"/>
 <pin name="TX" x="5.08" y="-17.78" length="middle" rot="R90"/>
+<text x="-12.7" y="12.7" size="1.9304" layer="95">&gt;NAME</text>
 </symbol>
 </symbols>
 <devicesets>
@@ -840,14 +842,14 @@
 </class>
 </classes>
 <parts>
-<part name="U$1" library="Aldar" deviceset="ARDUINO_NANO" device="R3"/>
+<part name="ARDUINO_NANO" library="Aldar" deviceset="ARDUINO_NANO" device="R3"/>
 <part name="LED1" library="adafruit" deviceset="RGBLED" device="5050"/>
 <part name="LED2" library="adafruit" deviceset="RGBLED" device="5050"/>
 <part name="R4" library="ROBOCON_" deviceset="RESISTOR(HORIZONTAL)" device=""/>
 <part name="R2" library="ROBOCON_" deviceset="RESISTOR(HORIZONTAL)" device=""/>
 <part name="R1" library="ROBOCON_" deviceset="RESISTOR(HORIZONTAL)" device=""/>
 <part name="R3" library="ROBOCON_" deviceset="RESISTOR(HORIZONTAL)" device=""/>
-<part name="GSM_CONNECTOR" library="OIZOM" deviceset="GSM900_MODULE" device=""/>
+<part name="GSM_MODULE" library="OIZOM" deviceset="GSM900_MODULE" device=""/>
 <part name="P+1" library="supply1" deviceset="VCC" device=""/>
 <part name="GND1" library="supply1" deviceset="GND" device=""/>
 <part name="GND2" library="supply1" deviceset="GND" device=""/>
@@ -865,14 +867,14 @@
 <text x="106.68" y="-5.08" size="1.778" layer="95">Power Supply</text>
 </plain>
 <instances>
-<instance part="U$1" gate="G$1" x="-17.78" y="33.02" rot="R270"/>
+<instance part="ARDUINO_NANO" gate="G$1" x="-17.78" y="33.02" rot="R270"/>
 <instance part="LED1" gate="G$1" x="25.4" y="-2.54"/>
 <instance part="LED2" gate="G$1" x="66.04" y="0"/>
 <instance part="R4" gate="G$1" x="91.44" y="55.88" rot="R90"/>
 <instance part="R2" gate="G$1" x="58.42" y="40.64"/>
 <instance part="R1" gate="G$1" x="48.26" y="-20.32" rot="R90"/>
 <instance part="R3" gate="G$1" x="55.88" y="33.02"/>
-<instance part="GSM_CONNECTOR" gate="G$1" x="114.3" y="60.96"/>
+<instance part="GSM_MODULE" gate="G$1" x="114.3" y="60.96"/>
 <instance part="P+1" gate="VCC" x="-38.1" y="15.24"/>
 <instance part="GND1" gate="1" x="-43.18" y="-20.32"/>
 <instance part="GND2" gate="1" x="48.26" y="-38.1"/>
@@ -891,7 +893,7 @@
 <segment>
 <wire x1="-38.1" y1="-5.08" x2="-38.1" y2="12.7" width="0.1524" layer="91"/>
 <pinref part="P+1" gate="VCC" pin="VCC"/>
-<pinref part="U$1" gate="G$1" pin="VIN"/>
+<pinref part="ARDUINO_NANO" gate="G$1" pin="VIN"/>
 <wire x1="-20.32" y1="-5.08" x2="-38.1" y2="-5.08" width="0.1524" layer="91"/>
 </segment>
 <segment>
@@ -903,7 +905,7 @@
 <wire x1="109.22" y1="-17.78" x2="109.22" y2="-15.24" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="GSM_CONNECTOR" gate="G$1" pin="VCC"/>
+<pinref part="GSM_MODULE" gate="G$1" pin="VCC"/>
 <wire x1="104.14" y1="43.18" x2="96.52" y2="43.18" width="0.1524" layer="91"/>
 <pinref part="P+3" gate="VCC" pin="VCC"/>
 <wire x1="96.52" y1="43.18" x2="96.52" y2="83.82" width="0.1524" layer="91"/>
@@ -915,8 +917,8 @@
 <wire x1="-43.18" y1="-2.54" x2="-43.18" y2="-15.24" width="0.1524" layer="91"/>
 <wire x1="-43.18" y1="-15.24" x2="-43.18" y2="-17.78" width="0.1524" layer="91"/>
 <wire x1="-43.18" y1="-2.54" x2="-20.32" y2="-2.54" width="0.1524" layer="91"/>
-<pinref part="U$1" gate="G$1" pin="GND@2"/>
-<pinref part="U$1" gate="G$1" pin="GND@1"/>
+<pinref part="ARDUINO_NANO" gate="G$1" pin="GND@2"/>
+<pinref part="ARDUINO_NANO" gate="G$1" pin="GND@1"/>
 <wire x1="0" y1="2.54" x2="2.54" y2="2.54" width="0.1524" layer="91"/>
 <wire x1="2.54" y1="2.54" x2="2.54" y2="-15.24" width="0.1524" layer="91"/>
 <wire x1="2.54" y1="-15.24" x2="-43.18" y2="-15.24" width="0.1524" layer="91"/>
@@ -945,7 +947,7 @@
 <wire x1="33.02" y1="43.18" x2="27.94" y2="43.18" width="0.1524" layer="91"/>
 <junction x="27.94" y="43.18"/>
 <pinref part="R3" gate="G$1" pin="2"/>
-<pinref part="GSM_CONNECTOR" gate="G$1" pin="GND"/>
+<pinref part="GSM_MODULE" gate="G$1" pin="GND"/>
 <wire x1="109.22" y1="43.18" x2="109.22" y2="27.94" width="0.1524" layer="91"/>
 <wire x1="109.22" y1="27.94" x2="66.04" y2="27.94" width="0.1524" layer="91"/>
 <junction x="66.04" y="27.94"/>
@@ -965,7 +967,7 @@
 <wire x1="10.16" y1="38.1" x2="-25.4" y2="38.1" width="0.1524" layer="91"/>
 <wire x1="-25.4" y1="38.1" x2="-25.4" y2="20.32" width="0.1524" layer="91"/>
 <wire x1="-20.32" y1="20.32" x2="-25.4" y2="20.32" width="0.1524" layer="91"/>
-<pinref part="U$1" gate="G$1" pin="A1"/>
+<pinref part="ARDUINO_NANO" gate="G$1" pin="A1"/>
 <pinref part="LED1" gate="G$1" pin="GREEN_A"/>
 <wire x1="10.16" y1="38.1" x2="10.16" y2="12.7" width="0.1524" layer="91"/>
 <wire x1="10.16" y1="12.7" x2="10.16" y2="-2.54" width="0.1524" layer="91"/>
@@ -978,7 +980,7 @@
 </net>
 <net name="N$9" class="0">
 <segment>
-<pinref part="U$1" gate="G$1" pin="VCC"/>
+<pinref part="ARDUINO_NANO" gate="G$1" pin="VCC"/>
 <wire x1="-20.32" y1="2.54" x2="-25.4" y2="2.54" width="0.1524" layer="91"/>
 <wire x1="-25.4" y1="2.54" x2="-25.4" y2="-20.32" width="0.1524" layer="91"/>
 <wire x1="-25.4" y1="-20.32" x2="27.94" y2="-20.32" width="0.1524" layer="91"/>
@@ -1001,7 +1003,7 @@
 </net>
 <net name="N$8" class="0">
 <segment>
-<pinref part="U$1" gate="G$1" pin="D2"/>
+<pinref part="ARDUINO_NANO" gate="G$1" pin="D2"/>
 <wire x1="0" y1="5.08" x2="5.08" y2="5.08" width="0.1524" layer="91"/>
 <wire x1="5.08" y1="5.08" x2="5.08" y2="-12.7" width="0.1524" layer="91"/>
 <wire x1="5.08" y1="-12.7" x2="19.4" y2="-12.7" width="0.1524" layer="91"/>
@@ -1011,7 +1013,7 @@
 </net>
 <net name="N$10" class="0">
 <segment>
-<pinref part="U$1" gate="G$1" pin="D3"/>
+<pinref part="ARDUINO_NANO" gate="G$1" pin="D3"/>
 <wire x1="0" y1="7.62" x2="17.78" y2="7.62" width="0.1524" layer="91"/>
 <wire x1="17.78" y1="7.62" x2="17.78" y2="-10.16" width="0.1524" layer="91"/>
 <wire x1="17.78" y1="-10.16" x2="21.5" y2="-10.16" width="0.1524" layer="91"/>
@@ -1043,12 +1045,12 @@
 </net>
 <net name="N$12" class="0">
 <segment>
-<pinref part="GSM_CONNECTOR" gate="G$1" pin="RX"/>
+<pinref part="GSM_MODULE" gate="G$1" pin="RX"/>
 <wire x1="124.46" y1="43.18" x2="124.46" y2="15.24" width="0.1524" layer="91"/>
 <wire x1="124.46" y1="15.24" x2="86.36" y2="15.24" width="0.1524" layer="91"/>
 <wire x1="86.36" y1="15.24" x2="86.36" y2="40.64" width="0.1524" layer="91"/>
 <wire x1="86.36" y1="40.64" x2="73.66" y2="40.64" width="0.1524" layer="91"/>
-<pinref part="U$1" gate="G$1" pin="D8"/>
+<pinref part="ARDUINO_NANO" gate="G$1" pin="D8"/>
 <wire x1="73.66" y1="40.64" x2="73.66" y2="20.32" width="0.1524" layer="91"/>
 <wire x1="73.66" y1="20.32" x2="0" y2="20.32" width="0.1524" layer="91"/>
 <wire x1="73.66" y1="40.64" x2="68.61" y2="40.64" width="0.1524" layer="91"/>
@@ -1061,29 +1063,12 @@
 <pinref part="ESP8266" gate="G$1" pin="TXD"/>
 <wire x1="71.12" y1="55.88" x2="76.2" y2="55.88" width="0.1524" layer="91"/>
 <wire x1="76.2" y1="55.88" x2="76.2" y2="17.78" width="0.1524" layer="91"/>
-<pinref part="GSM_CONNECTOR" gate="G$1" pin="TX"/>
-<pinref part="U$1" gate="G$1" pin="D7"/>
+<pinref part="GSM_MODULE" gate="G$1" pin="TX"/>
+<pinref part="ARDUINO_NANO" gate="G$1" pin="D7"/>
 <wire x1="119.38" y1="17.78" x2="119.38" y2="43.18" width="0.1524" layer="91"/>
 <wire x1="0" y1="17.78" x2="76.2" y2="17.78" width="0.1524" layer="91"/>
 <junction x="119.38" y="17.78"/>
 <wire x1="76.2" y1="17.78" x2="119.38" y2="17.78" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="N$3" class="0">
-<segment>
-<pinref part="LED1" gate="G$1" pin="RED_A"/>
-<wire x1="20.32" y1="-7.62" x2="12.7" y2="-7.62" width="0.1524" layer="91"/>
-<pinref part="LED2" gate="G$1" pin="BLUE_A"/>
-<wire x1="50.8" y1="5.08" x2="60.96" y2="5.08" width="0.1524" layer="91"/>
-<wire x1="-20.32" y1="17.78" x2="-33.02" y2="17.78" width="0.1524" layer="91"/>
-<wire x1="-33.02" y1="17.78" x2="-33.02" y2="40.64" width="0.1524" layer="91"/>
-<wire x1="-33.02" y1="40.64" x2="12.7" y2="40.64" width="0.1524" layer="91"/>
-<wire x1="12.7" y1="40.64" x2="12.7" y2="10.16" width="0.1524" layer="91"/>
-<wire x1="12.7" y1="10.16" x2="12.7" y2="-7.62" width="0.1524" layer="91"/>
-<wire x1="50.8" y1="5.08" x2="50.8" y2="10.16" width="0.1524" layer="91"/>
-<wire x1="50.8" y1="10.16" x2="12.7" y2="10.16" width="0.1524" layer="91"/>
-<junction x="12.7" y="10.16"/>
-<pinref part="U$1" gate="G$1" pin="A2"/>
 </segment>
 </net>
 <net name="N$6" class="0">
@@ -1115,19 +1100,36 @@
 </net>
 <net name="N$1" class="0">
 <segment>
-<pinref part="LED2" gate="G$1" pin="RED_A"/>
-<wire x1="60.96" y1="-5.08" x2="40.64" y2="-5.08" width="0.1524" layer="91"/>
-<pinref part="U$1" gate="G$1" pin="A0"/>
+<pinref part="LED2" gate="G$1" pin="BLUE_A"/>
+<wire x1="50.8" y1="5.08" x2="60.96" y2="5.08" width="0.1524" layer="91"/>
+<wire x1="50.8" y1="5.08" x2="50.8" y2="10.16" width="0.1524" layer="91"/>
+<pinref part="ARDUINO_NANO" gate="G$1" pin="A0"/>
 <wire x1="-20.32" y1="22.86" x2="-30.48" y2="22.86" width="0.1524" layer="91"/>
 <wire x1="-30.48" y1="22.86" x2="-30.48" y2="35.56" width="0.1524" layer="91"/>
 <wire x1="-30.48" y1="35.56" x2="7.62" y2="35.56" width="0.1524" layer="91"/>
-<wire x1="7.62" y1="35.56" x2="7.62" y2="15.24" width="0.1524" layer="91"/>
-<wire x1="7.62" y1="15.24" x2="7.62" y2="2.54" width="0.1524" layer="91"/>
+<wire x1="7.62" y1="35.56" x2="7.62" y2="10.16" width="0.1524" layer="91"/>
+<wire x1="7.62" y1="10.16" x2="7.62" y2="2.54" width="0.1524" layer="91"/>
 <wire x1="7.62" y1="2.54" x2="20.32" y2="2.54" width="0.1524" layer="91"/>
 <pinref part="LED1" gate="G$1" pin="BLUE_A"/>
-<junction x="7.62" y="15.24"/>
-<wire x1="40.64" y1="15.24" x2="7.62" y2="15.24" width="0.1524" layer="91"/>
+<wire x1="50.8" y1="10.16" x2="7.62" y2="10.16" width="0.1524" layer="91"/>
+<junction x="7.62" y="10.16"/>
+</segment>
+</net>
+<net name="N$3" class="0">
+<segment>
+<pinref part="LED2" gate="G$1" pin="RED_A"/>
+<wire x1="60.96" y1="-5.08" x2="40.64" y2="-5.08" width="0.1524" layer="91"/>
 <wire x1="40.64" y1="-5.08" x2="40.64" y2="15.24" width="0.1524" layer="91"/>
+<pinref part="LED1" gate="G$1" pin="RED_A"/>
+<wire x1="20.32" y1="-7.62" x2="12.7" y2="-7.62" width="0.1524" layer="91"/>
+<wire x1="-20.32" y1="17.78" x2="-33.02" y2="17.78" width="0.1524" layer="91"/>
+<wire x1="-33.02" y1="17.78" x2="-33.02" y2="40.64" width="0.1524" layer="91"/>
+<wire x1="-33.02" y1="40.64" x2="12.7" y2="40.64" width="0.1524" layer="91"/>
+<wire x1="12.7" y1="40.64" x2="12.7" y2="15.24" width="0.1524" layer="91"/>
+<pinref part="ARDUINO_NANO" gate="G$1" pin="A2"/>
+<wire x1="12.7" y1="15.24" x2="12.7" y2="-7.62" width="0.1524" layer="91"/>
+<wire x1="40.64" y1="15.24" x2="12.7" y2="15.24" width="0.1524" layer="91"/>
+<junction x="12.7" y="15.24"/>
 </segment>
 </net>
 </nets>
