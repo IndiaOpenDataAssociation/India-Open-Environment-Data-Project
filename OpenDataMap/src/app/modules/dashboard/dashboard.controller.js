@@ -364,7 +364,6 @@
                 }
                 // show:true;
             };
-            console.log("came here i times : ");
             self.markers.push(newMarker);
         };
         this.showOizomDevices = true;
@@ -426,7 +425,6 @@
                 self.selectedContributor = contributor;
             } else if(contributor === null){
                 angular.forEach(self.markers, function(item){
-                    console.log("pushed to markersToshow");
                     self.markersToshow.push(item);
                 });
             } else {}
@@ -444,19 +442,15 @@
 
         //fetch all public data from server
         AllPublicDataItems.query().$promise.then(function(data){
-            self.dataResourcesCount = data[0].length;
-            self.allPublicData = data[0];
+            self.dataResourcesCount = data.length;
+            self.allPublicData = data;
             self.allUberData = data[1];
-            angular.forEach(data[0],function(item){
+            angular.forEach(data,function(item){
                 self.tempPublicData.push(item);
                 item.imagePath = AQIColorService.getPinPath(item.aqi);
                 self.addNewMarker(item.deviceId, item.latitude, item.longitude, item.label, item.loc, item.imagePath, item.type);
             });
-            angular.forEach(data[1],function(item){
-                self.tempUberData.push(item);
-                item.imagePath = "assets/images/pins/uber.svg";
-                //self.addNewMarker(item.deviceId, item.stop_lat, item.stop_lon, "Uber", "Roaming Around", item.imagePath, item.deviceType);
-            });
+            
             self.dataResourcesCount = self.tempPublicData.length;
 
             self.changeContributor(null);
@@ -474,10 +468,8 @@ if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine
 
         this.windowWidth = w.width();
         if(isMobile == true || this.windowWidth < 500){
-            console.log("is mobile true");
             this.graphWidth = (this.windowWidth) - 20;    
         } else {
-            console.log("is mobile false");
             this.graphWidth = (this.windowWidth/4) - 40;
         }
         
@@ -491,7 +483,6 @@ if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine
 
         this.markersToshow = [];
         $scope.onClicked = function(marker){
-            console.log('clicked here');
         };
         //click called 
         this.markerClicked = function(marker, deviceId, deviceLabel, deviceAddr, contributor){

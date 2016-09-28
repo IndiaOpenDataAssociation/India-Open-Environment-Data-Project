@@ -18,6 +18,8 @@
         });
         //$locationProvider.html5Mode(true).hashPrefix('#');
         //$locationProvider.html5Mode(true);
+        $httpProvider.defaults.headers.common['Accept'] = 'application/json';
+        $httpProvider.defaults.headers.common['X-Mashape-Key'] = 'SPmv0Z46zymshRjsWckXKsA09OBrp14RCeSjsniWIpRk6llTuk';
         swaggerTranslatorProvider
             .setLanguage('en')
             .addTranslations('en', {

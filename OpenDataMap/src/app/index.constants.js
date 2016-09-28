@@ -5,6 +5,6 @@
         .module('config', [])
         .constant('config', {
             moduleDir: 'app/modules/',
-            api: 'http://api.airpollution.online/'
+            api: 'https://openenvironment.p.mashape.com/'
         });
 })();
