@@ -5,7 +5,7 @@
         .factory('AnalyticsDataItems', AnalyticsDataItems);
 
     function AnalyticsDataItems($resource, $state, config) {
-        return $resource(config.api + 'all/public/data/:deviceid' , {
+        return $resource(config.api + 'all/public/data/hours/24/:deviceid' , {
                 deviceid: '@deviceid'
             }, {
             update: {

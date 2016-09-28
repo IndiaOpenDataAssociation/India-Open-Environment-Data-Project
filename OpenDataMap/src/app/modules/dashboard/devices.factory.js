@@ -5,7 +5,7 @@
         .factory('DeviceDataItems', DeviceDataItems);
 
     function DeviceDataItems($resource, $cookies, $state, config) {
-        return $resource(config.api + 'all/public/:deviceid' , {
+        return $resource(config.api + 'all/public/data/cur/:deviceid' , {
                 deviceid: '@deviceid'
             }, {
             update: {
