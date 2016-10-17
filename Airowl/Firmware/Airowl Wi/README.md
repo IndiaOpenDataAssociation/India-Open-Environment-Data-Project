@@ -34,8 +34,11 @@ Ans: Follow these easy steps:
 Here in this case the updated baudrate is taken as '115200' . Replace it with the baudrate you want to set.
 As you’ve replaced the preloaded code from the Arduino you need to upload back the “Airowl_wifi” code into Arduino Nano. Extra care must be taken to change the baud rate in “Airowl_wifi” also.
 
+
 ***How to upload code on Arduino Nano?***
 
 Ans: We’ve very meticulously illustrated the process of uploading the code onto Arduino Nano on our wiki page. Here’s the link: http://bit.do/Airowl
 Go to the section 4.3 Re-coding your Airowl.
+
+https://lh3.googleusercontent.com/-bXlvFCccBXI/V3oi6ohTcyI/AAAAAAAAERo/6GFj0kFJurQjvvgZjGzL7qxl5kxIJz4EQCLcB/s0/wi_1.PNG
 
