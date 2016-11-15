@@ -1,4 +1,4 @@
-﻿# IndiaOpenData
+# IndiaOpenData
 The India Open Environment Data Project is focused on assessing the air-quality index of different parts of Delhi and showcasing the information in an open, standardized and visualized format to promote community action within the society. For which India Open Data needed help in showcasing the readings in a very simple and understandable format on their website:
 http://openenvironment.indiaopendata.com.
  The purpose was to make anyone access the site and be able to understand the air quality for a specific area at any given point of time.
