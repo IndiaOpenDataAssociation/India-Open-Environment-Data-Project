@@ -4,36 +4,39 @@ http://openenvironment.indiaopendata.com.
  The purpose was to make anyone access the site and be able to understand the air quality for a specific area at any given point of time.
 # India Open Data had developed a small and cost effective device to measure the air quality and send the captured data to their server.
 #Installation:
-This Front end application has been implemented in AngularJS 1.4.x. Gulp task runner is there to run your code and deploy it to production server. Bower components has been used for libraries which are used in application.
+This Front end application has been implemented in **React JS**. NodeJS is there to run your code and deploy it to production server. One needs to install all node packages described in package.json to run this application.
 #1. install node and bower components 
 Please run clone this application and run following commands : 
 ```
 npm install
-bower install
 ```
 #2. Code Structure 
-Each of the modules in AngularJS are having it's own controller, module, factory, route and other directives if required.
+Each of the modules in ReactJS are having it's own controllers and components.
 ```
-dashboard
-  --- dashboard.controller.js
-  --- dashboard.module.js
-  --- dashboard.route.js
-  --- dashboard.factory.js
+Dashboard
+  --- components
+  	  --- Map.js
+  --- pages
+	  --- Home.js
+	  --- Analytics.js
+	  --- Realtime.js
 ``` 
-#3. Run Application with gulp  
-We are using gulp as JS task runner, it builds your code, uglifies it, minifies it and joins all js and css files into one.
+#3. Run Application with npm  
+We are using node npm, it builds your code, uglifies it, minifies it and joins all js and css files into one.
 To run your application in local with (browser sync open) run following command.
 ```
-gulp serve
+npm start
 ```
 
 To minify and combine all files, run production deployment which combines all js and css files to one and save all the data to "dist" directory.
 ```
-gulp deploy:dist
+
+npm run bs
+
 ```
 
-#4. Angular Version 
-We are using AngularJS version 1.4.x. We will be shifting to AngularJS 2.0 very soon.
+#4. React Version 
+We are using React version 15.x.
 
 
 #5. Contribute 
